@@ -1,0 +1,321 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import 'tailwindcss';
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 217 32% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 32% 17%;
+
+    --primary: 228 59% 21%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 25 95% 53%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 13% 91%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 14% 96%;
+    --ring: 228 59% 21%;
+
+    --radius: 0.75rem;
+
+    /* Custom Aura AI tokens */
+    --gradient-start: 0 0% 100%;
+    --gradient-mid: 0 0% 100%;
+    --gradient-end: 0 0% 100%;
+    
+    --orange-start: 25 100% 53%;
+    --orange-end: 25 95% 50%;
+    
+    --blue-primary: 228 59% 21%;
+  }
+
+  .dark {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 217 32% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 32% 17%;
+
+    --primary: 228 59% 21%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 25 95% 53%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 13% 91%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 14% 96%;
+    --ring: 228 59% 21%;
+  }
+
+  html {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    background-color: #F9FAFB;
+    color: hsl(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  /* Fix text selection to make text visible */
+  ::selection {
+    background-color: hsl(var(--primary));
+    color: white;
+  }
+
+  ::-moz-selection {
+    background-color: hsl(var(--primary));
+    color: white;
+  }
+
+  /* Ensure all text is visible */
+  * {
+    color: inherit;
+  }
+
+  p, h1, h2, h3, h4, h5, h6, span, label, div {
+    color: inherit;
+  }
+
+  /* Make muted text more visible */
+  .text-muted-foreground {
+    color: hsl(var(--muted-foreground)) !important;
+    opacity: 1 !important;
+  }
+
+  /* Ensure card foreground text is visible */
+  .text-card-foreground {
+    color: hsl(var(--card-foreground)) !important;
+  }
+
+  /* Improve contrast for description text */
+  [class*="description"],
+  [class*="subtitle"],
+  .text-foreground\/70,
+  .text-foreground\/80 {
+    color: hsl(var(--foreground), 0.85) !important;
+  }
+
+  /* Fix text color opacity modifiers */
+  .text-card-foreground\/75 {
+    color: hsl(222, 47%, 30%) !important;
+  }
+
+  .text-card-foreground\/50 {
+    color: hsl(222, 47%, 50%) !important;
+  }
+}
+
+@layer components {
+  .gradient-bg {
+    background: #FFFFFF;
+  }
+
+  .gradient-orange {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--orange-start)) 0%,
+      hsl(var(--orange-end)) 100%
+    );
+  }
+
+  .auth-card {
+    background-color: hsl(var(--card));
+    border-radius: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1),
+                0 4px 6px rgba(0, 0, 0, 0.07);
+    padding: 2rem;
+    border: 1px solid hsl(var(--border));
+  }
+
+  @media (min-width: 768px) {
+    .auth-card {
+      padding: 2.5rem;
+    }
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: #FFFFFF;
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.75rem;
+    color: hsl(var(--card-foreground));
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .input-field::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .input-field:focus {
+    outline: none;
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+  }
+
+  .btn-primary {
+    background: hsl(var(--orange-start));
+    color: white;
+    font-weight: 600;
+    padding: 0.875rem 2rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    z-index: 20;
+    user-select: none;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.3);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .btn-primary:focus {
+    outline: 2px solid hsl(var(--orange-start));
+    outline-offset: 2px;
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid hsl(var(--primary));
+    color: hsl(var(--primary));
+    font-weight: 600;
+    padding: 0.75rem 1.75rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    z-index: 20;
+    user-select: none;
+  }
+
+  .btn-outline:hover {
+    background-color: hsl(var(--primary));
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px -2px rgba(30, 58, 138, 0.15);
+  }
+
+  .btn-outline:active {
+    transform: translateY(0);
+  }
+
+  .btn-outline:focus {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+
+  .btn-social {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    color: hsl(var(--card-foreground));
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .btn-social:hover {
+    background-color: #f9fafb;
+    border-color: #d1d5db;
+  }
+
+  .floating-element {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .floating-element-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+
+  .sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up-delay {
+  animation: fadeInUp 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
