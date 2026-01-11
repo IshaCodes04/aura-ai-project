@@ -33,7 +33,7 @@ passport.use(
           });
         }
 
-        return cb(null, user); // 'cb' callback function hai
+        return cb(null, user); // 'cb' callback function 
       } catch (error) {
         console.error("Google OAuth error:", error);
         return cb(error, null);
