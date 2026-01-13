@@ -2,22 +2,26 @@ const express = require("express");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const authControllers = require("../controllers/auth.controller");
+const { authUser } = require("../middlewares/auth.middleware");
 
 const router = express.Router();
 
 /* Regular Auth Routes */
 router.post('/register', authControllers.registerUser);
 router.post('/login', authControllers.loginUser);
+router.get('/profile', authUser, authControllers.getProfile);
+router.post('/logout', authControllers.logoutUser);
 
 /* Google OAuth Routes */
-router.get('/google', 
+router.get('/google',
   passport.authenticate("google", {
     scope: ["profile", "email"],
-    session: false
+    session: false,
+    prompt: 'select_account' // ✅ This will show all google accounts to select
   })
 );
 
-router.get("/google/callback", 
+router.get("/google/callback",
   passport.authenticate("google", {
     session: false,
     failureRedirect: `${process.env.CLIENT_URL}/login?error=auth_failed`
@@ -34,8 +38,8 @@ router.get("/google/callback",
 
       // Generate token
       const token = jwt.sign(
-        { id: req.user._id, email: req.user.email }, 
-        process.env.JWT_SECRET, 
+        { id: req.user._id, email: req.user.email },
+        process.env.JWT_SECRET,
         { expiresIn: "7d" }
       );
 
@@ -51,12 +55,12 @@ router.get("/google/callback",
 
       // ✅ Redirect to frontend with token in query param
       const redirectUrl = `${process.env.CLIENT_URL}/auth/success?token=${token}`;
-      
+
       console.log("✅ Redirecting to:", redirectUrl);
-      
+
       res.redirect(redirectUrl);
-      
-    } catch(error) {
+
+    } catch (error) {
       console.error("❌ OAuth callback error:", error);
       res.redirect(`${process.env.CLIENT_URL}/login?error=server_error`);
     }

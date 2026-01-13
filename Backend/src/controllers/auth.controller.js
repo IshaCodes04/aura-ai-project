@@ -82,7 +82,41 @@ async function loginUser(req, res) {
 
 }
 
+async function getProfile(req, res) {
+  try {
+    const user = req.user;
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json({
+      user: {
+        fullName: user.fullName,
+        email: user.email,
+        _id: user._id,
+        avatar: user.avatar
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+}
+
+async function logoutUser(req, res) {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax'
+    });
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Logout failed" });
+  }
+}
+
 module.exports = {
   registerUser,
-  loginUser
+  loginUser,
+  getProfile,
+  logoutUser
 }

@@ -11,26 +11,32 @@ const mychatgptprojectIndex = pc.Index('my-aura-ai-project');
 // A createMemory fnc do vectors , metadata , messageId ke form mein vectors ko store krke dega
 
 async function createMemory({ vectors, metadata, messageId }) {
-
-  await mychatgptprojectIndex.upsert([{
-    id: messageId,
-    values: vectors,
-    metadata
-  }])
-
+  try {
+    await mychatgptprojectIndex.upsert([{
+      id: messageId,
+      values: vectors,
+      metadata
+    }])
+    console.log("✅ Memory stored in Pinecone:", messageId);
+  } catch (error) {
+    console.error("❌ Pinecone Upsert Error:", error.message);
+    // Don't throw error to prevent socket crash, just log it
+  }
 }
 
 async function queryMemory({ queryVector, limit = 5, metadata }) {
-
-  const data = await mychatgptprojectIndex.query({
-    vector: queryVector,
-    topK: limit, // topk means pick 5 closest points
-    filter: metadata ? metadata  : undefined,
-    includeMetadata: true
-  })
-
-  return data.matches
-
+  try {
+    const data = await mychatgptprojectIndex.query({
+      vector: queryVector,
+      topK: limit, // topk means pick 5 closest points
+      filter: metadata ? metadata : undefined,
+      includeMetadata: true
+    })
+    return data.matches;
+  } catch (error) {
+    console.error("❌ Pinecone Query Error:", error.message);
+    return []; // Return empty array on error
+  }
 }
 
 
