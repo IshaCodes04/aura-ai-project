@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Send,
   Plus,
@@ -13,6 +14,7 @@ import {
   Mic,
   Sun,
   Bell,
+  LogOut
 } from "lucide-react";
 import { io, Socket } from "socket.io-client";
 
@@ -31,6 +33,7 @@ interface ChatSession {
 }
 
 const Chat = () => {
+  const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -38,11 +41,13 @@ const Chat = () => {
   const [activeChatId, setActiveChatId] = useState<string | null>(null);
   const [isOnline, setIsOnline] = useState(false);
   const [isAiTyping, setIsAiTyping] = useState(false);
+  const [user, setUser] = useState<{ fullName: { firstName: string, lastName: string }, email: string, avatar?: string } | null>(null);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const socketRef = useRef<Socket | null>(null);
 
-// socket connection
+  // socket connection
   useEffect(() => {
     const socket = io("http://localhost:3000", {
       withCredentials: true,
@@ -143,6 +148,45 @@ const Chat = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isAiTyping]);
+
+  // Fetch user profile
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/auth/profile", {
+          credentials: "include",
+        });
+        const data = await response.json();
+        if (data.user) {
+          setUser(data.user);
+        }
+      } catch (error) {
+        console.error("Failed to fetch profile:", error);
+      }
+    };
+    fetchProfile();
+  }, []);
+
+  const getUserInitial = () => {
+    if (user?.fullName?.firstName) {
+      return user.fullName.firstName.charAt(0).toUpperCase();
+    }
+    return "U";
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch("http://localhost:3000/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      localStorage.removeItem("token");
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+      alert("Logout failed. Please try again.");
+    }
+  };
 
   const handleSendMessage = async () => {
     if (inputValue.trim() === "" || !socketRef.current || !isOnline) return;
@@ -344,17 +388,17 @@ const Chat = () => {
   ];
 
   return (
-    <div className="fixed inset-0 flex overflow-hidden bg-white">
+    <div className="fixed inset-0 flex overflow-hidden bg-white selection:bg-orange-100 selection:text-orange-900">
       {/* ==================== SIDEBAR ==================== */}
       <div
         className={`
-    fixed md:static inset-y-0 left-0
-    w-64 md:w-72
+    fixed lg:static inset-y-0 left-0
+    w-[280px] md:w-72 lg:w-80
     bg-gray-50
     border-r border-gray-200
     z-50 flex flex-col
-    transform transition-transform duration-300 ease-out
-    ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+    transform transition-transform duration-300 ease-out shadow-xl lg:shadow-none
+    ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
   `}
       >
         {/* ================= HEADER ================= */}
@@ -374,9 +418,8 @@ const Chat = () => {
               <div className="flex items-center gap-2 text-xs text-gray-500">
                 <span className="flex items-center gap-1">
                   <span
-                    className={`w-2 h-2 rounded-full ${
-                      isOnline ? "bg-green-500" : "bg-red-500"
-                    }`}
+                    className={`w-2 h-2 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"
+                      }`}
                   ></span>
                   {isOnline ? "Online" : "Offline"}
                 </span>
@@ -444,11 +487,10 @@ const Chat = () => {
               <div
                 key={chat.id}
                 onClick={() => handleSelectChat(chat.id)}
-                className={`group relative px-3 py-3 rounded-lg cursor-pointer transition-all ${
-                  activeChatId === chat.id
-                    ? "bg-white shadow-sm border border-orange-200"
-                    : "hover:bg-white"
-                }`}
+                className={`group relative px-3 py-3 rounded-lg cursor-pointer transition-all ${activeChatId === chat.id
+                  ? "bg-white shadow-sm border border-orange-200"
+                  : "hover:bg-white"
+                  }`}
               >
                 {/* Active Indicator */}
                 {activeChatId === chat.id && (
@@ -457,11 +499,10 @@ const Chat = () => {
 
                 <div className="flex items-start gap-2">
                   <MessageSquare
-                    className={`w-4 h-4 mt-0.5 ${
-                      activeChatId === chat.id
-                        ? "text-orange-500"
-                        : "text-gray-400"
-                    }`}
+                    className={`w-4 h-4 mt-0.5 ${activeChatId === chat.id
+                      ? "text-orange-500"
+                      : "text-gray-400"
+                      }`}
                   />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900 truncate">
@@ -487,28 +528,23 @@ const Chat = () => {
         </div>
 
         {/* ================= FOOTER ================= */}
-        <div className="border-t border-gray-200 bg-white p-3 space-y-2 shrink-0">
-          <button className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg">
-            <Settings className="w-4 h-4" />
-            Settings
-          </button>
-
-          <button className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg">
-            <HelpCircle className="w-4 h-4" />
-            Support
-          </button>
-
-          <div className="px-3 py-3 bg-gray-50 rounded-lg border border-gray-200">
-            <p className="text-xs font-semibold text-gray-900">Isha Dev</p>
-            <p className="text-xs text-gray-500">Free Plan • Encrypted</p>
+        <div className="border-t border-gray-200 bg-white p-4 shrink-0">
+          <div className="px-3 py-3 bg-gray-50 rounded-xl border border-gray-200 shadow-sm">
+            <p className="text-sm font-bold text-gray-900 truncate">
+              {user ? `${user.fullName.firstName} ${user.fullName.lastName}` : "Guest User"}
+            </p>
+            <div className="flex items-center gap-2 mt-1">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+              <p className="text-[11px] text-gray-500 font-medium">Free Plan • Encrypted</p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Mobile Overlay */}
-      {sidebarOpen && isMobile && (
+      {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/40 z-30 md:hidden"
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -516,47 +552,95 @@ const Chat = () => {
       {/* ==================== MAIN CHAT AREA ==================== */}
       <div className="flex-1 flex flex-col bg-white min-w-0">
         {/* ==================== TOP HEADER ==================== */}
-        <div className="flex items-center justify-between px-4 md:px-8 py-3 md:py-4 border-b border-gray-200 bg-white shrink-0">
+        <div className="flex items-center justify-between px-4 md:px-6 lg:px-8 py-3 bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-20 shrink-0">
           <div className="flex items-center gap-3 min-w-0">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="md:hidden p-2 -ml-2 hover:bg-gray-100 rounded-lg transition-colors duration-150"
+              className="lg:hidden p-2 -ml-2 hover:bg-gray-100 rounded-xl transition-colors duration-150"
             >
               {sidebarOpen ? (
-                <X className="w-6 h-6 text-gray-700" />
+                <X className="w-5 h-5 text-gray-600" />
               ) : (
-                <Menu className="w-6 h-6 text-gray-700" />
+                <Menu className="w-5 h-5 text-gray-600" />
               )}
             </button>
-            <div className="w-9 h-9 rounded-lg gradient-orange flex items-center justify-center text-white font-bold text-sm">
+            <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl gradient-orange flex items-center justify-center text-white font-bold text-sm shadow-sm shrink-0">
               A
             </div>
             <div className="min-w-0">
-              <h1 className="text-base md:text-lg font-bold text-gray-900 truncate">
+              <h1 className="text-sm md:text-base font-bold text-gray-900 truncate">
                 Aura AI Assistant
               </h1>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5">
                 <div
-                  className={`w-1.5 h-1.5 rounded-full ${
-                    isOnline ? "bg-green-500" : "bg-red-500"
-                  }`}
+                  className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"
+                    }`}
                 ></div>
-                <p className="text-xs text-gray-500 font-medium">
+                <p className="text-[10px] md:text-xs text-gray-500 font-medium capitalize">
                   {isOnline ? "Online" : "Offline"}
                 </p>
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors duration-150">
-              <Sun className="w-5 h-5 text-gray-600" />
+          <div className="flex items-center gap-1.5 md:gap-3">
+            <button className="hidden sm:flex p-2 hover:bg-gray-100 rounded-xl transition-colors text-gray-600">
+              <Sun className="w-5 h-5" />
             </button>
-            <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors duration-150 relative">
-              <Bell className="w-5 h-5 text-gray-600" />
-              <div className="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500"></div>
+            <button className="p-2 hover:bg-gray-100 rounded-xl transition-colors relative text-gray-600">
+              <Bell className="w-5 h-5" />
+              <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-red-500 border-2 border-white"></div>
             </button>
-            <div className="w-8 h-8 rounded-full bg-linear-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-xs">
-              I
+
+            {/* User Profile Menu */}
+            <div className="relative">
+              <button
+                onClick={() => setShowUserMenu(!showUserMenu)}
+                className="w-8 h-8 rounded-full bg-linear-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-xs ring-2 ring-blue-100 hover:ring-blue-300 transition-all cursor-pointer"
+              >
+                {getUserInitial()}
+              </button>
+
+              {showUserMenu && (
+                <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-[100] animate-in fade-in zoom-in duration-200 origin-top-right">
+                  <div className="px-4 py-3 border-b border-gray-100">
+                    <p className="text-sm font-bold text-gray-900">
+                      {user ? `${user.fullName.firstName} ${user.fullName.lastName}` : "User"}
+                    </p>
+                    <p className="text-xs text-gray-500 truncate mt-0.5">
+                      {user?.email}
+                    </p>
+                  </div>
+
+                  <div className="py-1">
+                    <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors text-left">
+                      <Settings className="w-4 h-4 text-gray-400" />
+                      Account Settings
+                    </button>
+                    <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors text-left">
+                      <Bell className="w-4 h-4 text-gray-400" />
+                      Notifications
+                    </button>
+                  </div>
+
+                  <div className="border-t border-gray-100 mt-1 pt-1">
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors text-left font-medium"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Log out
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Overlay to close menu */}
+              {showUserMenu && (
+                <div
+                  className="fixed inset-0 z-0"
+                  onClick={() => setShowUserMenu(false)}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -591,17 +675,17 @@ const Chat = () => {
               </div>
 
               {/* Greeting */}
-              <p className="text-sm md:text-base text-gray-500 font-medium mb-3">
+              <p className="text-xs md:text-sm lg:text-base text-gray-500 font-medium mb-3">
                 Good evening 👋
               </p>
 
               {/* Main Heading */}
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-4 leading-tight">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-6 max-w-2xl leading-tight px-4">
                 What would you like Aura to help you with today?
               </h2>
 
               {/* Tagline */}
-              <p className="text-base md:text-lg text-gray-500 text-center max-w-xl mb-12">
+              <p className="text-sm md:text-base lg:text-lg text-gray-500 text-center max-w-xl mb-10 px-6">
                 Your personal AI for{" "}
                 <span className="text-gray-700 font-medium">coding</span>,{" "}
                 <span className="text-gray-700 font-medium">creativity</span> &{" "}
@@ -609,14 +693,14 @@ const Chat = () => {
               </p>
 
               {/* Action Buttons */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 w-full max-w-3xl">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 w-full max-w-3xl px-4">
                 {actionButtons.map((btn, idx) => (
                   <button
                     key={idx}
-                    className="flex items-center gap-2 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg hover:bg-gray-100 hover:shadow-sm transition-all duration-200"
+                    className="flex items-center justify-center lg:justify-start gap-2 px-4 py-3 md:py-4 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
                   >
-                    <span className="text-xl">{btn.icon}</span>
-                    <span className="text-sm font-medium text-gray-900">
+                    <span className="text-lg md:text-xl">{btn.icon}</span>
+                    <span className="text-xs md:text-sm font-semibold text-gray-800">
                       {btn.label}
                     </span>
                   </button>
@@ -626,38 +710,35 @@ const Chat = () => {
           ) : (
             // Messages Area
             <div className="h-full">
-              <div className="max-w-4xl mx-auto w-full px-4 md:px-6 py-6 md:py-8 space-y-6">
+              <div className="max-w-4xl mx-auto w-full px-4 md:px-6 lg:px-12 py-6 md:py-10 space-y-6">
                 {messages.map((message) => (
                   <div
                     key={message.id}
-                    className={`flex gap-4 animate-fade-in-up ${
-                      message.sender === "user"
+                    className={`flex gap-3 md:gap-4 animate-fade-in-up ${message.sender === "user"
                         ? "justify-end"
                         : "justify-start"
-                    }`}
+                      }`}
                   >
                     {message.sender === "ai" && (
-                      <div className="w-9 h-9 rounded-lg gradient-orange flex items-center justify-center text-white font-bold text-sm shrink-0">
+                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl gradient-orange flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-sm self-end">
                         A
                       </div>
                     )}
 
                     <div
-                      className={`max-w-xl px-5 py-3 rounded-lg ${
-                        message.sender === "user"
-                          ? "bg-orange-500 text-white"
-                          : "bg-gray-100 text-gray-900"
-                      }`}
+                      className={`max-w-[85%] md:max-w-[75%] px-4 md:px-5 py-3 rounded-2xl shadow-sm ${message.sender === "user"
+                          ? "bg-orange-500 text-white rounded-br-none"
+                          : "bg-gray-100 text-gray-800 rounded-bl-none border border-gray-200"
+                        }`}
                     >
-                      <p className="text-sm md:text-base leading-relaxed">
+                      <p className="text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words">
                         {message.content}
                       </p>
                       <p
-                        className={`text-xs mt-2 font-medium ${
-                          message.sender === "user"
+                        className={`text-[10px] mt-2 font-medium ${message.sender === "user"
                             ? "text-orange-100"
-                            : "text-gray-500"
-                        }`}
+                            : "text-gray-400"
+                          }`}
                       >
                         {message.timestamp.toLocaleTimeString([], {
                           hour: "2-digit",
@@ -667,8 +748,8 @@ const Chat = () => {
                     </div>
 
                     {message.sender === "user" && (
-                      <div className="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xs shrink-0">
-                        U
+                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-xs shrink-0 shadow-sm self-end ring-2 ring-blue-50">
+                        {getUserInitial()}
                       </div>
                     )}
                   </div>
@@ -751,11 +832,10 @@ const Chat = () => {
           rounded-xl
           flex items-center justify-center
           transition-all duration-200
-          ${
-            inputValue.trim() === "" || !isOnline
-              ? "bg-green-300 cursor-not-allowed opacity-50"
-              : "bg-green-500 hover:bg-green-600 shadow-lg hover:shadow-green-400/40"
-          }
+          ${inputValue.trim() === "" || !isOnline
+                    ? "bg-green-300 cursor-not-allowed opacity-50"
+                    : "bg-green-500 hover:bg-green-600 shadow-lg hover:shadow-green-400/40"
+                  }
         `}
               >
                 {/* Glow */}
@@ -772,9 +852,8 @@ const Chat = () => {
               <div className="flex items-center justify-center gap-3 text-xs text-gray-500 font-medium">
                 <span className="flex items-center gap-1">
                   <span
-                    className={`w-2 h-2 rounded-full ${
-                      isOnline ? "bg-green-500" : "bg-red-500"
-                    }`}
+                    className={`w-2 h-2 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"
+                      }`}
                   ></span>
                   {isOnline ? "AI Online" : "AI Offline"}
                 </span>
