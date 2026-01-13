@@ -1,7 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const passport =  require("./config/passport");
+const passport = require("./config/passport");
 
 /* Require Routes */
 const authRoutes = require("./routes/auth.routes");
@@ -10,8 +10,8 @@ const chatRoutes = require("./routes/chat.routes");
 const app = express(); // create server
 
 /* Using middlewares*/
-app.use(express.json()); 
-app.use(cookieParser()); 
+app.use(express.json());
+app.use(cookieParser());
 
 app.use(passport.initialize());
 
