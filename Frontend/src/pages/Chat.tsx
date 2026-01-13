@@ -22,7 +22,7 @@ interface Message {
   id: string;
   sender: "user" | "ai";
   content: string;
-  timestamp: Date;
+  timestamp: Date | string;
 }
 
 interface ChatSession {
@@ -47,9 +47,11 @@ const Chat = () => {
   const [isMobile, setIsMobile] = useState(false);
   const socketRef = useRef<Socket | null>(null);
 
+  const BACKEND_URL = "http://localhost:3000";
+
   // socket connection
   useEffect(() => {
-    const socket = io("http://localhost:3000", {
+    const socket = io(BACKEND_URL, {
       withCredentials: true,
     });
 
@@ -110,7 +112,7 @@ const Chat = () => {
   useEffect(() => {
     const loadChats = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/chat/", {
+        const response = await fetch(`${BACKEND_URL}/api/chat/`, {
           credentials: "include",
         });
 
@@ -153,7 +155,7 @@ const Chat = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/auth/profile", {
+        const response = await fetch(`${BACKEND_URL}/api/auth/profile`, {
           credentials: "include",
         });
         const data = await response.json();
@@ -176,7 +178,7 @@ const Chat = () => {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:3000/api/auth/logout", {
+      await fetch(`${BACKEND_URL}/api/auth/logout`, {
         method: "POST",
         credentials: "include",
       });
@@ -195,7 +197,7 @@ const Chat = () => {
     let currentChatId = activeChatId;
     if (!activeChatId) {
       try {
-        const response = await fetch("http://localhost:3000/api/chat/", {
+        const response = await fetch(`${BACKEND_URL}/api/chat/`, {
           method: "POST",
           credentials: "include",
           headers: {
@@ -274,7 +276,7 @@ const Chat = () => {
 
   const handleNewChat = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/chat/", {
+      const response = await fetch(`${BACKEND_URL}/api/chat/`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -306,7 +308,7 @@ const Chat = () => {
 
   const handleSelectChat = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/chat/${id}`, {
+      const response = await fetch(`${BACKEND_URL}/api/chat/${id}`, {
         credentials: "include",
       });
 
@@ -341,7 +343,7 @@ const Chat = () => {
 
   const handleDeleteChat = async (id: string) => {
     try {
-      await fetch(`http://localhost:3000/api/chat/${id}`, {
+      await fetch(`${BACKEND_URL}/api/chat/${id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -715,8 +717,8 @@ const Chat = () => {
                   <div
                     key={message.id}
                     className={`flex gap-3 md:gap-4 animate-fade-in-up ${message.sender === "user"
-                        ? "justify-end"
-                        : "justify-start"
+                      ? "justify-end"
+                      : "justify-start"
                       }`}
                   >
                     {message.sender === "ai" && (
@@ -727,8 +729,8 @@ const Chat = () => {
 
                     <div
                       className={`max-w-[85%] md:max-w-[75%] px-4 md:px-5 py-3 rounded-2xl shadow-sm ${message.sender === "user"
-                          ? "bg-orange-500 text-white rounded-br-none"
-                          : "bg-gray-100 text-gray-800 rounded-bl-none border border-gray-200"
+                        ? "bg-orange-500 text-white rounded-br-none"
+                        : "bg-gray-100 text-gray-800 rounded-bl-none border border-gray-200"
                         }`}
                     >
                       <p className="text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words">
@@ -736,11 +738,11 @@ const Chat = () => {
                       </p>
                       <p
                         className={`text-[10px] mt-2 font-medium ${message.sender === "user"
-                            ? "text-orange-100"
-                            : "text-gray-400"
+                          ? "text-orange-100"
+                          : "text-gray-400"
                           }`}
                       >
-                        {message.timestamp.toLocaleTimeString([], {
+                        {new Date(message.timestamp).toLocaleTimeString([], {
                           hour: "2-digit",
                           minute: "2-digit",
                         })}

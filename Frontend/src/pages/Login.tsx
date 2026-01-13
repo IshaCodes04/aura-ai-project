@@ -141,9 +141,7 @@ const Login = () => {
           <button
             type="button"
             className="btn-social"
-            onClick={() =>
-              window.open("http://localhost:3000/api/auth/google", "_self")
-            }
+            onClick={handleGoogleLogin}
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
