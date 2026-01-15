@@ -20,7 +20,7 @@ app.use(passport.initialize());
 // Using cors
 app.use(
   cors({
-    origin: "http://localhost:5173", // ✅ frontend URL
+    origin: process.env.CLIENT_URL || "http://localhost:5173", // ✅ Dynamic frontend URL
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -36,7 +36,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
 
 // Using wildcart
-app.get("*name", (req,res) => {
+app.get("*name", (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
