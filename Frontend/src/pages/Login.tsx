@@ -15,7 +15,7 @@ const Login = () => {
     password: "",
   });
 
-  const BACKEND_URL = "http://localhost:3000";
+  const BACKEND_URL = "https://aura-ai-a4wr.onrender.com";
 
   // Google Login Handler
   const handleGoogleLogin = () => {

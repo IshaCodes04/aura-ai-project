@@ -31,3 +31,10 @@ User clicks "Continue with Google"
 - create config folder and passport.js file 
 - we need to do some changes in user.model.js add avatart or googleId
 - 
+
+
+*Deployment*
+
+- for frontend = npm run build 
+- then ek dist folder milega = usme 3 files milengi index.html , index css or index js
+- then backend m ek public folder create krna h uske bd sari files usme add on kr deni h 

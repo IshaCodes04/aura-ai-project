@@ -47,7 +47,7 @@ const Chat = () => {
   const [isMobile, setIsMobile] = useState(false);
   const socketRef = useRef<Socket | null>(null);
 
-  const BACKEND_URL = "http://localhost:3000";
+  const BACKEND_URL = "https://aura-ai-a4wr.onrender.com";
 
   // socket connection
   useEffect(() => {
