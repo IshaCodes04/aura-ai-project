@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const passport = require("./config/passport");
+const path = require("path");
 
 /* Require Routes */
 const authRoutes = require("./routes/auth.routes");
@@ -13,9 +14,10 @@ const app = express(); // create server
 app.use(express.json());
 app.use(cookieParser());
 
+// Using passport
 app.use(passport.initialize());
 
-
+// Using cors
 app.use(
   cors({
     origin: "http://localhost:5173", // ✅ frontend URL
@@ -25,10 +27,18 @@ app.use(
   })
 );
 
+// Using path of public files
+app.use(express.static(path.join(__dirname, '../public')));
+
 
 /* Using Routes */
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
+
+// Using wildcart
+app.get("*name", (req,res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
 
 module.exports = app;
