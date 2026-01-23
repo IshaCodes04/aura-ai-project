@@ -1,0 +1,22 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect
+    x="0"
+    y="0"
+    width="64"
+    height="64"
+    rx="14"
+    ry="14"
+    fill="#F97316"
+  />
+  <text
+    x="32"
+    y="44"
+    font-size="28"
+    font-weight="700"
+    fill="white"
+    text-anchor="middle"
+    font-family="sans-serif"
+  >
+    AI
+  </text>
+</svg>

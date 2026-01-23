@@ -12,23 +12,23 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, cb) => {
       try {
-        // Pehle check karo user exist karta hai ya nahi
+      
         let user = await User.findOne({ googleId: profile.id });
 
         if (!user) {
-          // Google profile se firstName aur lastName extract karo
+          
           const firstName = profile.name?.givenName || profile.displayName?.split(' ')[0] || 'User';
           const lastName = profile.name?.familyName || profile.displayName?.split(' ').slice(1).join(' ') || '';
           
-          // Agar nahi hai toh create karo
+          
           user = await User.create({
             googleId: profile.id,
             username: profile.displayName,
             fullName: {
               firstName: firstName,
-              lastName: lastName || 'User' // Agar lastName nahi mila toh 'User' default
+              lastName: lastName || 'User' 
             },
-            email: profile.emails[0].value, // 'emails' with 's'
+            email: profile.emails[0].value, 
             avatar: profile.photos[0].value,
           });
         }
