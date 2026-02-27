@@ -30,7 +30,7 @@ const Pricing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
       <Navbar />
 
       {/* Floating Elements */}
@@ -41,12 +41,12 @@ const Pricing = () => {
       <section className="relative z-10 min-h-screen flex items-center px-6 md:px-12 pt-32 pb-12">
         <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-16">
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-5xl lg:text-6xl font-bold text-foreground mb-6">
               Simple, Transparent<br />
               <span className="text-orange-500">Pricing</span>
             </h1>
             
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto font-medium">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium">
               Choose the perfect plan for your needs. No hidden fees, cancel anytime.
             </p>
           </div>
@@ -70,20 +70,20 @@ const Pricing = () => {
                   )}
 
                   {/* Plan Name */}
-                  <h3 className="text-3xl font-bold text-gray-900 mb-2 pt-4">{plan.name}</h3>
+                  <h3 className="text-3xl font-bold text-card-foreground mb-2 pt-4">{plan.name}</h3>
                   
                   {/* Description */}
-                  <p className="text-gray-600 text-sm font-medium mb-8">
+                  <p className="text-muted-foreground text-sm font-medium mb-8">
                     {plan.description}
                   </p>
 
                   {/* Price */}
                   <div className="mb-8">
-                    <div className="text-5xl font-bold text-gray-900">
+                    <div className="text-5xl font-bold text-card-foreground">
                       {plan.price}
                     </div>
                     {plan.period && (
-                      <div className="text-gray-600 text-sm font-medium mt-2">
+                      <div className="text-muted-foreground text-sm font-medium mt-2">
                         {plan.period}
                       </div>
                     )}
@@ -96,7 +96,7 @@ const Pricing = () => {
                         <div className="p-1 rounded-full gradient-orange shrink-0 mt-0.5">
                           <Check className="w-4 h-4 text-white" />
                         </div>
-                        <span className="text-gray-700 font-medium">
+                        <span className="text-muted-foreground font-medium">
                           {feature}
                         </span>
                       </li>

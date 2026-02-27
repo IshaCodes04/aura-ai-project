@@ -12,7 +12,7 @@ interface AuthLayoutProps {
 
 const AuthLayout = ({ children, title, subtitle, supportingText, titleHighlight }: AuthLayoutProps) => {
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden" style={{ fontFamily: "'Inter', sans-serif" }}>
       <Navbar />
 
       {/* Floating Elements */}
@@ -24,16 +24,16 @@ const AuthLayout = ({ children, title, subtitle, supportingText, titleHighlight 
         <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Hero Content */}
           <div className="text-left order-2 lg:order-1">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               {title}<br />
               <span className="text-orange-500">
                 {titleHighlight}
               </span>
             </h1>
-            <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-md font-medium">
+            <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-md font-medium">
               {subtitle}
             </p>
-            <p className="mt-3 text-sm md:text-base text-gray-500">
+            <p className="mt-3 text-sm md:text-base text-muted-foreground/80">
               {supportingText}
             </p>
           </div>

@@ -69,13 +69,13 @@ const Login = () => {
       supportingText="Secure login. Instant access. Intelligent assistance."
     >
       <form onSubmit={handleSubmit} className="space-y-5">
-        <h2 className="text-2xl font-bold text-gray-900 text-center mb-6">
+        <h2 className="text-2xl font-bold text-card-foreground text-center mb-6">
           Welcome Back
         </h2>
 
         {/* Email */}
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Email
           </label>
           <input
@@ -90,7 +90,7 @@ const Login = () => {
 
         {/* Password */}
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Password
           </label>
           <div className="relative">
@@ -104,7 +104,7 @@ const Login = () => {
             />
             <button
               type="button"
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-900 transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? <EyeOff /> : <Eye />}
@@ -119,22 +119,19 @@ const Login = () => {
           </button>
           <Link
             to="/forgot-password"
-            className="text-blue-900 hover:text-blue-700 text-sm font-semibold transition-colors whitespace-nowrap"
+            className="text-primary hover:opacity-80 text-sm font-semibold transition-opacity whitespace-nowrap"
           >
             Forgot Password?
           </Link>
         </div>
 
         {/* Divider */}
-        <div className="relative my-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-200" />
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="bg-white px-4 text-gray-600">
-              or continue with
-            </span>
-          </div>
+        <div className="my-6 flex items-center gap-4">
+          <div className="h-px flex-1 bg-border" />
+          <span className="text-sm text-muted-foreground">
+            or continue with
+          </span>
+          <div className="h-px flex-1 bg-border" />
         </div>
         {/* Social Login Buttons */}
         <div className="space-y-3">
@@ -166,7 +163,7 @@ const Login = () => {
         </div>
 
         {/* Register Link */}
-        <p className="text-center text-gray-700 mt-6">
+        <p className="text-center text-muted-foreground mt-6">
           Don't have an account?{" "}
           <Link
             to="/signup"

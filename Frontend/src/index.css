@@ -5,13 +5,13 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 100%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 217 32% 17%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 217 32% 17%;
+    --popover-foreground: 222 47% 11%;
 
     --primary: 228 59% 21%;
     --primary-foreground: 0 0% 100%;
@@ -19,8 +19,8 @@
     --secondary: 25 95% 53%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 13% 91%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 16% 47%;
 
     --accent: 25 95% 53%;
     --accent-foreground: 0 0% 100%;
@@ -29,14 +29,14 @@
     --destructive-foreground: 0 0% 100%;
 
     --border: 220 13% 91%;
-    --input: 220 14% 96%;
+    --input: 0 0% 100%;
     --ring: 228 59% 21%;
 
     --radius: 0.75rem;
 
     /* Custom Aura AI tokens */
-    --gradient-start: 0 0% 100%;
-    --gradient-mid: 0 0% 100%;
+    --gradient-start: 210 40% 98%;
+    --gradient-mid: 220 14% 96%;
     --gradient-end: 0 0% 100%;
     
     --orange-start: 25 100% 53%;
@@ -46,33 +46,38 @@
   }
 
   .dark {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 100%;
+    /* Deep black / navy base + high contrast text */
+    --background: 222 47% 7%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 217 32% 17%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 217 32% 17%;
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 228 59% 21%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 213 93% 67%;
+    --primary-foreground: 222 47% 11%;
 
     --secondary: 25 95% 53%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 13% 91%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 217 19% 14%;
+    --muted-foreground: 215 20% 70%;
 
     --accent: 25 95% 53%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62% 30%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 14% 96%;
-    --ring: 228 59% 21%;
+    --border: 217 19% 20%;
+    --input: 217 19% 14%;
+    --ring: 25 95% 53%;
+
+    --gradient-start: 222 47% 7%;
+    --gradient-mid: 222 47% 10%;
+    --gradient-end: 222 47% 7%;
   }
 
   html {
@@ -80,7 +85,7 @@
   }
 
   body {
-    background-color: #F9FAFB;
+    background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -123,22 +128,27 @@
   [class*="subtitle"],
   .text-foreground\/70,
   .text-foreground\/80 {
-    color: hsl(var(--foreground), 0.85) !important;
+    color: hsl(var(--foreground) / 0.85) !important;
   }
 
   /* Fix text color opacity modifiers */
   .text-card-foreground\/75 {
-    color: hsl(222, 47%, 30%) !important;
+    color: hsl(var(--card-foreground) / 0.75) !important;
   }
 
   .text-card-foreground\/50 {
-    color: hsl(222, 47%, 50%) !important;
+    color: hsl(var(--card-foreground) / 0.5) !important;
   }
 }
 
 @layer components {
   .gradient-bg {
-    background: #FFFFFF;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--gradient-start)) 0%,
+      hsl(var(--gradient-mid)) 45%,
+      hsl(var(--gradient-end)) 100%
+    );
   }
 
   .gradient-orange {
@@ -167,10 +177,10 @@
   .input-field {
     width: 100%;
     padding: 0.875rem 1rem;
-    background: #FFFFFF;
+    background: hsl(var(--input));
     border: 1px solid hsl(var(--border));
     border-radius: 0.75rem;
-    color: hsl(var(--card-foreground));
+    color: hsl(var(--foreground));
     transition: all 0.2s;
     font-family: inherit;
   }
@@ -233,7 +243,7 @@
 
   .btn-outline:hover {
     background-color: hsl(var(--primary));
-    color: white;
+    color: hsl(var(--primary-foreground));
     transform: translateY(-2px);
     box-shadow: 0 4px 12px -2px rgba(30, 58, 138, 0.15);
   }
@@ -254,16 +264,16 @@
     justify-content: center;
     gap: 0.75rem;
     padding: 0.875rem 1rem;
-    border: 1px solid #e5e7eb;
+    border: 1px solid hsl(var(--border));
     border-radius: 0.75rem;
-    color: hsl(var(--card-foreground));
+    color: hsl(var(--foreground));
     font-weight: 500;
     transition: all 0.2s;
   }
 
   .btn-social:hover {
-    background-color: #f9fafb;
-    border-color: #d1d5db;
+    background-color: hsl(var(--muted));
+    border-color: hsl(var(--border));
   }
 
   .floating-element {

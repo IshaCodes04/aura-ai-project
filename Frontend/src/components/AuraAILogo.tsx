@@ -56,7 +56,7 @@ const AuraAILogo: React.FC<AuraAILogoProps> = ({ size = 'md', showText = true })
       {/* Logo Text */}
       {showText && (
         <span
-          className={`${config.text} font-semibold text-gray-900 whitespace-nowrap`}
+          className={`${config.text} font-semibold text-foreground whitespace-nowrap`}
           style={{ fontFamily: "'Inter', 'Poppins', 'SF Pro Display', sans-serif" }}
         >
           Aura AI

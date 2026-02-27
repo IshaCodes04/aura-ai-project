@@ -81,13 +81,13 @@ const Signup = () => {
       supportingText="Start free. Upgrade anytime. No credit card required."
     >
       <form onSubmit={handleSubmit} className="space-y-3">
-        <h2 className="text-2xl font-bold text-gray-900 text-center mb-5">
+        <h2 className="text-2xl font-bold text-card-foreground text-center mb-5">
           Create Account
         </h2>
 
         {/* First Name */}
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Firstname
           </label>
           <input
@@ -102,7 +102,7 @@ const Signup = () => {
 
         {/* Last Name */}
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Lastname
           </label>
           <input
@@ -117,7 +117,7 @@ const Signup = () => {
 
         {/* Email */}
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Email
           </label>
           <input
@@ -132,7 +132,7 @@ const Signup = () => {
 
         {/* Password */}
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Password
           </label>
           <div className="relative">
@@ -146,7 +146,7 @@ const Signup = () => {
             />
             <button
               type="button"
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-900 transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
@@ -160,7 +160,7 @@ const Signup = () => {
 
         {/* Confirm Password */}
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Confirm Password
           </label>
           <div className="relative">
@@ -176,7 +176,7 @@ const Signup = () => {
             />
             <button
               type="button"
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 hover:text-gray-900 transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
               {showConfirmPassword ? (
@@ -194,15 +194,12 @@ const Signup = () => {
         </button>
 
         {/* Divider */}
-        <div className="relative my-3">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-200" />
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="bg-white px-4 text-gray-600">
-              or continue with
-            </span>
-          </div>
+        <div className="my-3 flex items-center gap-4">
+          <div className="h-px flex-1 bg-border" />
+          <span className="text-sm text-muted-foreground">
+            or continue with
+          </span>
+          <div className="h-px flex-1 bg-border" />
         </div>
 
         {/* Google Login Button */}
@@ -235,7 +232,7 @@ const Signup = () => {
         </div>
 
         {/* Login Link */}
-        <p className="text-center text-gray-700 mt-4">
+        <p className="text-center text-muted-foreground mt-4">
           Already have an account?{" "}
           <Link
             to="/login"

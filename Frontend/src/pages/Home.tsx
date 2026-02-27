@@ -23,7 +23,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
       <Navbar />
 
       {/* Floating Elements */}
@@ -36,19 +36,19 @@ const Home = () => {
         <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Side - Hero Content */}
           <div className="text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-white/10 rounded-full mb-6 border border-transparent dark:border-white/10">
               <span className="w-2 h-2 bg-orange-500 rounded-full" />
-              <span className="text-sm text-blue-900 font-semibold">Next-Gen AI Platform</span>
+              <span className="text-sm text-blue-900 dark:text-white font-semibold">Next-Gen AI Platform</span>
             </div>
             
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+            <h1 className="text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
               Aura AI — The<br />
               <span className="text-orange-500">Future of Intelligent</span>
               <br />
               Assistance
             </h1>
             
-            <p className="text-lg text-gray-600 max-w-2xl mb-8 leading-relaxed font-medium" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+            <p className="text-lg text-muted-foreground max-w-2xl mb-8 leading-relaxed font-medium" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
               Build smarter workflows with an AI assistant designed to boost productivity and adapt to your needs.
             </p>
             
@@ -74,8 +74,8 @@ const Home = () => {
                   <feature.icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900">{feature.title}</h3>
-                  <p className="mt-1 text-gray-600">{feature.description}</p>
+                  <h3 className="text-lg font-bold text-card-foreground">{feature.title}</h3>
+                  <p className="mt-1 text-muted-foreground">{feature.description}</p>
                 </div>
               </div>
             ))}

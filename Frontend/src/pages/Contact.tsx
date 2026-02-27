@@ -25,7 +25,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
       <Navbar />
 
       {/* Floating Elements */}
@@ -35,7 +35,7 @@ const Contact = () => {
 
       <section className="relative z-10 min-h-screen flex items-center px-6 md:px-12 pt-32 pb-12">
         <div className="max-w-6xl mx-auto w-full">
-          <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 text-center">
+          <h1 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 text-center">
             Get in <span className="text-orange-500">Touch</span>
           </h1>
 
@@ -47,8 +47,8 @@ const Contact = () => {
                   <Mail className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900">Email</h3>
-                  <p className="text-gray-600 mt-1">hello@auraai.com</p>
+                  <h3 className="text-lg font-bold text-card-foreground">Email</h3>
+                  <p className="text-muted-foreground mt-1">hello@auraai.com</p>
                 </div>
               </div>
 
@@ -57,8 +57,8 @@ const Contact = () => {
                   <Phone className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900">Phone</h3>
-                  <p className="text-gray-600 mt-1">+1 (555) 123-4567</p>
+                  <h3 className="text-lg font-bold text-card-foreground">Phone</h3>
+                  <p className="text-muted-foreground mt-1">+1 (555) 123-4567</p>
                 </div>
               </div>
 
@@ -67,8 +67,8 @@ const Contact = () => {
                   <MapPin className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900">Location</h3>
-                  <p className="text-gray-600 mt-1">San Francisco, CA</p>
+                  <h3 className="text-lg font-bold text-card-foreground">Location</h3>
+                  <p className="text-muted-foreground mt-1">San Francisco, CA</p>
                 </div>
               </div>
             </div>
@@ -77,7 +77,7 @@ const Contact = () => {
             <div className="auth-card p-8">
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">Name</label>
+                  <label className="block text-sm font-semibold text-card-foreground mb-2">Name</label>
                   <input
                     type="text"
                     name="name"
@@ -90,7 +90,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">Email</label>
+                  <label className="block text-sm font-semibold text-card-foreground mb-2">Email</label>
                   <input
                     type="email"
                     name="email"
@@ -103,7 +103,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">Subject</label>
+                  <label className="block text-sm font-semibold text-card-foreground mb-2">Subject</label>
                   <input
                     type="text"
                     name="subject"
@@ -116,7 +116,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">Message</label>
+                  <label className="block text-sm font-semibold text-card-foreground mb-2">Message</label>
                   <textarea
                     name="message"
                     value={formData.message}
