@@ -43,33 +43,28 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 h-16 bg-background/92 dark:bg-[#06070b]/70 supports-[backdrop-filter]:bg-background/75 supports-[backdrop-filter]:dark:bg-[#06070b]/55 backdrop-blur-xl border-b border-border/70 dark:border-white/10 shadow-[0_10px_24px_-24px_rgba(0,0,0,0.18)] dark:shadow-[0_18px_55px_-40px_rgba(0,0,0,0.95)]">
-      {/* Premium glow + accent line (dark mode) */}
-      <div className="pointer-events-none absolute inset-0 dark:bg-[radial-gradient(900px_240px_at_50%_0%,rgba(249,115,22,0.16),transparent_62%)]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-orange-500/50 to-transparent opacity-0 dark:opacity-100" />
+    <nav className="fixed inset-x-0 top-0 z-50 px-4 md:px-8 py-3">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-between gap-3 md:gap-6 rounded-2xl bg-white/80 dark:bg-zinc-900/85 border border-white/70 dark:border-white/10 backdrop-blur-xl">
+          {/* Logo */}
+          <Link
+            to="/"
+            className="flex items-center pl-4 pr-2 py-1 group transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99]"
+          >
+            <AuraAILogo size="sm" showText={true} />
+          </Link>
 
-      <div className="relative max-w-7xl mx-auto h-full grid grid-cols-[auto_1fr_auto] items-center gap-4">
-        {/* Logo */}
-        <Link
-          to="/"
-          className="flex items-center group transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99]"
-        >
-          <AuraAILogo size="sm" showText={true} />
-        </Link>
-
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center justify-center">
-          {/* Gradient-border glass pill */}
-          <div className="rounded-2xl p-[1px] bg-gradient-to-r from-orange-500/35 via-black/10 to-blue-500/25 dark:from-orange-500/40 dark:via-white/10 dark:to-blue-500/30">
-            <div className="flex items-center gap-1 rounded-2xl px-1 py-1 bg-background/70 dark:bg-white/5 backdrop-blur-xl">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex flex-1 items-center justify-center">
+            <div className="inline-flex items-center gap-1 rounded-full bg-white/70 dark:bg-zinc-800/80 px-1.5 py-1 border border-white/80 dark:border-white/10">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`relative px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                    location.pathname === link.path 
-                      ? 'bg-background text-foreground dark:bg-white/10 dark:text-white shadow-sm dark:shadow-none'
-                      : 'text-foreground/70 dark:text-white/75 hover:text-foreground dark:hover:text-white hover:bg-background/60 dark:hover:bg-white/5'
+                  className={`relative px-4 py-2 rounded-full text-sm font-medium tracking-tight transition-all duration-200 ${
+                    location.pathname === link.path
+                      ? 'bg-white text-slate-900 dark:bg-white text-slate-900'
+                      : 'text-slate-600 dark:text-zinc-200 hover:text-slate-900 dark:hover:text-white hover:bg-white/70 dark:hover:bg-white/10'
                   }`}
                 >
                   {link.name}
@@ -77,49 +72,59 @@ const Navbar = () => {
               ))}
             </div>
           </div>
-        </div>
 
-        {/* Auth Buttons */}
-        <div className="hidden md:flex items-center gap-2">
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="group inline-flex items-center justify-center h-10 w-10 rounded-xl border border-border/70 dark:border-white/10 bg-background/70 dark:bg-white/5 text-foreground dark:text-white hover:bg-background dark:hover:bg-white/10 transition shadow-sm dark:shadow-none"
-            aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-            title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
-          >
-            {theme === 'dark' ? (
-              <Sun className="w-5 h-5 text-orange-300 group-hover:text-orange-200 transition-colors" />
-            ) : (
-              <Moon className="w-5 h-5 text-foreground/80 group-hover:text-foreground transition-colors" />
-            )}
-          </button>
-          <Link
-            to="/signup"
-            className="btn-outline dark:border-white/12 dark:text-white/90 dark:hover:bg-white/10 dark:hover:text-white dark:hover:border-white/15"
-          >
-            Sign up
-          </Link>
-          <Link
-            to="/login"
-            className="btn-primary dark:shadow-[0_18px_55px_-28px_rgba(249,115,22,0.9)] dark:hover:shadow-[0_26px_70px_-34px_rgba(249,115,22,0.95)]"
-          >
-            Log in
-          </Link>
-        </div>
+          {/* Desktop Auth / Theme */}
+          <div className="hidden md:flex items-center gap-2 pr-4">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="group inline-flex items-center justify-center h-9 w-9 rounded-full border border-white/70 dark:border-white/15 bg-white/50 dark:bg-transparent text-slate-800 dark:text-white hover:bg-white dark:hover:bg-white/10 transition-colors"
+              aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+              title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4" />
+              ) : (
+                <Moon className="w-4 h-4" />
+              )}
+            </button>
+            <Link
+              to="/login"
+              className="inline-flex items-center justify-center h-9 px-4 rounded-full border border-white/70 bg-white/40 text-sm font-medium text-slate-800 hover:bg-white/80 hover:text-slate-900 transition-colors dark:border-white/25 dark:bg-transparent dark:text-white/85 dark:hover:bg-white/10"
+            >
+              Log in
+            </Link>
+            <Link
+              to="/signup"
+              className="inline-flex items-center justify-center h-9 px-5 rounded-full bg-orange-500 text-sm font-semibold text-white hover:bg-orange-600 transition-colors shadow-[0_18px_40px_-22px_rgba(249,115,22,0.9)]"
+            >
+              Get started
+            </Link>
+          </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-border/70 dark:border-white/10 bg-background/70 dark:bg-white/5 text-foreground dark:text-white hover:bg-background dark:hover:bg-white/10 transition shadow-sm dark:shadow-none"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+          {/* Mobile right side */}
+          <div className="flex items-center gap-2 pr-3 md:hidden">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="inline-flex items-center justify-center h-9 w-9 rounded-full border border-white/70 dark:border-white/15 bg-white/60 dark:bg-transparent text-slate-800 dark:text-white"
+              aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+            <button
+              className="inline-flex items-center justify-center h-9 w-9 rounded-full border border-white/70 dark:border-white/15 bg-white/60 dark:bg-transparent text-slate-800 dark:text-white"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-4 right-4 mt-3 bg-background/95 dark:bg-background/85 border border-border/70 dark:border-white/10 rounded-2xl p-4 shadow-lg dark:shadow-[0_30px_60px_-40px_rgba(0,0,0,0.95)] backdrop-blur-xl">
+        <div className="md:hidden absolute inset-x-4 top-[4.5rem] mt-2 rounded-2xl bg-white/95 dark:bg-zinc-900/95 border border-white/80 dark:border-white/15 p-4 shadow-lg backdrop-blur-xl">
           <div className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link
