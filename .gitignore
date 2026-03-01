@@ -1,0 +1,67 @@
+# Dependencies
+node_modules/
+*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production.local
+
+# Build outputs
+dist/
+build/
+*/dist/
+*/build/
+.next/
+
+# IDE and editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+tmp/
+temp/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Public build artifacts
+Backend/public/*
+!Backend/public/.gitkeep
+
+Frontend/dist/
+Frontend/build/
+
+# Cache
+.cache/
+.eslintcache
+.parcel-cache
+.next/cache/
+
+# Local development
+.local
+.vscode/settings.json
+
+# Sensitive API keys and credentials
+config/secrets.json
+.env.*.secret
