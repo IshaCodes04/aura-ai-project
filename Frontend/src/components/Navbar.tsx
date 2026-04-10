@@ -124,16 +124,16 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute inset-x-4 top-[4.5rem] mt-2 rounded-2xl bg-white/95 dark:bg-zinc-900/95 border border-white/80 dark:border-white/15 p-4 shadow-lg backdrop-blur-xl">
+        <div className="md:hidden absolute inset-x-4 top-[4.5rem] mt-2 rounded-2xl bg-white dark:bg-zinc-900 border border-border/50 dark:border-white/10 p-4 shadow-xl backdrop-blur-xl animate-in fade-in zoom-in-95 duration-200">
           <div className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`px-4 py-3 rounded-xl text-sm font-semibold transition ${
+                className={`px-4 py-3 rounded-xl text-base font-medium transition ${
                   location.pathname === link.path
-                    ? 'bg-background text-foreground dark:bg-white/10 dark:text-white ring-1 ring-border/70 dark:ring-white/10'
-                    : 'text-foreground/80 dark:text-white/80 hover:bg-background/70 dark:hover:bg-white/5 hover:text-foreground dark:hover:text-white'
+                    ? 'bg-orange-500 text-white shadow-md'
+                    : 'text-foreground/90 dark:text-white/90 hover:bg-muted dark:hover:bg-white/5'
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -144,10 +144,19 @@ const Navbar = () => {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="inline-flex items-center justify-center gap-2 h-11 rounded-xl border border-border/70 dark:border-white/10 bg-background/70 dark:bg-white/5 text-foreground dark:text-white hover:bg-background dark:hover:bg-white/10 transition shadow-sm dark:shadow-none"
+                className="flex items-center justify-center gap-3 h-12 rounded-xl border border-border/70 dark:border-white/10 bg-muted/50 dark:bg-white/5 text-foreground dark:text-white hover:bg-muted dark:hover:bg-white/10 transition shadow-sm"
               >
-                {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-                {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+                {theme === 'dark' ? (
+                  <>
+                    <Sun className="w-5 h-5 text-orange-500" />
+                    <span className="font-semibold">Light mode</span>
+                  </>
+                ) : (
+                  <>
+                    <Moon className="w-5 h-5 text-blue-600" />
+                    <span className="font-semibold">Dark mode</span>
+                  </>
+                )}
               </button>
               <Link to="/signup" className="btn-outline text-center">
                 Sign up
