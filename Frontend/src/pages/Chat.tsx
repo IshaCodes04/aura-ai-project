@@ -13,6 +13,7 @@ import {
   Paperclip,
   Mic,
   Sun,
+  Moon,
   Bell,
   LogOut
 } from "lucide-react";
@@ -48,6 +49,34 @@ const Chat = () => {
   const socketRef = useRef<Socket | null>(null);
 
   const BACKEND_URL = "https://aura-ai-a4wr.onrender.com";
+  const THEME_STORAGE_KEY = "aura-theme";
+
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const isDark = typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
+    return isDark ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(isDark ? 'dark' : 'light');
+  }, []);
+
+  const setThemeAndPersist = (next: 'light' | 'dark') => {
+    setTheme(next);
+    document.documentElement.classList.toggle('dark', next === 'dark');
+    document.documentElement.style.colorScheme = next;
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, next);
+    } catch {
+      // no-op
+    }
+  };
+
+  const toggleTheme = () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    const next: 'light' | 'dark' = isDark ? 'light' : 'dark';
+    setThemeAndPersist(next);
+  };
 
   // socket connection
   useEffect(() => {
@@ -390,21 +419,21 @@ const Chat = () => {
   ];
 
   return (
-    <div className="fixed inset-0 flex overflow-hidden bg-white selection:bg-orange-100 selection:text-orange-900">
+    <div className="fixed inset-0 flex overflow-hidden bg-background selection:bg-orange-100 selection:text-orange-900">
       {/* ==================== SIDEBAR ==================== */}
       <div
         className={`
     fixed lg:static inset-y-0 left-0
     w-[280px] md:w-72 lg:w-80
-    bg-gray-50
-    border-r border-gray-200
+    bg-card
+    border-r border-border
     z-50 flex flex-col
     transform transition-transform duration-300 ease-out shadow-xl lg:shadow-none
     ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
   `}
       >
         {/* ================= HEADER ================= */}
-        <div className="px-4 py-6 border-b border-gray-200 shrink-0">
+        <div className="px-4 py-6 border-b border-border shrink-0">
           {/* Brand */}
           <div className="flex items-center gap-3 mb-4">
             {/* Aura Orb */}
@@ -416,8 +445,8 @@ const Chat = () => {
             </div>
 
             <div className="flex-1">
-              <h2 className="text-lg font-bold text-gray-900">Aura AI</h2>
-              <div className="flex items-center gap-2 text-xs text-gray-500">
+              <h2 className="text-lg font-bold text-foreground">Aura AI</h2>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <span
                     className={`w-2 h-2 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"
@@ -443,28 +472,28 @@ const Chat = () => {
         </div>
 
         {/* ================= SEARCH ================= */}
-        <div className="px-4 py-3 border-b border-gray-200 shrink-0">
+        <div className="px-4 py-3 border-b border-border shrink-0">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/70" />
             <input
               type="text"
               placeholder="Search chats or topics…"
-              className="w-full pl-10 pr-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+              className="w-full pl-10 pr-4 py-2 bg-muted border border-input rounded-lg text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
             />
           </div>
         </div>
 
         {/* ================= QUICK ACTIONS ================= */}
-        <div className="px-4 py-3 border-b border-gray-200 shrink-0">
-          <div className="grid grid-cols-3 gap-2 text-xs font-medium text-gray-700">
-            <button className="flex flex-col items-center gap-1 py-2 rounded-lg hover:bg-gray-100">
+        <div className="px-4 py-3 border-b border-border shrink-0">
+          <div className="grid grid-cols-3 gap-2 text-xs font-medium text-foreground/90">
+            <button className="flex flex-col items-center gap-1 py-2 rounded-lg hover:bg-muted">
               ⚡<span>Templates</span>
             </button>
-            <button className="flex flex-col items-center gap-1 py-2 rounded-lg hover:bg-gray-100">
+            <button className="flex flex-col items-center gap-1 py-2 rounded-lg hover:bg-muted">
               🧠
               <span>Think</span>
             </button>
-            <button className="flex flex-col items-center gap-1 py-2 rounded-lg hover:bg-gray-100">
+            <button className="flex flex-col items-center gap-1 py-2 rounded-lg hover:bg-muted">
               📂
               <span>Files</span>
             </button>
@@ -473,14 +502,14 @@ const Chat = () => {
 
         {/* ================= RECENT CHATS ================= */}
         <div className="flex-1 overflow-y-auto px-3 py-4 space-y-4">
-          <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider px-1">
+          <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider px-1">
             Recent Conversations
           </h3>
 
           {chatSessions.length === 0 ? (
-            <div className="text-center text-sm text-gray-500 mt-10">
+            <div className="text-center text-sm text-muted-foreground mt-10">
               No chats yet
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-muted-foreground/70 mt-1">
                 Start your first conversation
               </p>
             </div>
@@ -490,8 +519,8 @@ const Chat = () => {
                 key={chat.id}
                 onClick={() => handleSelectChat(chat.id)}
                 className={`group relative px-3 py-3 rounded-lg cursor-pointer transition-all ${activeChatId === chat.id
-                  ? "bg-white shadow-sm border border-orange-200"
-                  : "hover:bg-white"
+                  ? "bg-background shadow-sm border border-orange-200"
+                  : "hover:bg-background"
                   }`}
               >
                 {/* Active Indicator */}
@@ -503,14 +532,14 @@ const Chat = () => {
                   <MessageSquare
                     className={`w-4 h-4 mt-0.5 ${activeChatId === chat.id
                       ? "text-orange-500"
-                      : "text-gray-400"
+                      : "text-muted-foreground/70"
                       }`}
                   />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate">
+                    <p className="text-sm font-medium text-foreground truncate">
                       {chat.title}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-muted-foreground">
                       {formatDateTime(chat.timestamp)}
                     </p>
                   </div>
@@ -530,14 +559,14 @@ const Chat = () => {
         </div>
 
         {/* ================= FOOTER ================= */}
-        <div className="border-t border-gray-200 bg-white p-4 shrink-0">
-          <div className="px-3 py-3 bg-gray-50 rounded-xl border border-gray-200 shadow-sm">
-            <p className="text-sm font-bold text-gray-900 truncate">
+        <div className="border-t border-border bg-background p-4 shrink-0">
+          <div className="px-3 py-3 bg-card rounded-xl border border-border shadow-sm">
+            <p className="text-sm font-bold text-foreground truncate">
               {user ? `${user.fullName.firstName} ${user.fullName.lastName}` : "Guest User"}
             </p>
             <div className="flex items-center gap-2 mt-1">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-              <p className="text-[11px] text-gray-500 font-medium">Free Plan • Encrypted</p>
+              <p className="text-[11px] text-muted-foreground font-medium">Free Plan • Encrypted</p>
             </div>
           </div>
         </div>
@@ -552,25 +581,25 @@ const Chat = () => {
       )}
 
       {/* ==================== MAIN CHAT AREA ==================== */}
-      <div className="flex-1 flex flex-col bg-white min-w-0">
+      <div className="flex-1 flex flex-col bg-background min-w-0">
         {/* ==================== TOP HEADER ==================== */}
-        <div className="flex items-center justify-between px-4 md:px-6 lg:px-8 py-3 bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-20 shrink-0">
+        <div className="flex items-center justify-between px-4 md:px-6 lg:px-8 py-3 bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-20 shrink-0">
           <div className="flex items-center gap-3 min-w-0">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="lg:hidden p-2 -ml-2 hover:bg-gray-100 rounded-xl transition-colors duration-150"
+              className="lg:hidden p-2 -ml-2 hover:bg-muted rounded-xl transition-colors duration-150"
             >
               {sidebarOpen ? (
-                <X className="w-5 h-5 text-gray-600" />
+                <X className="w-5 h-5 text-muted-foreground" />
               ) : (
-                <Menu className="w-5 h-5 text-gray-600" />
+                <Menu className="w-5 h-5 text-muted-foreground" />
               )}
             </button>
             <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl gradient-orange flex items-center justify-center text-white font-bold text-sm shadow-sm shrink-0">
               A
             </div>
             <div className="min-w-0">
-              <h1 className="text-sm md:text-base font-bold text-gray-900 truncate">
+              <h1 className="text-sm md:text-base font-bold text-foreground truncate">
                 Aura AI Assistant
               </h1>
               <div className="flex items-center gap-1.5">
@@ -578,17 +607,21 @@ const Chat = () => {
                   className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"
                     }`}
                 ></div>
-                <p className="text-[10px] md:text-xs text-gray-500 font-medium capitalize">
+                <p className="text-[10px] md:text-xs text-muted-foreground font-medium capitalize">
                   {isOnline ? "Online" : "Offline"}
                 </p>
               </div>
             </div>
           </div>
           <div className="flex items-center gap-1.5 md:gap-3">
-            <button className="hidden sm:flex p-2 hover:bg-gray-100 rounded-xl transition-colors text-gray-600">
-              <Sun className="w-5 h-5" />
+            <button
+              onClick={toggleTheme}
+              className="p-2 hover:bg-muted rounded-xl transition-colors text-muted-foreground cursor-pointer"
+              aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
-            <button className="p-2 hover:bg-gray-100 rounded-xl transition-colors relative text-gray-600">
+            <button className="p-2 hover:bg-muted rounded-xl transition-colors relative text-muted-foreground">
               <Bell className="w-5 h-5" />
               <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-red-500 border-2 border-white"></div>
             </button>
@@ -603,28 +636,28 @@ const Chat = () => {
               </button>
 
               {showUserMenu && (
-                <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-[100] animate-in fade-in zoom-in duration-200 origin-top-right">
-                  <div className="px-4 py-3 border-b border-gray-100">
-                    <p className="text-sm font-bold text-gray-900">
+                <div className="absolute right-0 mt-2 w-56 bg-background rounded-xl shadow-xl border border-border py-2 z-[100] animate-in fade-in zoom-in duration-200 origin-top-right">
+                  <div className="px-4 py-3 border-b border-border">
+                    <p className="text-sm font-bold text-foreground">
                       {user ? `${user.fullName.firstName} ${user.fullName.lastName}` : "User"}
                     </p>
-                    <p className="text-xs text-gray-500 truncate mt-0.5">
+                    <p className="text-xs text-muted-foreground truncate mt-0.5">
                       {user?.email}
                     </p>
                   </div>
 
                   <div className="py-1">
-                    <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors text-left">
-                      <Settings className="w-4 h-4 text-gray-400" />
+                    <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-foreground/90 hover:bg-card transition-colors text-left">
+                      <Settings className="w-4 h-4 text-muted-foreground/70" />
                       Account Settings
                     </button>
-                    <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors text-left">
-                      <Bell className="w-4 h-4 text-gray-400" />
+                    <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-foreground/90 hover:bg-card transition-colors text-left">
+                      <Bell className="w-4 h-4 text-muted-foreground/70" />
                       Notifications
                     </button>
                   </div>
 
-                  <div className="border-t border-gray-100 mt-1 pt-1">
+                  <div className="border-t border-border mt-1 pt-1">
                     <button
                       onClick={handleLogout}
                       className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors text-left font-medium"
@@ -677,21 +710,21 @@ const Chat = () => {
               </div>
 
               {/* Greeting */}
-              <p className="text-xs md:text-sm lg:text-base text-gray-500 font-medium mb-3">
+              <p className="text-xs md:text-sm lg:text-base text-muted-foreground font-medium mb-3">
                 Good evening 👋
               </p>
 
               {/* Main Heading */}
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-6 max-w-2xl leading-tight px-4">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-6 max-w-2xl leading-tight px-4">
                 What would you like Aura to help you with today?
               </h2>
 
               {/* Tagline */}
-              <p className="text-sm md:text-base lg:text-lg text-gray-500 text-center max-w-xl mb-10 px-6">
+              <p className="text-sm md:text-base lg:text-lg text-muted-foreground text-center max-w-xl mb-10 px-6">
                 Your personal AI for{" "}
-                <span className="text-gray-700 font-medium">coding</span>,{" "}
-                <span className="text-gray-700 font-medium">creativity</span> &{" "}
-                <span className="text-gray-700 font-medium">clarity</span>
+                <span className="text-foreground/90 font-medium">coding</span>,{" "}
+                <span className="text-foreground/90 font-medium">creativity</span> &{" "}
+                <span className="text-foreground/90 font-medium">clarity</span>
               </p>
 
               {/* Action Buttons */}
@@ -699,10 +732,10 @@ const Chat = () => {
                 {actionButtons.map((btn, idx) => (
                   <button
                     key={idx}
-                    className="flex items-center justify-center lg:justify-start gap-2 px-4 py-3 md:py-4 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                    className="flex items-center justify-center lg:justify-start gap-2 px-4 py-3 md:py-4 bg-card border border-border rounded-xl hover:bg-muted hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
                   >
                     <span className="text-lg md:text-xl">{btn.icon}</span>
-                    <span className="text-xs md:text-sm font-semibold text-gray-800">
+                    <span className="text-xs md:text-sm font-semibold text-foreground">
                       {btn.label}
                     </span>
                   </button>
@@ -730,7 +763,7 @@ const Chat = () => {
                     <div
                       className={`max-w-[85%] md:max-w-[75%] px-4 md:px-5 py-3 rounded-2xl shadow-sm ${message.sender === "user"
                         ? "bg-orange-500 text-white rounded-br-none"
-                        : "bg-gray-100 text-gray-800 rounded-bl-none border border-gray-200"
+                        : "bg-muted text-foreground rounded-bl-none border border-border"
                         }`}
                     >
                       <p className="text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words">
@@ -739,7 +772,7 @@ const Chat = () => {
                       <p
                         className={`text-[10px] mt-2 font-medium ${message.sender === "user"
                           ? "text-orange-100"
-                          : "text-gray-400"
+                          : "text-muted-foreground/70"
                           }`}
                       >
                         {new Date(message.timestamp).toLocaleTimeString([], {
@@ -763,18 +796,18 @@ const Chat = () => {
                     <div className="w-9 h-9 rounded-lg gradient-orange flex items-center justify-center text-white font-bold text-sm shrink-0">
                       A
                     </div>
-                    <div className="max-w-xl px-5 py-3 rounded-lg bg-gray-100">
+                    <div className="max-w-xl px-5 py-3 rounded-lg bg-muted">
                       <div className="flex gap-1">
                         <div
-                          className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
+                          className="w-2 h-2 rounded-full bg-muted-foreground/50 animate-bounce"
                           style={{ animationDelay: "0ms" }}
                         ></div>
                         <div
-                          className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
+                          className="w-2 h-2 rounded-full bg-muted-foreground/50 animate-bounce"
                           style={{ animationDelay: "150ms" }}
                         ></div>
                         <div
-                          className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"
+                          className="w-2 h-2 rounded-full bg-muted-foreground/50 animate-bounce"
                           style={{ animationDelay: "300ms" }}
                         ></div>
                       </div>
@@ -788,12 +821,12 @@ const Chat = () => {
           )}
         </div>
         {/* ==================== INPUT AREA ==================== */}
-        <div className="border-t border-gray-200 bg-white px-4 py-4 md:py-5 shrink-0">
+        <div className="border-t border-border bg-background px-4 py-4 md:py-5 shrink-0">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center gap-2 md:gap-3">
               {/* Attachment */}
-              <button className="p-2 hover:bg-gray-100 rounded-lg transition shrink-0">
-                <Paperclip className="w-5 h-5 text-gray-600" />
+              <button className="p-2 hover:bg-muted rounded-lg transition shrink-0">
+                <Paperclip className="w-5 h-5 text-muted-foreground" />
               </button>
 
               {/* INPUT */}
@@ -807,9 +840,9 @@ const Chat = () => {
                 className="
          flex-1 min-w-0
   px-4 md:px-5 py-3 md:py-4
-  bg-gray-50 border border-gray-300 rounded-xl
-          text-sm md:text-base text-gray-900
-          placeholder-gray-400
+  bg-card border border-input rounded-xl
+          text-sm md:text-base text-foreground
+          placeholder-muted-foreground
           focus:outline-none
           focus:border-orange-500
           focus:ring-2 focus:ring-orange-200
@@ -819,8 +852,8 @@ const Chat = () => {
               />
 
               {/* Mic */}
-              <button className="p-2 hover:bg-gray-100 rounded-lg transition shrink-0">
-                <Mic className="w-5 h-5 text-gray-600" />
+              <button className="p-2 hover:bg-muted rounded-lg transition shrink-0">
+                <Mic className="w-5 h-5 text-muted-foreground" />
               </button>
 
               {/* SEND BUTTON */}
@@ -851,7 +884,7 @@ const Chat = () => {
 
             {/* Footer Status */}
             <div className="mt-3 text-center space-y-1">
-              <div className="flex items-center justify-center gap-3 text-xs text-gray-500 font-medium">
+              <div className="flex items-center justify-center gap-3 text-xs text-muted-foreground font-medium">
                 <span className="flex items-center gap-1">
                   <span
                     className={`w-2 h-2 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"
@@ -863,7 +896,7 @@ const Chat = () => {
                 <span>🔒 End-to-end encrypted</span>
               </div>
 
-              <p className="text-xs text-gray-400">
+              <p className="text-xs text-muted-foreground/70">
                 Voice enabled •{" "}
                 <span className="text-orange-600 font-medium">
                   Powered by Aura AI
