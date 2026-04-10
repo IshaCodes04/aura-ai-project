@@ -168,10 +168,17 @@ const Navbar = () => {
                   </>
                 )}
               </button>
-              <Link to="/signup" className="btn-primary text-center">
+              <Link 
+                to="/signup" 
+                className={`text-center py-3 rounded-xl font-semibold border transition-all ${
+                  theme === 'dark'
+                    ? 'border-white/20 text-white hover:bg-white/10'
+                    : 'border-slate-300 text-slate-900 hover:bg-slate-100'
+                }`}
+              >
                 Sign up
               </Link>
-              <Link to="/login" className="btn-outline text-center !bg-transparent">
+              <Link to="/login" className="btn-primary text-center">
                 Log in
               </Link>
             </div>
