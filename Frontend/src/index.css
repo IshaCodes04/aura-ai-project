@@ -37,6 +37,10 @@
 
     --orange-start: 25 100% 53%;
     --orange-end: 25 95% 50%;
+
+    --gradient-start: 210 40% 98%;
+    --gradient-mid: 220 14% 96%;
+    --gradient-end: 0 0% 100%;
   }
 
   .dark {
@@ -67,6 +71,10 @@
     --border: 217 19% 20%;
     --input: 217 19% 20%;
     --ring: 25 95% 53%;
+
+    --gradient-start: 224 71% 4%;
+    --gradient-mid: 224 71% 6%;
+    --gradient-end: 224 71% 4%;
   }
 
   html {
