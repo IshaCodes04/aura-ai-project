@@ -124,16 +124,22 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute inset-x-4 top-[4.5rem] mt-2 rounded-2xl bg-white dark:bg-zinc-900 border border-border/50 dark:border-white/10 p-4 shadow-xl backdrop-blur-xl animate-in fade-in zoom-in-95 duration-200">
+        <div className={`md:hidden absolute inset-x-4 top-[4.5rem] mt-2 rounded-2xl border p-4 shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-200 ${
+          theme === 'dark' 
+            ? 'bg-zinc-900/95 border-white/10' 
+            : 'bg-white border-slate-200'
+        }`}>
           <div className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`px-4 py-3 rounded-xl text-base font-medium transition ${
+                className={`px-4 py-3 rounded-xl text-base font-semibold transition-all duration-200 ${
                   location.pathname === link.path
-                    ? 'bg-orange-500 text-white shadow-md'
-                    : 'text-foreground/90 dark:text-white/90 hover:bg-muted dark:hover:bg-white/5'
+                    ? 'bg-orange-500 text-white shadow-lg'
+                    : theme === 'dark' 
+                      ? 'text-white hover:bg-white/10' 
+                      : 'text-slate-900 hover:bg-slate-100'
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -144,11 +150,15 @@ const Navbar = () => {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="flex items-center justify-center gap-3 h-12 rounded-xl border border-border/70 dark:border-white/10 bg-muted/50 dark:bg-white/5 text-foreground dark:text-white hover:bg-muted dark:hover:bg-white/10 transition shadow-sm"
+                className={`flex items-center justify-center gap-3 h-12 rounded-xl border transition-all duration-200 shadow-sm ${
+                  theme === 'dark'
+                    ? 'bg-white/5 border-white/10 text-white hover:bg-white/10'
+                    : 'bg-slate-50 border-slate-200 text-slate-900 hover:bg-slate-100'
+                }`}
               >
                 {theme === 'dark' ? (
                   <>
-                    <Sun className="w-5 h-5 text-orange-500" />
+                    <Sun className="w-5 h-5 text-orange-400" />
                     <span className="font-semibold">Light mode</span>
                   </>
                 ) : (
@@ -158,10 +168,10 @@ const Navbar = () => {
                   </>
                 )}
               </button>
-              <Link to="/signup" className="btn-outline text-center">
+              <Link to="/signup" className="btn-primary text-center">
                 Sign up
               </Link>
-              <Link to="/login" className="btn-primary text-center">
+              <Link to="/login" className="btn-outline text-center !bg-transparent">
                 Log in
               </Link>
             </div>
