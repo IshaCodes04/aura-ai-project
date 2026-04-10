@@ -45,7 +45,11 @@ const Navbar = () => {
   return (
     <nav className="fixed inset-x-0 top-0 z-50 px-4 md:px-8 py-3">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between gap-3 md:gap-6 rounded-2xl bg-white/80 dark:bg-zinc-900/85 border border-white/70 dark:border-white/10 backdrop-blur-xl">
+        <div className={`flex items-center justify-between gap-3 md:gap-6 rounded-2xl border backdrop-blur-xl transition-all duration-300 ${
+          theme === 'dark' 
+            ? 'bg-zinc-900/90 border-white/10 shadow-2xl shadow-black/20' 
+            : 'bg-white/90 border-slate-200 shadow-xl shadow-slate-200/50'
+        }`}>
           {/* Logo */}
           <Link
             to="/"
@@ -107,7 +111,11 @@ const Navbar = () => {
             <button
               type="button"
               onClick={toggleTheme}
-              className="inline-flex items-center justify-center h-9 w-9 rounded-full border border-white/70 dark:border-white/15 bg-white/60 dark:bg-transparent text-slate-800 dark:text-white"
+              className={`inline-flex items-center justify-center h-9 w-9 rounded-full border transition-all ${
+                theme === 'dark'
+                  ? 'border-white/15 bg-white/5 text-white hover:bg-white/15'
+                  : 'border-slate-200 bg-slate-100 text-slate-800 hover:bg-white'
+              }`}
               aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
             >
               {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
