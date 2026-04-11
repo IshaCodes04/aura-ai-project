@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import AuthLayout from "@/components/AuthLayout";
@@ -15,20 +15,20 @@ const Login = () => {
     password: "",
   });
 
-  const BACKEND_URL = "https://aura-ai-a4wr.onrender.com";
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://aura-ai-a4wr.onrender.com";
 
   // Google Login Handler
   const handleGoogleLogin = () => {
     window.open(`${BACKEND_URL}/api/auth/google`, "_self");
   };
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
   // Normal Login
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     try {
@@ -52,7 +52,7 @@ const Login = () => {
         }
         navigate("/chat");
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error("Login error:", err);
       alert(err?.response?.data?.message || "Login failed");
     } finally {

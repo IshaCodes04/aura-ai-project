@@ -28,7 +28,6 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          // App.jsx ya Routes file mein
           <Route path="/auth/success" element={<AuthSuccess />} />
           {/* ADD ALL CUSTOM ROUTES HERE ABOVE THE CATCH-ALL "*" ROUTE */}
         </Routes>

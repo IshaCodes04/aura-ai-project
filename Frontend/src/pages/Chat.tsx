@@ -26,6 +26,21 @@ interface Message {
   timestamp: Date | string;
 }
 
+interface BackendMessage {
+  _id: string;
+  role: "user" | "assistant";
+  content: string;
+  timestamp?: string;
+  createdAt?: string;
+}
+
+interface BackendChat {
+  _id: string;
+  title: string;
+  lastActivity: string;
+  messages: BackendMessage[];
+}
+
 interface ChatSession {
   id: string;
   title: string;
@@ -48,7 +63,7 @@ const Chat = () => {
   const [isMobile, setIsMobile] = useState(false);
   const socketRef = useRef<Socket | null>(null);
 
-  const BACKEND_URL = "https://aura-ai-a4wr.onrender.com";
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://aura-ai-a4wr.onrender.com";
   const THEME_STORAGE_KEY = "aura-theme";
 
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -148,7 +163,7 @@ const Chat = () => {
         const data = await response.json();
 
         if (data.chats) {
-          const formattedChats: ChatSession[] = data.chats.map((chat: any) => ({
+          const formattedChats: ChatSession[] = data.chats.map((chat: BackendChat) => ({
             id: chat._id,
             title: chat.title,
             timestamp: new Date(chat.lastActivity),
@@ -347,11 +362,11 @@ const Chat = () => {
         setActiveChatId(id);
 
         const loadedMessages: Message[] = data.chat.messages.map(
-          (msg: any) => ({
+          (msg: BackendMessage) => ({
             id: msg._id,
-            sender: msg.role === "user" ? "user" : "ai", // ✅ Convert role to sender
+            sender: msg.role === "user" ? "user" : "ai", 
             content: msg.content,
-            timestamp: new Date(msg.timestamp || msg.createdAt),
+            timestamp: new Date(msg.timestamp || msg.createdAt || Date.now()),
           })
         );
 

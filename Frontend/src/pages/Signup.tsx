@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import AuthLayout from "@/components/AuthLayout";
@@ -19,7 +19,7 @@ const Signup = () => {
     confirmPassword: "",
   });
 
-  const BACKEND_URL = "https://aura-ai-a4wr.onrender.com";
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://aura-ai-a4wr.onrender.com";
 
   // ✅ Google Login Handler
   const handleGoogleLogin = () => {
@@ -95,7 +95,7 @@ const Signup = () => {
             placeholder="John Doe"
             className="input-field"
             value={form.firstname}
-            onChange={(e) => setForm({ ...form, firstname: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, firstname: e.target.value })}
             required
           />
         </div>
@@ -110,7 +110,7 @@ const Signup = () => {
             placeholder="John Doe"
             className="input-field"
             value={form.lastname}
-            onChange={(e) => setForm({ ...form, lastname: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, lastname: e.target.value })}
             required
           />
         </div>
@@ -125,7 +125,7 @@ const Signup = () => {
             placeholder="your@email.com"
             className="input-field"
             value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, email: e.target.value })}
             required
           />
         </div>
@@ -141,7 +141,7 @@ const Signup = () => {
               placeholder="••••••••"
               className="input-field pr-12"
               value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, password: e.target.value })}
               required
             />
             <button
@@ -169,7 +169,7 @@ const Signup = () => {
               placeholder="••••••••"
               className="input-field pr-12"
               value={form.confirmPassword}
-              onChange={(e) =>
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setForm({ ...form, confirmPassword: e.target.value })
               }
               required

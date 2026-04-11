@@ -35,8 +35,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
 
-// Using wildcart
-app.get("*name", (req, res) => {
+// Catch-all route to serve the frontend for any other URL (SPA routing)
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
