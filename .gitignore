@@ -46,7 +46,7 @@ temp/
 *.sqlite3
 
 # Public build artifacts
-Backend/public/*
+# Backend/public/*  <- Removed to allow tracking build
 !Backend/public/.gitkeep
 
 Frontend/dist/
