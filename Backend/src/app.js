@@ -9,6 +9,7 @@ const authRoutes = require("./routes/auth.routes");
 const chatRoutes = require("./routes/chat.routes");
 
 const app = express(); // create server
+app.set("trust proxy", 1); // ✅ Required for Render/Proxies to handle HTTPS correctly
 
 /* Using middlewares*/
 app.use(express.json());
