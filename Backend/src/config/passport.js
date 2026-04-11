@@ -7,7 +7,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `${process.env.BACKEND_URL}/api/auth/google/callback`, // Full URL
+      callbackURL: "/api/auth/google/callback", 
       proxy: true,
     },
     async (accessToken, refreshToken, profile, cb) => {
