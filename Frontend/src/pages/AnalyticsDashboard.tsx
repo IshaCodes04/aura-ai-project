@@ -144,7 +144,7 @@ const AnalyticsDashboard = () => {
                             <button className="text-xs font-semibold text-gray-500 flex items-center gap-1">Last 7 days <ChevronDown size={12} /></button>
                         </div>
                         <div className="mb-6">
-                            <h2 className="text-2xl font-bold">{summary.totalVisitors} <span className="text-xs text-gray-400 font-normal">total tracking events</span></h2>
+                            <h2 className="text-2xl font-bold">{summary.peakHourCount || 0} <span className="text-xs text-gray-400 font-normal">events in peak hour</span></h2>
                             <div className="flex gap-4 mt-4">
                                 <LegendItem color="bg-orange-500" label="High" />
                                 <LegendItem color="bg-orange-200" label="Medium" />

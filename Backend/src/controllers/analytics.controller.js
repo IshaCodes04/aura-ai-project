@@ -46,12 +46,12 @@ exports.getAnalyticsSummary = async (req, res) => {
         const uniqueVisitors = await Analytics.distinct('ip');
         const totalVisitors = uniqueVisitors.length;
 
-        // Traffic overview (last 7 days)
+        // Traffic overview (last 7 days) - Count ALL events for more 'real' feel
         const sevenDaysAgo = new Date();
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
         const trafficData = await Analytics.aggregate([
-            { $match: { eventType: 'page_view', timestamp: { $gte: sevenDaysAgo } } },
+            { $match: { timestamp: { $gte: sevenDaysAgo } } },
             {
                 $group: {
                     _id: { $dateToString: { format: "%Y-%m-%d", date: "$timestamp" } },
@@ -60,6 +60,14 @@ exports.getAnalyticsSummary = async (req, res) => {
             },
             { $sort: { "_id": 1 } }
         ]);
+
+        // Peak Hours calculation (distribution by hour)
+        const peakHoursData = await Analytics.aggregate([
+            { $group: { _id: { $hour: "$timestamp" }, count: { $sum: 1 } } },
+            { $sort: { count: -1 } },
+            { $limit: 1 }
+        ]);
+        const peakHourCount = peakHoursData.length > 0 ? peakHoursData[0].count : 0;
 
         // Browser distribution
         const browserData = await Analytics.aggregate([
@@ -80,6 +88,7 @@ exports.getAnalyticsSummary = async (req, res) => {
                 totalMessages,
                 totalUsers: totalUsers.length,
                 imageGenerations: imageEvents,
+                peakHourCount,
                 bounceRate: "42.5%",
                 conversionRate: "12.3%"
             },

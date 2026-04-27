@@ -182,9 +182,13 @@ function initSocketServer(httpServer) {
 
       } catch (error) {
         console.error("❌ Error in ai-message handler:", error);
+        
+        // Detailed error for debugging
+        const errorMessage = error.name === 'BSONError' ? 'Invalid Chat ID format' : error.message;
+        
         socket.emit('ai-error', {
-          message: "Failed to process message",
-          error: error.message
+          message: "Aura is having trouble processing this message.",
+          error: errorMessage
         });
       }
 
