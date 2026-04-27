@@ -11,8 +11,15 @@ import Pricing from "./pages/Pricing";
 import Contact from "./pages/Contact";
 import Chat from "./pages/Chat";
 import AuthSuccess from "./pages/AuthSuccess"
+import AnalyticsDashboard from "./pages/AnalyticsDashboard";
+import { useTracking } from "./hooks/useTracking";
 
 const queryClient = new QueryClient();
+
+const Tracker = () => {
+  useTracking();
+  return null;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -20,6 +27,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <Tracker />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/chat" element={<Chat />} />
@@ -29,6 +37,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/auth/success" element={<AuthSuccess />} />
+          <Route path="/analytics" element={<AnalyticsDashboard />} />
           {/* ADD ALL CUSTOM ROUTES HERE ABOVE THE CATCH-ALL "*" ROUTE */}
         </Routes>
       </BrowserRouter>

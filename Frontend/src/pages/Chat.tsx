@@ -18,6 +18,7 @@ import {
   LogOut
 } from "lucide-react";
 import { io, Socket } from "socket.io-client";
+import { useTracking } from "../hooks/useTracking";
 
 interface Message {
   id: string;
@@ -50,6 +51,7 @@ interface ChatSession {
 
 const Chat = () => {
   const navigate = useNavigate();
+  const { trackEvent } = useTracking();
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -236,6 +238,8 @@ const Chat = () => {
 
   const handleSendMessage = async () => {
     if (inputValue.trim() === "" || !socketRef.current || !isOnline) return;
+
+    trackEvent('chat_message', { length: inputValue.length });
 
     // If no active chat, create one first from backend
     let currentChatId = activeChatId;

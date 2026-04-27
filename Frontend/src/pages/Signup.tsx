@@ -3,9 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import AuthLayout from "@/components/AuthLayout";
 import axios from "axios";
+import { useTracking } from "../hooks/useTracking";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const { trackEvent } = useTracking();
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -59,6 +61,7 @@ const Signup = () => {
       console.log("Signup response:", res);
 
       if (res.status === 201 || res.status === 200) {
+        trackEvent('session_start', { method: 'email', type: 'signup' });
         // Token save karo agar response mein hai
         if (res.data.token) {
           localStorage.setItem("token", res.data.token);

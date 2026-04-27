@@ -7,6 +7,7 @@ const path = require("path");
 /* Require Routes */
 const authRoutes = require("./routes/auth.routes");
 const chatRoutes = require("./routes/chat.routes");
+const analyticsRoutes = require("./routes/analytics.routes");
 
 const app = express(); // create server
 app.set("trust proxy", 1); // ✅ Required for Render/Proxies to handle HTTPS correctly
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 /* Using Routes */
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/analytics', analyticsRoutes);
 
 // Catch-all route to serve the frontend for any other URL (SPA routing)
 app.get(/.*/, (req, res) => {

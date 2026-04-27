@@ -6,7 +6,8 @@ const httpServer = require("http").createServer(app);
 
 connectDb();
 
-initSocketServer(httpServer);
+const io = initSocketServer(httpServer);
+app.set("socketio", io);
 
 const PORT = process.env.PORT || 3000;
 

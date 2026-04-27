@@ -196,6 +196,7 @@ function initSocketServer(httpServer) {
 
   })
 
+  return io;
 }
 
 
