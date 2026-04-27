@@ -101,7 +101,7 @@ const AnalyticsDashboard = () => {
                     <StatCard label="Total visitors" value={summary.totalVisitors} trend="9.8%" icon={<Users size={16} className="text-orange-500" />} />
                     <StatCard label="AI Messages" value={summary.totalMessages || 0} trend="Real-time" icon={<Cpu size={16} className="text-orange-500" />} />
                     <StatCard label="Page Views" value={summary.pageViews} trend="Today" icon={<Layers size={16} className="text-orange-500" />} />
-                    <StatCard label="Image Generations" value={summary.imageGenerations || 0} trend="Active" icon={<Database size={16} className="text-orange-500" />} />
+                    <StatCard label="Total Users" value={summary.totalUsers || 0} trend="Active" icon={<Database size={16} className="text-orange-500" />} />
                 </div>
 
                 <div className="grid grid-cols-3 gap-8 mb-8">
