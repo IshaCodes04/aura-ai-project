@@ -45,10 +45,10 @@ const AnalyticsDashboard = () => {
             {/* Sidebar */}
             <aside className="w-[260px] bg-white flex flex-col sticky top-0 h-screen border-r border-gray-100">
                 <div className="p-7 mb-2 flex items-center gap-3">
-                    <div className="w-8 h-8 bg-[#7C3AED] rounded-lg flex items-center justify-center">
-                        <div className="w-4 h-4 bg-white/20 rounded-sm rotate-45"></div>
+                    <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center shadow-lg shadow-orange-500/20">
+                        <span className="text-white font-bold text-lg">A</span>
                     </div>
-                    <span className="text-xl font-bold tracking-tight text-[#0F172A]">Growlytics</span>
+                    <span className="text-xl font-bold tracking-tight text-[#0F172A]">Aura AI</span>
                 </div>
 
                 <div className="px-6 mb-6">
@@ -84,7 +84,7 @@ const AnalyticsDashboard = () => {
             <main className="flex-1 p-8 overflow-x-hidden">
                 {/* Header */}
                 <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+                    <h1 className="text-2xl font-bold text-gray-900">Aura AI Analytics</h1>
                     <div className="flex items-center gap-4">
                         <button className="w-10 h-10 flex items-center justify-center bg-white rounded-xl shadow-sm border border-gray-50 text-gray-500">
                             <Bell size={18} />
