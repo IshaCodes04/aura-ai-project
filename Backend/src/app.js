@@ -10,6 +10,16 @@ const chatRoutes = require("./routes/chat.routes");
 const analyticsRoutes = require("./routes/analytics.routes");
 
 const app = express(); // create server
+const rateLimit = require('express-rate-limit');
+
+// Security: Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: { error: "Too many requests, please try again later." }
+});
+
+app.use('/api/', limiter); // Apply to all API routes
 app.set("trust proxy", 1); // ✅ Required for Render/Proxies to handle HTTPS correctly
 
 /* Using middlewares*/
