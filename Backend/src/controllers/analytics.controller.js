@@ -36,41 +36,41 @@ exports.getAnalyticsSummary = async (req, res) => {
         const last24h = new Date(now - 24 * 60 * 60 * 1000);
         const last7d = new Date(now - 7 * 24 * 60 * 60 * 1000);
 
-        // 1. Total Visitors (Unique IPs)
-        const totalVisitors = await Analytics.distinct('ip').countDocuments();
-
-        // 2. Pageviews
+        // Total Page Views
         const pageViews = await Analytics.countDocuments({ eventType: 'page_view' });
 
-        // 3. Active Users (last 24h)
-        const activeUsers = await Analytics.distinct('userId', { timestamp: { $gte: last24h }, userId: { $ne: null } }).countDocuments();
+        // Total Messages (AI Activity)
+        const totalMessages = await Analytics.countDocuments({ eventType: 'chat_message' });
 
-        // 4. Traffic Overview (Daily for last 7 days)
-        const trafficOverview = await Analytics.aggregate([
-            { $match: { timestamp: { $gte: last7d }, eventType: 'page_view' } },
+        // User count (Unique IPs/UserIDs)
+        const uniqueVisitors = await Analytics.distinct('ip');
+        const totalVisitors = uniqueVisitors.length;
+
+        // Traffic overview (last 7 days)
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+        const trafficData = await Analytics.aggregate([
+            { $match: { eventType: 'page_view', timestamp: { $gte: sevenDaysAgo } } },
             {
                 $group: {
                     _id: { $dateToString: { format: "%Y-%m-%d", date: "$timestamp" } },
-                    visitors: { $addToSet: "$ip" }
+                    count: { $sum: 1 }
                 }
             },
-            {
-                $project: {
-                    date: "$_id",
-                    count: { $size: "$visitors" },
-                    _id: 0
-                }
-            },
-            { $sort: { date: 1 } }
+            { $sort: { "_id": 1 } }
         ]);
 
-        // 5. Browser Distribution
-        const browserStats = await Analytics.aggregate([
-            { $group: { _id: "$browser", count: { $sum: 1 } } },
-            { $project: { name: "$_id", value: "$count", _id: 0 } }
+        // Browser distribution
+        const browserData = await Analytics.aggregate([
+            { $group: { _id: "$browser", count: { $sum: 1 } } }
         ]);
 
-        res.json({
+        // Interaction summary for the table
+        const chatEvents = await Analytics.countDocuments({ eventType: 'chat_message' });
+        const imageEvents = await Analytics.countDocuments({ eventType: 'image_generation' });
+
+        res.status(200).json({
             summary: {
                 totalVisitors,
                 pageViews,

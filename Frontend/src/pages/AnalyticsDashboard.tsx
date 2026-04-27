@@ -99,9 +99,9 @@ const AnalyticsDashboard = () => {
                 {/* Stat Cards */}
                 <div className="grid grid-cols-4 gap-6 mb-8">
                     <StatCard label="Total visitors" value={summary.totalVisitors} trend="9.8%" icon={<Users size={16} className="text-orange-500" />} />
-                    <StatCard label="AI Messages" value="12,543" trend="24.1%" icon={<Cpu size={16} className="text-orange-500" />} />
-                    <StatCard label="Bounce rate" value="47.8%" trend="2.1%" isDown icon={<Layers size={16} className="text-orange-500" />} />
-                    <StatCard label="Memory Vectors" value="8,921" trend="12.4%" icon={<Database size={16} className="text-orange-500" />} />
+                    <StatCard label="AI Messages" value={summary.totalMessages || 0} trend="Real-time" icon={<Cpu size={16} className="text-orange-500" />} />
+                    <StatCard label="Page Views" value={summary.pageViews} trend="Today" icon={<Layers size={16} className="text-orange-500" />} />
+                    <StatCard label="Image Generations" value={summary.imageGenerations || 0} trend="Active" icon={<Database size={16} className="text-orange-500" />} />
                 </div>
 
                 <div className="grid grid-cols-3 gap-8 mb-8">
@@ -116,7 +116,7 @@ const AnalyticsDashboard = () => {
                         <div className="mb-4">
                             <h2 className="text-3xl font-bold">{summary.totalVisitors.toLocaleString()}</h2>
                             <p className="text-xs text-orange-500 font-bold flex items-center gap-1 mt-1">
-                                <ArrowUpRight size={12} /> 15% <span className="text-gray-400 font-normal">from last month</span>
+                                <ArrowUpRight size={12} /> Active <span className="text-gray-400 font-normal">users tracking</span>
                             </p>
                         </div>
                         <div className="h-[280px]">
@@ -144,11 +144,11 @@ const AnalyticsDashboard = () => {
                             <button className="text-xs font-semibold text-gray-500 flex items-center gap-1">Last 7 days <ChevronDown size={12} /></button>
                         </div>
                         <div className="mb-6">
-                            <h2 className="text-2xl font-bold">4,231 <span className="text-xs text-gray-400 font-normal">visitors in peak hour</span></h2>
+                            <h2 className="text-2xl font-bold">{summary.totalVisitors} <span className="text-xs text-gray-400 font-normal">total tracking events</span></h2>
                             <div className="flex gap-4 mt-4">
-                                <LegendItem color="bg-orange-500" label="3,000+" />
-                                <LegendItem color="bg-orange-200" label="1,000-2,000" />
-                                <LegendItem color="bg-gray-50" label="<1,000" />
+                                <LegendItem color="bg-orange-500" label="High" />
+                                <LegendItem color="bg-orange-200" label="Medium" />
+                                <LegendItem color="bg-gray-50" label="Low" />
                             </div>
                         </div>
                         <div className="flex">
@@ -160,8 +160,8 @@ const AnalyticsDashboard = () => {
                                     <div 
                                         key={i} 
                                         className={`aspect-square rounded-[2px] transition-all hover:scale-110 cursor-pointer ${
-                                            [24, 25, 31, 32, 18, 39].includes(i) ? 'bg-orange-500 shadow-sm shadow-orange-200' : 
-                                            [11, 12, 17, 19, 23, 26, 33, 4, 38].includes(i) ? 'bg-orange-200' : 
+                                            (summary.totalVisitors > 0 && i % 7 === 0) ? 'bg-orange-500' : 
+                                            (summary.totalVisitors > 0 && i % 3 === 0) ? 'bg-orange-200' : 
                                             'bg-gray-50'
                                         }`}
                                     />
@@ -176,7 +176,6 @@ const AnalyticsDashboard = () => {
                     <div className="p-7 flex justify-between items-center border-b border-gray-50">
                         <div className="flex bg-[#F9FAFB] p-1 rounded-xl">
                             <button className="px-5 py-1.5 rounded-lg text-xs font-bold bg-white shadow-sm text-orange-600">AI Usage</button>
-                            <button className="px-5 py-1.5 rounded-lg text-xs font-bold text-gray-400">Memory</button>
                             <button className="px-5 py-1.5 rounded-lg text-xs font-bold text-gray-400">Users</button>
                         </div>
                         <button className="text-xs font-semibold text-gray-500 flex items-center gap-1">Last 7 days <ChevronDown size={14} /></button>
@@ -192,9 +191,9 @@ const AnalyticsDashboard = () => {
                                 </tr>
                             </thead>
                             <tbody className="text-xs text-gray-700 divide-y divide-gray-50">
-                                <TableRow name="Text Chat Conversations" value="8,420" rate="99.2%" time="1.2s" width="85%" />
-                                <TableRow name="Image Generations" value="2,150" rate="94.7%" time="4.5s" width="45%" />
-                                <TableRow name="Vector DB Queries" value="15,320" rate="100%" time="0.3s" width="95%" />
+                                {(data.interactions || []).map((inter: any, idx: number) => (
+                                    <TableRow key={idx} name={inter.name} value={inter.count} rate={inter.rate} time={inter.time} width={`${Math.min(inter.count * 10, 100)}%`} />
+                                ))}
                             </tbody>
                         </table>
                     </div>
