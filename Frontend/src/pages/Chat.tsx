@@ -146,7 +146,15 @@ const Chat = () => {
     socket.on("ai-error", (error: { message: string; error: string }) => {
       console.error("❌ AI Error:", error);
       setIsAiTyping(false);
-      alert(`Error: ${error.message}`);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now().toString(),
+          sender: "ai",
+          content: `⚠️ ${error.message}`,
+          timestamp: new Date(),
+        },
+      ]);
     });
 
     return () => {
@@ -261,14 +269,23 @@ const Chat = () => {
 
         if (data.chat && data.chat._id) {
           currentChatId = data.chat._id;
+          
+          const initialMessages = data.chat.messages?.map((msg: any) => ({
+            id: msg._id,
+            sender: msg.role === "user" ? "user" : "ai",
+            content: msg.content,
+            timestamp: new Date(msg.timestamp || msg.createdAt || Date.now()),
+          })) || [];
+
           const newChat: ChatSession = {
             id: currentChatId,
             title: data.chat.title,
             timestamp: new Date(data.chat.lastActivity),
-            messages: [],
+            messages: initialMessages,
           };
           setChatSessions((prev) => [newChat, ...prev]);
           setActiveChatId(currentChatId);
+          setMessages(initialMessages);
         } else {
           console.error("Failed to create chat");
           return;
@@ -338,15 +355,24 @@ const Chat = () => {
       const data = await response.json();
 
       if (data.chat && data.chat._id) {
+        const initialMessages = data.chat.messages?.map((msg: any) => ({
+          id: msg._id,
+          sender: msg.role === "user" ? "user" : "ai",
+          content: msg.content,
+          timestamp: new Date(msg.timestamp || msg.createdAt || Date.now()),
+        })) || [];
+
         const newChat: ChatSession = {
           id: data.chat._id,
           title: data.chat.title,
           timestamp: new Date(data.chat.lastActivity),
-          messages: [],
+          messages: initialMessages,
         };
+        
         setChatSessions([newChat, ...chatSessions]);
         setActiveChatId(data.chat._id);
-        setMessages([]);
+        setMessages(initialMessages);
+        
         if (isMobile) setSidebarOpen(false);
       }
     } catch (error) {
