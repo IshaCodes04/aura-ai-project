@@ -32,7 +32,11 @@ app.use(passport.initialize());
 // Using cors
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173", // ✅ Dynamic frontend URL
+    origin: [
+      process.env.CLIENT_URL,
+      "http://localhost:5173",
+      "https://aura-ai-a4wr.onrender.com"
+    ].filter(Boolean), // ✅ Allow both local and production frontend URLs
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
