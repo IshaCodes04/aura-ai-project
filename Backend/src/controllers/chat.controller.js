@@ -19,6 +19,14 @@ async function createChat(req, res) {
       lastActivity: Date.now(),
     });
 
+    // Create a default welcome message
+    const welcomeMessage = await messageModel.create({
+      chat: chat._id,
+      user: user._id,
+      content: "Hi! I am Aura AI. I can help you write code, generate images, and brainstorm ideas. How can I assist you today?",
+      role: "model"
+    });
+
     res.status(201).json({
       message: "Chat created successfully enjoyy!!",
       chat: {
@@ -26,6 +34,7 @@ async function createChat(req, res) {
         title: chat.title,
         lastActivity: chat.lastActivity,
         user: chat.user,
+        messages: [welcomeMessage] // Optionally return it
       },
     });
   } catch (error) {

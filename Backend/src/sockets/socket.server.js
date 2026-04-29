@@ -71,7 +71,20 @@ function initSocketServer(httpServer) {
 
     // ai-message
 
+    // ✅ Rate limiting map for sockets
+    const socketRateLimits = new Map();
+
     socket.on('ai-message', async (messagePayload) => {
+      // Basic AI Rate Limiting (1 message per 3 seconds max)
+      const lastMessageTime = socketRateLimits.get(socket.id) || 0;
+      const now = Date.now();
+      if (now - lastMessageTime < 3000) {
+        return socket.emit('ai-error', { 
+          message: "Please wait a few seconds before sending another message.",
+          error: "Rate Limit Exceeded"
+        });
+      }
+      socketRateLimits.set(socket.id, now);
 
       try {
         // ✅ Convert chat string to ObjectId
