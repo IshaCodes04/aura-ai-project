@@ -32,46 +32,69 @@ const Home = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative z-10 min-h-[95vh] flex flex-col justify-center items-center px-6 md:px-12 pt-32 pb-20 text-center">
-        {/* Glow Background */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-0">
-           <div className="w-[80vw] h-[80vw] max-w-[1000px] max-h-[1000px] bg-gradient-to-r from-orange-500/20 to-rose-500/20 blur-[120px] rounded-full animate-pulse" style={{ animationDuration: '8s' }}></div>
-        </div>
-
-        <div className="max-w-5xl mx-auto w-full relative z-10">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-background/50 backdrop-blur-xl rounded-full mb-8 border border-orange-500/30 shadow-[0_0_15px_rgba(249,115,22,0.15)]">
-            <span className="w-2.5 h-2.5 bg-orange-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(249,115,22,0.8)]" />
-            <span className="text-sm font-bold tracking-wide uppercase bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-rose-500">Aura AI 2.0 is Live</span>
+      <section className="relative z-10 min-h-[95vh] flex flex-col justify-center items-center px-4 md:px-12 pt-32 pb-16 text-center overflow-hidden">
+        {/* Subtle Background Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] bg-orange-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
+        
+        <div className="max-w-4xl mx-auto w-full relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-muted/50 backdrop-blur-md rounded-full mb-8 border border-border">
+            <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
+            <span className="text-xs md:text-sm font-medium tracking-wide text-foreground/80">Meet Your Personal AI</span>
           </div>
           
-          <h1 className="text-6xl md:text-7xl lg:text-[6rem] font-black text-foreground leading-[1.05] mb-8 tracking-tight" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
-            Think it. <br className="md:hidden" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-rose-500">Aura builds it.</span>
+          <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black text-foreground leading-[1.1] mb-6 tracking-tight">
+            Ask <span className="text-transparent bg-clip-text gradient-orange">anything.</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
-            The intelligent companion that doesn't just chat—it creates, analyzes, and remembers. Your personal supercomputer is ready.
+          <p className="text-lg md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-medium px-4">
+            Aura AI answers questions, writes code, and helps you brainstorm. Your incredibly smart, personalized companion is ready to chat.
           </p>
-          
-          {/* Big Mock Input Bar */}
-          <div className="max-w-3xl mx-auto relative group mb-16">
-             <div className="absolute -inset-1.5 bg-gradient-to-r from-orange-500 to-rose-500 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-300"></div>
-             <div className="relative flex items-center bg-white/90 dark:bg-black/60 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-2xl p-2 shadow-2xl">
-               <div className="pl-5 pr-2 py-5 flex-1 text-left flex items-center gap-4">
-                  <span className="text-3xl animate-bounce" style={{ animationDuration: '2s' }}>✨</span>
-                  <span className="text-lg md:text-xl text-foreground/50 font-medium font-mono type-writer-effect">Build a sleek React dashboard...</span>
-               </div>
-               <Link to="/signup" className="hidden md:flex bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white px-10 py-5 rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-orange-500/50 hover:-translate-y-0.5 items-center gap-2">
-                 Generate <ArrowRight className="w-6 h-6" />
-               </Link>
-             </div>
-          </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center md:hidden">
-            <Link to="/signup" className="btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 text-xl w-full rounded-xl shadow-lg shadow-orange-500/30">
-              Get Started Free <ArrowRight className="w-5 h-5" />
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 px-6">
+            <Link to="/signup" className="btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 text-lg rounded-xl shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:-translate-y-1 transition-all w-full sm:w-auto">
+              Start Chatting <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
+        </div>
+
+        {/* Massive Realistic Chat Mockup */}
+        <div className="max-w-5xl mx-auto w-full relative z-20 px-2 md:px-0">
+           <div className="w-full bg-background/80 dark:bg-card/80 backdrop-blur-2xl border border-border rounded-2xl md:rounded-[2rem] shadow-2xl overflow-hidden transform transition-transform duration-700 hover:scale-[1.01]">
+             {/* Window Header */}
+             <div className="flex items-center gap-2 px-6 py-4 border-b border-border bg-muted/30">
+                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                <div className="mx-auto text-xs font-semibold text-muted-foreground uppercase tracking-widest pr-8">Aura AI Companion</div>
+             </div>
+             
+             {/* Chat Area */}
+             <div className="p-5 md:p-10 space-y-6 text-left bg-background/50">
+                <div className="flex gap-3 md:gap-4 items-end justify-end">
+                  <div className="bg-orange-500 text-white px-4 md:px-5 py-3 rounded-2xl rounded-br-none text-sm md:text-base shadow-sm max-w-[85%] md:max-w-[70%]">
+                    Can you explain how Quantum Computing works in simple terms?
+                  </div>
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs md:text-sm font-bold shrink-0 shadow-sm ring-2 ring-background">U</div>
+                </div>
+
+                <div className="flex gap-3 md:gap-4 items-end">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full gradient-orange flex items-center justify-center text-white text-xs md:text-sm font-bold shrink-0 shadow-sm ring-2 ring-background">A</div>
+                  <div className="bg-muted border border-border px-4 md:px-6 py-4 rounded-2xl rounded-bl-none text-sm md:text-base shadow-sm max-w-[90%] md:max-w-[80%] text-foreground/90 leading-relaxed">
+                    <p className="mb-3">Imagine you're flipping a coin. It can either be heads (1) or tails (0). That's how normal computers work with bits.</p>
+                    <p>But a <b>Quantum Computer</b> uses <i>qubits</i>. It's like a spinning coin—it can be heads, tails, or anywhere in between, all at the same time! This allows it to solve incredibly complex problems much faster. 🚀</p>
+                  </div>
+                </div>
+             </div>
+             
+             {/* Input Area */}
+             <div className="p-4 md:p-6 bg-card border-t border-border">
+                <div className="flex items-center bg-background border border-border rounded-xl px-4 py-3 shadow-sm">
+                   <span className="text-muted-foreground mr-3">✨</span>
+                   <span className="text-muted-foreground text-sm flex-1 opacity-70">Ask Aura anything...</span>
+                   <div className="w-8 h-8 rounded-lg gradient-orange flex items-center justify-center shadow-md"><ArrowRight className="w-4 h-4 text-white" /></div>
+                </div>
+             </div>
+           </div>
         </div>
       </section>
 
