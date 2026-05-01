@@ -310,3 +310,29 @@
   animation: fadeInUp 0.8s ease-out 0.2s forwards;
   opacity: 0;
 }
+
+@keyframes morph {
+  0% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.liquid-blob {
+  animation: morph 15s ease-in-out infinite;
+  background: linear-gradient(135deg, #FF7A00 0%, #FF0066 50%, #7000FF 100%);
+  filter: blur(20px);
+  opacity: 0.15;
+}
+
+.dark .liquid-blob {
+  opacity: 0.25;
+}

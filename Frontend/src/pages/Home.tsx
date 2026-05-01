@@ -1,200 +1,330 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Zap, Shield, Brain } from 'lucide-react';
+import { ArrowRight, Code2, MessageSquare, Lightbulb, Sparkles, Brain, Zap, Shield, Star } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import FloatingElements from '@/components/FloatingElements';
 
 const Home = () => {
-  const features = [
+  const capabilities = [
+    {
+      icon: Code2,
+      title: 'Code Anything',
+      description: 'Write, debug, and refactor any language. From React components to Python scripts — Aura has got you.',
+      color: 'from-blue-500 to-cyan-500',
+      bg: 'bg-blue-500/10',
+    },
+    {
+      icon: MessageSquare,
+      title: 'Ask Anything',
+      description: 'Science, history, philosophy, or just daily life questions — no topic is too big or too small for Aura.',
+      color: 'from-purple-500 to-pink-500',
+      bg: 'bg-purple-500/10',
+    },
+    {
+      icon: Lightbulb,
+      title: 'Brainstorm Everything',
+      description: 'Stuck on an idea? Aura is your creative partner. Get content ideas, business plans, or story plots in seconds.',
+      color: 'from-orange-500 to-rose-500',
+      bg: 'bg-orange-500/10',
+    },
     {
       icon: Brain,
-      title: 'Smart Learning',
-      description: 'AI that adapts and learns from your workflow patterns.',
+      title: 'Remembers You',
+      description: 'Powered by Pinecone Vector memory, Aura learns from every conversation and personalizes responses just for you.',
+      color: 'from-emerald-500 to-teal-500',
+      bg: 'bg-emerald-500/10',
     },
     {
       icon: Zap,
-      title: 'Lightning Fast',
-      description: 'Get instant responses and complete tasks in seconds.',
+      title: 'Instant Responses',
+      description: 'Real-time streaming via WebSockets means you see Aura thinking and typing, with zero lag or waiting.',
+      color: 'from-yellow-400 to-orange-500',
+      bg: 'bg-yellow-500/10',
     },
     {
       icon: Shield,
-      title: 'Secure & Private',
-      description: 'Your data is encrypted and never shared with third parties.',
+      title: 'Private & Secure',
+      description: 'Your conversations are yours only. End-to-end encrypted, never shared, never sold. Your trust is everything.',
+      color: 'from-slate-500 to-blue-600',
+      bg: 'bg-slate-500/10',
     },
   ];
 
+  const useCases = [
+    { emoji: '👩‍💻', title: 'Students', desc: 'Get homework help, explanations, and study plans.' },
+    { emoji: '🚀', title: 'Developers', desc: 'Code faster, debug smarter, ship with confidence.' },
+    { emoji: '✍️', title: 'Writers', desc: 'Overcome writer\'s block and craft compelling stories.' },
+    { emoji: '💼', title: 'Professionals', desc: 'Draft emails, reports, and presentations instantly.' },
+  ];
+
   return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
       <Navbar />
 
-      {/* Floating Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <FloatingElements />
-      </div>
+      {/* ─── HERO SECTION ─── */}
+      <section className="relative z-10 min-h-screen flex flex-col justify-center items-center px-4 md:px-8 pt-28 pb-20 text-center overflow-hidden">
 
-      {/* Hero Section */}
-      <section className="relative z-10 min-h-[95vh] flex flex-col justify-center items-center px-4 md:px-12 pt-32 pb-16 text-center overflow-hidden">
-        {/* Subtle Background Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] bg-orange-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
-        
-        <div className="max-w-4xl mx-auto w-full relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-muted/50 backdrop-blur-md rounded-full mb-8 border border-border">
-            <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
-            <span className="text-xs md:text-sm font-medium tracking-wide text-foreground/80">Meet Your Personal AI</span>
+        {/* Liquid Blobs Background */}
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+          <div
+            className="liquid-blob absolute"
+            style={{
+              width: '55vw', height: '55vw',
+              maxWidth: '700px', maxHeight: '700px',
+              top: '-10%', left: '-15%',
+              background: 'linear-gradient(135deg, #FF7A00 0%, #FF0066 50%, #9333ea 100%)',
+            }}
+          />
+          <div
+            className="liquid-blob absolute"
+            style={{
+              width: '45vw', height: '45vw',
+              maxWidth: '600px', maxHeight: '600px',
+              bottom: '-5%', right: '-10%',
+              animationDelay: '-7s',
+              animationDuration: '20s',
+              background: 'linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 50%, #ec4899 100%)',
+            }}
+          />
+          <div
+            className="liquid-blob absolute"
+            style={{
+              width: '30vw', height: '30vw',
+              maxWidth: '400px', maxHeight: '400px',
+              top: '40%', right: '20%',
+              animationDelay: '-3s',
+              animationDuration: '12s',
+              background: 'linear-gradient(135deg, #10b981 0%, #0ea5e9 100%)',
+            }}
+          />
+        </div>
+
+        {/* Frosted Glass Content */}
+        <div className="relative z-10 max-w-5xl mx-auto">
+
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-10 backdrop-blur-xl border border-white/20 dark:border-white/10 bg-white/40 dark:bg-white/5 shadow-lg">
+            <Sparkles className="w-4 h-4 text-orange-500" />
+            <span className="text-sm font-semibold text-foreground/90 tracking-wide">The AI companion for everyone</span>
           </div>
-          
-          <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black text-foreground leading-[1.1] mb-6 tracking-tight">
-            Ask <span className="text-transparent bg-clip-text gradient-orange">anything.</span>
+
+          {/* Headline */}
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] mb-8">
+            <span className="block text-foreground">Intelligence</span>
+            <span
+              className="block"
+              style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066, #9333ea)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
+            >
+              that flows with you.
+            </span>
           </h1>
-          
-          <p className="text-lg md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-medium px-4">
-            Aura AI answers questions, writes code, and helps you brainstorm. Your incredibly smart, personalized companion is ready to chat.
+
+          {/* Subtitle */}
+          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
+            Aura AI is your personal, conversational AI companion. Ask questions, get code, spark ideas — all in one beautiful chat experience.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 px-6">
-            <Link to="/signup" className="btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 text-lg rounded-xl shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:-translate-y-1 transition-all w-full sm:w-auto">
-              Start Chatting <ArrowRight className="w-5 h-5" />
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              to="/signup"
+              className="group inline-flex items-center justify-center gap-3 px-10 py-4 text-lg font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)', boxShadow: '0 8px 30px -5px rgba(255, 122, 0, 0.4)' }}
+            >
+              Start Chatting Free
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link
+              to="/about"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold rounded-2xl border border-border backdrop-blur-md bg-background/50 hover:bg-background/80 hover:-translate-y-1 transition-all duration-300"
+            >
+              Learn More
             </Link>
           </div>
+
+          {/* Social Proof */}
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-1">
+              {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />)}
+            </div>
+            <span>Loved by students, developers & creators</span>
+          </div>
         </div>
 
-        {/* Massive Realistic Chat Mockup */}
-        <div className="max-w-5xl mx-auto w-full relative z-20 px-2 md:px-0">
-           <div className="w-full bg-background/80 dark:bg-card/80 backdrop-blur-2xl border border-border rounded-2xl md:rounded-[2rem] shadow-2xl overflow-hidden transform transition-transform duration-700 hover:scale-[1.01]">
-             {/* Window Header */}
-             <div className="flex items-center gap-2 px-6 py-4 border-b border-border bg-muted/30">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                <div className="mx-auto text-xs font-semibold text-muted-foreground uppercase tracking-widest pr-8">Aura AI Companion</div>
-             </div>
-             
-             {/* Chat Area */}
-             <div className="p-5 md:p-10 space-y-6 text-left bg-background/50">
-                <div className="flex gap-3 md:gap-4 items-end justify-end">
-                  <div className="bg-orange-500 text-white px-4 md:px-5 py-3 rounded-2xl rounded-br-none text-sm md:text-base shadow-sm max-w-[85%] md:max-w-[70%]">
-                    Can you explain how Quantum Computing works in simple terms?
-                  </div>
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs md:text-sm font-bold shrink-0 shadow-sm ring-2 ring-background">U</div>
-                </div>
-
-                <div className="flex gap-3 md:gap-4 items-end">
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full gradient-orange flex items-center justify-center text-white text-xs md:text-sm font-bold shrink-0 shadow-sm ring-2 ring-background">A</div>
-                  <div className="bg-muted border border-border px-4 md:px-6 py-4 rounded-2xl rounded-bl-none text-sm md:text-base shadow-sm max-w-[90%] md:max-w-[80%] text-foreground/90 leading-relaxed">
-                    <p className="mb-3">Imagine you're flipping a coin. It can either be heads (1) or tails (0). That's how normal computers work with bits.</p>
-                    <p>But a <b>Quantum Computer</b> uses <i>qubits</i>. It's like a spinning coin—it can be heads, tails, or anywhere in between, all at the same time! This allows it to solve incredibly complex problems much faster. 🚀</p>
-                  </div>
-                </div>
-             </div>
-             
-             {/* Input Area */}
-             <div className="p-4 md:p-6 bg-card border-t border-border">
-                <div className="flex items-center bg-background border border-border rounded-xl px-4 py-3 shadow-sm">
-                   <span className="text-muted-foreground mr-3">✨</span>
-                   <span className="text-muted-foreground text-sm flex-1 opacity-70">Ask Aura anything...</span>
-                   <div className="w-8 h-8 rounded-lg gradient-orange flex items-center justify-center shadow-md"><ArrowRight className="w-4 h-4 text-white" /></div>
-                </div>
-             </div>
-           </div>
-        </div>
-      </section>
-
-      {/* Trusted By / Stats Section */}
-      <section className="relative z-10 border-y border-border/50 bg-muted/30 py-12">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <p className="text-center text-sm font-semibold text-muted-foreground tracking-widest uppercase mb-8">
-            Powered by Next-Generation Tech
-          </p>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-             <div className="text-xl font-bold font-mono text-blue-500">React 18</div>
-             <div className="text-xl font-bold font-mono text-green-500">Node.js</div>
-             <div className="text-xl font-bold font-mono text-purple-500">Google Gemini</div>
-             <div className="text-xl font-bold font-mono text-green-600">MongoDB</div>
-             <div className="text-xl font-bold font-mono text-indigo-500">Pinecone Vector</div>
+        {/* Scroll Hint */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
+          <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center pt-1.5">
+            <div className="w-1.5 h-2.5 bg-muted-foreground/40 rounded-full"></div>
           </div>
         </div>
       </section>
 
-      {/* Capabilities Section */}
-      <section className="relative z-10 py-24 px-6 md:px-12 bg-background">
-        <div className="max-w-7xl mx-auto">
+      {/* ─── USE CASES ─── */}
+      <section className="relative z-10 py-20 px-4 md:px-8 bg-muted/20 border-y border-border/50 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="liquid-blob absolute opacity-5 dark:opacity-10"
+            style={{ width: '500px', height: '500px', top: '-20%', right: '-5%', animationDuration: '18s', background: 'linear-gradient(135deg, #FF7A00, #9333ea)' }}
+          />
+        </div>
+        <div className="max-w-5xl mx-auto relative z-10">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground mb-12">Built for every kind of mind</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {useCases.map((uc) => (
+              <div key={uc.title} className="group p-6 rounded-2xl text-center border border-border/70 bg-background/60 backdrop-blur-md hover:border-orange-500/40 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-default">
+                <div className="text-4xl mb-3">{uc.emoji}</div>
+                <h3 className="font-bold text-base mb-1">{uc.title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CAPABILITIES ─── */}
+      <section className="relative z-10 py-28 px-4 md:px-8 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="liquid-blob absolute opacity-5 dark:opacity-10"
+            style={{ width: '600px', height: '600px', bottom: '-10%', left: '-5%', animationDuration: '22s', animationDelay: '-4s', background: 'linear-gradient(135deg, #0ea5e9, #8b5cf6)' }}
+          />
+        </div>
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="text-center mb-20">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">What Aura can do</p>
+            <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
+              Everything. <span className="text-muted-foreground font-light">Intelligently.</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">One AI that replaces dozens of tools. Ask, create, build, learn — Aura flows with every need.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {capabilities.map((cap) => (
+              <div key={cap.title} className="group p-7 rounded-2xl border border-border/70 bg-background/60 backdrop-blur-md hover:border-border hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+                <div className={`w-12 h-12 rounded-xl ${cap.bg} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
+                  <div className={`bg-gradient-to-br ${cap.color} rounded-lg p-2`}>
+                    <cap.icon className="w-5 h-5 text-white" />
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold mb-3">{cap.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{cap.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── INTERACTIVE PREVIEW ─── */}
+      <section className="relative z-10 py-28 px-4 md:px-8 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="liquid-blob absolute opacity-5 dark:opacity-10"
+            style={{ width: '700px', height: '700px', top: '0', right: '-10%', animationDelay: '-10s', animationDuration: '25s', background: 'linear-gradient(135deg, #FF0066, #FF7A00)' }}
+          />
+        </div>
+        <div className="max-w-5xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Everything you need. <span className="text-orange-500">In one brain.</span></h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Aura AI isn't just a chatbot. It's a complete intelligent ecosystem designed to handle your most complex workflows.</p>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-purple-500 mb-4">See it in action</p>
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">A chat that <span style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>feels alive.</span></h2>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Capability 1 */}
-            <div className="auth-card p-8 group hover:-translate-y-2 transition-all duration-300">
-              <div className="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">💻</span>
-              </div>
-              <h3 className="text-2xl font-bold mb-3">Masterful Coding</h3>
-              <p className="text-muted-foreground leading-relaxed">From debugging complex React components to writing robust Node.js backends, Aura understands your stack and writes clean, production-ready code.</p>
-            </div>
-            
-            {/* Capability 2 */}
-            <div className="auth-card p-8 group hover:-translate-y-2 transition-all duration-300">
-              <div className="w-14 h-14 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">🧠</span>
-              </div>
-              <h3 className="text-2xl font-bold mb-3">Long-Term Memory</h3>
-              <p className="text-muted-foreground leading-relaxed">Powered by Pinecone Vector DB, Aura remembers your past conversations. It doesn't just answer; it learns your context over time.</p>
-            </div>
 
-            {/* Capability 3 */}
-            <div className="auth-card p-8 group hover:-translate-y-2 transition-all duration-300">
-              <div className="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">⚡</span>
+          {/* Chat Preview */}
+          <div className="rounded-3xl overflow-hidden border border-border/70 shadow-2xl bg-background/80 backdrop-blur-2xl">
+            {/* Window bar */}
+            <div className="flex items-center gap-2 px-6 py-4 bg-muted/40 border-b border-border">
+              <div className="w-3 h-3 rounded-full bg-red-400"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+              <div className="w-3 h-3 rounded-full bg-green-400"></div>
+              <div className="flex-1 flex justify-center">
+                <div className="px-4 py-1 rounded-full bg-background/70 text-xs text-muted-foreground font-medium border border-border/50">aura-ai.app · New Chat</div>
               </div>
-              <h3 className="text-2xl font-bold mb-3">Real-time Speed</h3>
-              <p className="text-muted-foreground leading-relaxed">Built on a highly optimized Socket.io architecture, you get streaming responses instantly. No more waiting for loaders to finish.</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="relative z-10 py-20 bg-orange-500 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-5xl font-black mb-2">0ms</div>
-              <div className="text-orange-100 font-medium tracking-wide uppercase text-sm">Latency Feel</div>
-            </div>
-            <div>
-              <div className="text-5xl font-black mb-2">Infinite</div>
-              <div className="text-orange-100 font-medium tracking-wide uppercase text-sm">Memory Capacity</div>
-            </div>
-            <div>
-              <div className="text-5xl font-black mb-2">100%</div>
-              <div className="text-orange-100 font-medium tracking-wide uppercase text-sm">Data Privacy</div>
-            </div>
-            <div>
-              <div className="text-5xl font-black mb-2">24/7</div>
-              <div className="text-orange-100 font-medium tracking-wide uppercase text-sm">Availability</div>
+            {/* Messages */}
+            <div className="p-6 md:p-10 space-y-6">
+              {/* User message */}
+              <div className="flex gap-3 justify-end">
+                <div className="max-w-[80%] px-5 py-3.5 rounded-2xl rounded-br-sm text-white text-sm leading-relaxed" style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)' }}>
+                  Hey Aura, can you write me a function in Python to reverse a string?
+                </div>
+                <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0 ring-2 ring-background shadow">U</div>
+              </div>
+              {/* AI message */}
+              <div className="flex gap-3">
+                <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0 ring-2 ring-background shadow" style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)' }}>A</div>
+                <div className="max-w-[85%] bg-muted/60 border border-border/60 px-5 py-4 rounded-2xl rounded-bl-sm text-sm leading-relaxed space-y-3">
+                  <p>Of course! Here's a clean Python function to reverse a string:</p>
+                  <div className="bg-background rounded-xl p-4 border border-border font-mono text-xs leading-6 overflow-x-auto">
+                    <span className="text-blue-500">def</span> <span className="text-yellow-500">reverse_string</span>(<span className="text-orange-400">text</span>:<span className="text-blue-400"> str</span>) -&gt; <span className="text-blue-400">str</span>:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-purple-400">"""Reverses a given string."""</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-500">return</span> text[<span className="text-orange-400">::-1</span>]<br /><br />
+                    <span className="text-gray-400"># Example</span><br />
+                    <span className="text-green-500">print</span>(reverse_string(<span className="text-orange-400">"Hello Aura"</span>)) <span className="text-gray-500"># Output: aruA olleH</span>
+                  </div>
+                  <p className="text-muted-foreground">The <code className="text-orange-500 bg-orange-500/10 px-1 rounded">::-1</code> slice is a pythonic way to reverse any sequence. Let me know if you want a loop-based version too! 🐍</p>
+                </div>
+              </div>
+              {/* Prompt Bar */}
+              <div className="flex items-center gap-3 bg-muted/30 border border-border/60 rounded-2xl px-5 py-3.5 mt-4">
+                <span className="text-muted-foreground text-base">✨</span>
+                <span className="flex-1 text-sm text-muted-foreground/60 font-medium">Ask Aura anything — code, questions, ideas...</span>
+                <div className="shrink-0 w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)' }}>
+                  <ArrowRight className="w-4 h-4 text-white" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Bottom */}
-      <section className="relative z-10 py-32 px-6 md:px-12 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-5xl font-bold mb-6">Ready to step into the future?</h2>
-          <p className="text-xl text-muted-foreground mb-10">Join the next generation of builders, creators, and thinkers who are scaling their minds with Aura AI.</p>
-          <Link to="/signup" className="btn-primary inline-flex items-center justify-center gap-2 px-10 py-4 text-xl rounded-full shadow-[0_0_40px_rgba(249,115,22,0.3)] hover:shadow-[0_0_60px_rgba(249,115,22,0.5)] transition-all">
-            Start Chatting Now
-            <ArrowRight className="w-6 h-6" />
+      {/* ─── STATS ─── */}
+      <section className="relative z-10 py-24 px-4 md:px-8 overflow-hidden" style={{ background: 'linear-gradient(135deg, #FF7A00 0%, #FF0066 50%, #9333ea 100%)' }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
+            {[
+              { stat: '∞', label: 'Memory Capacity' },
+              { stat: '<1s', label: 'Response Time' },
+              { stat: '100%', label: 'Privacy First' },
+              { stat: '24/7', label: 'Always Available' },
+            ].map(({ stat, label }) => (
+              <div key={label}>
+                <div className="text-5xl md:text-6xl font-black mb-2">{stat}</div>
+                <div className="text-white/70 text-sm font-semibold uppercase tracking-widest">{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CTA ─── */}
+      <section className="relative z-10 py-32 px-4 md:px-8 text-center overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="liquid-blob absolute opacity-5 dark:opacity-15"
+            style={{ width: '800px', height: '800px', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', animationDuration: '20s', animationDelay: '-5s', background: 'linear-gradient(135deg, #FF7A00, #FF0066, #9333ea)' }}
+          />
+        </div>
+        <div className="max-w-3xl mx-auto relative z-10">
+          <h2 className="text-5xl md:text-6xl font-black tracking-tight mb-6">
+            Ready to meet<br />
+            <span style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066, #9333ea)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              your Aura?
+            </span>
+          </h2>
+          <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
+            Join thousands of curious minds who chat, create, and learn with Aura AI every day.
+          </p>
+          <Link
+            to="/signup"
+            className="group inline-flex items-center justify-center gap-3 px-12 py-5 text-xl font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+            style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066, #9333ea)', boxShadow: '0 15px 40px -10px rgba(255, 0, 102, 0.4)' }}
+          >
+            Get Started — It's Free
+            <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
           </Link>
+          <p className="mt-6 text-sm text-muted-foreground">No credit card required. Sign up in seconds.</p>
         </div>
       </section>
 
-      {/* Simple Footer */}
-      <footer className="relative z-10 border-t border-border/50 py-8 text-center text-muted-foreground">
-        <p>© {new Date().getFullYear()} Aura AI. Built with ❤️ for the future.</p>
+      {/* ─── FOOTER ─── */}
+      <footer className="relative z-10 border-t border-border/50 py-10 px-4 text-center">
+        <p className="text-muted-foreground text-sm">
+          © {new Date().getFullYear()} <span className="font-bold text-foreground">Aura AI</span>. Built with ❤️ · Powered by Google Gemini + Pinecone.
+        </p>
       </footer>
-
     </div>
   );
 };
