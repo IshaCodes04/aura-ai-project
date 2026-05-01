@@ -118,12 +118,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Animated scroll hint */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
-          <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center pt-1.5">
-            <div className="w-1.5 h-2.5 bg-orange-400 rounded-full"></div>
-          </div>
-        </div>
+
       </section>
 
       {/* ─── USE CASES ─── */}
