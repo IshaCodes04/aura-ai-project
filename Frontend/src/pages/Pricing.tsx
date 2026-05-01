@@ -106,29 +106,53 @@ const Pricing = () => {
           ))}
         </div>
 
-        {/* COMPARISON TABLE (Advanced Enhancement) */}
-        <div className="max-w-4xl mx-auto mb-40 aura-fade-up">
+        {/* COMPARISON TABLE (Ultimate Refinement) */}
+        <div className="max-w-5xl mx-auto mb-40 aura-fade-up">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4">Compare <span className="text-orange-500">Features</span></h2>
-            <p className="text-muted-foreground">Every detail matters when you're building the future.</p>
+            <h2 className="text-4xl md:text-6xl font-black mb-4 tracking-tight">The Fine <span className="text-orange-500 italic text-3xl md:text-5xl">Print.</span></h2>
+            <p className="text-xl text-muted-foreground font-medium">Every detail matters when you're building the future.</p>
           </div>
-          <div className="rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-3xl overflow-hidden">
-            <table className="w-full text-left border-collapse">
+          
+          <div className="relative rounded-[3rem] border border-white/10 bg-white/5 backdrop-blur-3xl overflow-hidden shadow-2xl">
+            {/* Subtle Gradient Glow for Pro Column Background */}
+            <div className="absolute top-0 bottom-0 left-[50%] right-[25%] md:left-[50%] md:right-[25%] bg-orange-500/5 pointer-events-none border-x border-orange-500/10"></div>
+
+            <table className="w-full text-left border-collapse relative z-10">
               <thead>
-                <tr className="border-b border-white/10">
-                  <th className="p-8 text-xs font-black uppercase tracking-widest text-muted-foreground">Feature</th>
-                  <th className="p-8 text-xs font-black uppercase tracking-widest text-center">Starter</th>
-                  <th className="p-8 text-xs font-black uppercase tracking-widest text-center text-orange-500">Pro</th>
-                  <th className="p-8 text-xs font-black uppercase tracking-widest text-center">Business</th>
+                <tr className="border-b border-white/10 bg-white/5">
+                  <th className="p-8 md:p-10 text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">Capabilities</th>
+                  <th className="p-8 md:p-10 text-center">
+                    <span className="text-sm font-black uppercase tracking-widest text-foreground/60">Starter</span>
+                  </th>
+                  <th className="p-8 md:p-10 text-center">
+                    <span className="text-sm font-black uppercase tracking-widest text-orange-500 drop-shadow-[0_0_10px_rgba(255,122,0,0.3)]">Pro</span>
+                  </th>
+                  <th className="p-8 md:p-10 text-center">
+                    <span className="text-sm font-black uppercase tracking-widest text-foreground/60">Business</span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {comparison.map((row, i) => (
-                  <tr key={i} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                    <td className="p-8 font-bold text-foreground/80">{row.feature}</td>
-                    <td className="p-8 text-center text-sm font-medium">{typeof row.starter === 'boolean' ? (row.starter ? <Check className="w-4 h-4 mx-auto text-green-500" /> : <Minus className="w-4 h-4 mx-auto opacity-20" />) : row.starter}</td>
-                    <td className="p-8 text-center text-sm font-black text-orange-500">{typeof row.pro === 'boolean' ? (row.pro ? <Check className="w-4 h-4 mx-auto" /> : <Minus className="w-4 h-4 mx-auto opacity-20" />) : row.pro}</td>
-                    <td className="p-8 text-center text-sm font-medium">{typeof row.business === 'boolean' ? (row.business ? <Check className="w-4 h-4 mx-auto text-green-500" /> : <Minus className="w-4 h-4 mx-auto opacity-20" />) : row.business}</td>
+                  <tr key={i} className="group border-b border-white/5 hover:bg-white/[0.03] transition-all duration-300">
+                    <td className="p-8 md:p-10">
+                      <div className="font-bold text-lg text-foreground/80 group-hover:text-foreground transition-colors">{row.feature}</div>
+                    </td>
+                    <td className="p-8 md:p-10 text-center">
+                      <div className="flex justify-center font-medium text-muted-foreground">
+                        {typeof row.starter === 'boolean' ? (row.starter ? <Check className="w-5 h-5 text-green-500/70" /> : <Minus className="w-5 h-5 opacity-10" />) : row.starter}
+                      </div>
+                    </td>
+                    <td className="p-8 md:p-10 text-center bg-orange-500/[0.02]">
+                      <div className="flex justify-center font-black text-orange-500 drop-shadow-sm">
+                        {typeof row.pro === 'boolean' ? (row.pro ? <Check className="w-6 h-6 animate-pulse" /> : <Minus className="w-6 h-6 opacity-10" />) : row.pro}
+                      </div>
+                    </td>
+                    <td className="p-8 md:p-10 text-center">
+                      <div className="flex justify-center font-medium text-foreground/70">
+                        {typeof row.business === 'boolean' ? (row.business ? <Check className="w-5 h-5 text-green-500/70" /> : <Minus className="w-5 h-5 opacity-10" />) : row.business}
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
