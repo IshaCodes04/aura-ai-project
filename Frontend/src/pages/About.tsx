@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Brain, Cpu, ShieldCheck, Heart, Zap } from 'lucide-react';
+import { ArrowRight, Sparkles, Brain, Cpu, ShieldCheck, Heart, Zap, Globe, Users, Trophy } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 
 const About = () => {
@@ -11,6 +11,7 @@ const About = () => {
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="liquid-blob absolute opacity-20 dark:opacity-30" style={{ width: '60vw', height: '60vw', top: '-10%', left: '-10%', background: 'linear-gradient(135deg, #FF7A00 0%, #FF0066 100%)' }} />
         <div className="liquid-blob absolute opacity-10 dark:opacity-20" style={{ width: '40vw', height: '40vw', bottom: '10%', right: '10%', animationDelay: '-5s', background: 'linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%)' }} />
+        <div className="liquid-blob absolute opacity-5 dark:opacity-10" style={{ width: '30vw', height: '30vw', top: '30%', right: '15%', animationDelay: '-12s', background: 'linear-gradient(135deg, #facc15 0%, #FF7A00 100%)' }} />
       </div>
 
       <section className="relative z-10 pt-32 pb-20 px-4 md:px-8">
@@ -21,7 +22,7 @@ const About = () => {
             <Sparkles className="w-4 h-4" />
             Our Story & Vision
           </div>
-          <h1 className="aura-fade-2 text-5xl md:text-7xl font-black tracking-tight mb-8 leading-[1.1]">
+          <h1 className="aura-fade-2 text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-8 leading-[1.05]">
             We're defining the <br />
             <span className="shimmer-text">future of synergy.</span>
           </h1>
@@ -30,12 +31,29 @@ const About = () => {
           </p>
         </div>
 
+        {/* ─── STATS BAR ─── */}
+        <div className="aura-fade-4 max-w-4xl mx-auto mb-32 rounded-[2.5rem] p-1 border border-white/20 bg-white/5 backdrop-blur-xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-8 text-center">
+            {[
+              { icon: Globe, label: 'Global Users', val: '500k+' },
+              { icon: Users, label: 'Active Creators', val: '120k+' },
+              { icon: Trophy, label: 'Awards Won', val: '12+' },
+              { icon: Zap, label: 'Queries Daily', val: '2M+' },
+            ].map((s, i) => (
+              <div key={i} className="space-y-1">
+                <div className="text-3xl font-black text-foreground">{s.val}</div>
+                <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-orange-500">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* ─── THE PHILOSOPHY ─── */}
         <div className="max-w-4xl mx-auto mb-32">
-          <div className="aura-fade-4 grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative group">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="relative group aura-fade-left">
               <div className="absolute -inset-4 bg-gradient-to-r from-orange-500 to-rose-500 rounded-[2.5rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
-              <div className="relative rounded-3xl overflow-hidden aspect-square border border-white/10 shadow-2xl">
+              <div className="relative rounded-[2.5rem] overflow-hidden aspect-square border border-white/10 shadow-2xl">
                 <img 
                   src="https://images.unsplash.com/photo-1620712943543-bcc4638ef808?q=80&w=1000&auto=format&fit=crop" 
                   alt="AI Human Synergy" 
@@ -46,15 +64,15 @@ const About = () => {
                 </div>
               </div>
             </div>
-            <div className="space-y-6">
-              <h2 className="text-3xl font-bold tracking-tight">The Aura Philosophy</h2>
+            <div className="space-y-8 aura-fade-right">
+              <h2 className="text-4xl font-black tracking-tight leading-tight">The Aura <br/><span className="text-orange-500">Philosophy</span></h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
                 Most AI tools today are transactional—you ask, they answer, they forget. We believe intelligence should be <strong>relational</strong>.
               </p>
               <p className="text-muted-foreground text-lg leading-relaxed">
                 By integrating long-term vector memory with state-of-the-art reasoning, Aura grows with you. It learns your style, remembers your projects, and becomes an extension of your own mind.
               </p>
-              <div className="flex gap-4 pt-2">
+              <div className="flex gap-4 pt-4 border-t border-border/50">
                 <div className="flex flex-col items-center">
                   <div className="h-10 w-1 bg-orange-500 rounded-full"></div>
                 </div>

@@ -117,12 +117,16 @@ const Login = () => {
 
         {/* Login Button & Forgot Password */}
         <div className="flex flex-col sm:flex-row items-center gap-4">
-          <button type="submit" className="btn-primary flex-1 w-full">
+          <button 
+            type="submit" 
+            className="aura-glow-btn flex-1 w-full py-4 text-lg font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1"
+            style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)', boxShadow: '0 8px 25px -5px rgba(255, 122, 0, 0.4)' }}
+          >
             Login
           </button>
           <Link
             to="/forgot-password"
-            className="text-primary hover:opacity-80 text-sm font-semibold transition-opacity whitespace-nowrap"
+            className="text-muted-foreground hover:text-orange-500 text-sm font-semibold transition-colors whitespace-nowrap"
           >
             Forgot Password?
           </Link>

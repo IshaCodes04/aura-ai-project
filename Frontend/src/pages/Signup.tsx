@@ -192,8 +192,12 @@ const Signup = () => {
         </div>
 
         {/* Sign Up Button */}
-        <button type="submit" className="btn-primary w-full mt-3">
-          Sign Up
+        <button 
+          type="submit" 
+          className="aura-glow-btn w-full mt-4 py-4 text-lg font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1"
+          style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)', boxShadow: '0 8px 25px -5px rgba(255, 122, 0, 0.4)' }}
+        >
+          Create Free Account
         </button>
 
         {/* Divider */}
