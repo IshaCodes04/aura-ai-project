@@ -22,5 +22,11 @@ function applyInitialTheme() {
 
 applyInitialTheme();
 
+// Fix: Disable browser scroll restoration so page always starts at top
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 createRoot(document.getElementById("root")!).render(<App />);
 
