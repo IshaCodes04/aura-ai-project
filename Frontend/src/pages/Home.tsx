@@ -71,23 +71,23 @@ const Home = () => {
           <div className="liquid-blob absolute" style={{ width: '20vw', height: '20vw', maxWidth: '250px', maxHeight: '250px', bottom: '20%', left: '10%', animationDelay: '-5s', animationDuration: '14s', background: 'linear-gradient(135deg, #a855f7 0%, #FF0066 100%)' }} />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto">
+        <div className="relative z-10 max-w-4xl mx-auto">
 
           {/* Badge */}
-          <div className="aura-fade-1 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-10 backdrop-blur-xl border border-white/20 dark:border-white/10 bg-white/40 dark:bg-white/5 shadow-lg">
+          <div className="aura-fade-1 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-8 backdrop-blur-xl border border-white/20 dark:border-white/10 bg-white/40 dark:bg-white/5 shadow-lg">
             <Sparkles className="w-4 h-4 text-orange-500" />
             <span className="text-sm font-semibold text-foreground/90 tracking-wide">The AI companion for everyone</span>
             <span className="ml-1 px-2 py-0.5 rounded-full text-xs font-bold text-white" style={{ background: 'linear-gradient(135deg,#FF7A00,#FF0066)' }}>NEW</span>
           </div>
 
-          {/* Headline */}
-          <h1 className="aura-fade-2 text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] mb-8">
+          {/* Headline - Slightly smaller size */}
+          <h1 className="aura-fade-2 text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-6">
             <span className="block text-foreground">Intelligence</span>
             <span className="shimmer-text block">that flows with you.</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="aura-fade-3 text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
+          <p className="aura-fade-3 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
             Aura AI is your personal, conversational AI companion. Ask questions, get code, spark ideas — all in one beautiful chat experience.
           </p>
 
@@ -95,7 +95,7 @@ const Home = () => {
           <div className="aura-fade-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/signup"
-              className="aura-glow-btn group inline-flex items-center justify-center gap-3 px-10 py-4 text-lg font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1"
+              className="aura-glow-btn group inline-flex items-center justify-center gap-3 px-8 py-3.5 text-lg font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1"
               style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)', boxShadow: '0 8px 30px -5px rgba(255, 122, 0, 0.4)' }}
             >
               Start Chatting Free
@@ -103,43 +103,13 @@ const Home = () => {
             </Link>
             <Link
               to="/about"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold rounded-2xl border border-border backdrop-blur-md bg-background/50 hover:bg-background/80 hover:-translate-y-1 transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-lg font-semibold rounded-2xl border border-border backdrop-blur-md bg-background/50 hover:bg-background/80 hover:-translate-y-1 transition-all duration-300"
             >
               Learn More
             </Link>
           </div>
-
-          {/* Social Proof */}
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />)}
-            </div>
-            <span>Loved by students, developers & creators</span>
-          </div>
         </div>
 
-
-      </section>
-
-      {/* ─── USE CASES ─── */}
-      <section className="relative z-10 py-20 px-4 md:px-8 bg-muted/20 border-y border-border/50 overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="liquid-blob absolute opacity-5 dark:opacity-10"
-            style={{ width: '500px', height: '500px', top: '-20%', right: '-5%', animationDuration: '18s', background: 'linear-gradient(135deg, #FF7A00, #9333ea)' }}
-          />
-        </div>
-        <div className="max-w-5xl mx-auto relative z-10">
-          <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground mb-12">Built for every kind of mind</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {useCases.map((uc) => (
-              <div key={uc.title} className="group p-6 rounded-2xl text-center border border-border/70 bg-background/60 backdrop-blur-md hover:border-orange-500/50 hover:-translate-y-3 hover:shadow-[0_20px_60px_-15px_rgba(255,122,0,0.25)] transition-all duration-500 cursor-default">
-                <div className="text-4xl mb-3 group-hover:scale-125 transition-transform duration-300">{uc.emoji}</div>
-                <h3 className="font-bold text-base mb-1">{uc.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* ─── CAPABILITIES ─── */}
@@ -149,7 +119,7 @@ const Home = () => {
             style={{ width: '600px', height: '600px', bottom: '-10%', left: '-5%', animationDuration: '22s', animationDelay: '-4s', background: 'linear-gradient(135deg, #0ea5e9, #8b5cf6)' }}
           />
         </div>
-        <div className="max-w-6xl mx-auto relative z-10">
+        <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-20">
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-orange-500 mb-4">What Aura can do</p>
             <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
@@ -181,7 +151,7 @@ const Home = () => {
             style={{ width: '700px', height: '700px', top: '0', right: '-10%', animationDelay: '-10s', animationDuration: '25s', background: 'linear-gradient(135deg, #FF0066, #FF7A00)' }}
           />
         </div>
-        <div className="max-w-5xl mx-auto relative z-10">
+        <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-purple-500 mb-4">See it in action</p>
             <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">A chat that <span style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>feels alive.</span></h2>
