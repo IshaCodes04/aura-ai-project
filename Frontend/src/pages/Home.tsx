@@ -62,71 +62,40 @@ const Home = () => {
       {/* ─── HERO SECTION ─── */}
       <section className="relative z-10 min-h-screen flex flex-col justify-center items-center px-4 md:px-8 pt-28 pb-20 text-center overflow-hidden">
 
-        {/* Liquid Blobs Background */}
+        {/* Liquid Blobs Background — more blobs, better spread */}
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-          <div
-            className="liquid-blob absolute"
-            style={{
-              width: '55vw', height: '55vw',
-              maxWidth: '700px', maxHeight: '700px',
-              top: '-10%', left: '-15%',
-              background: 'linear-gradient(135deg, #FF7A00 0%, #FF0066 50%, #9333ea 100%)',
-            }}
-          />
-          <div
-            className="liquid-blob absolute"
-            style={{
-              width: '45vw', height: '45vw',
-              maxWidth: '600px', maxHeight: '600px',
-              bottom: '-5%', right: '-10%',
-              animationDelay: '-7s',
-              animationDuration: '20s',
-              background: 'linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 50%, #ec4899 100%)',
-            }}
-          />
-          <div
-            className="liquid-blob absolute"
-            style={{
-              width: '30vw', height: '30vw',
-              maxWidth: '400px', maxHeight: '400px',
-              top: '40%', right: '20%',
-              animationDelay: '-3s',
-              animationDuration: '12s',
-              background: 'linear-gradient(135deg, #10b981 0%, #0ea5e9 100%)',
-            }}
-          />
+          <div className="liquid-blob absolute" style={{ width: '60vw', height: '60vw', maxWidth: '750px', maxHeight: '750px', top: '-15%', left: '-20%', background: 'linear-gradient(135deg, #FF7A00 0%, #FF0066 50%, #9333ea 100%)' }} />
+          <div className="liquid-blob absolute" style={{ width: '50vw', height: '50vw', maxWidth: '650px', maxHeight: '650px', bottom: '-10%', right: '-15%', animationDelay: '-7s', animationDuration: '20s', background: 'linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 50%, #ec4899 100%)' }} />
+          <div className="liquid-blob absolute" style={{ width: '35vw', height: '35vw', maxWidth: '450px', maxHeight: '450px', top: '35%', right: '15%', animationDelay: '-3s', animationDuration: '12s', background: 'linear-gradient(135deg, #10b981 0%, #0ea5e9 100%)' }} />
+          <div className="liquid-blob absolute" style={{ width: '25vw', height: '25vw', maxWidth: '300px', maxHeight: '300px', top: '10%', right: '5%', animationDelay: '-9s', animationDuration: '17s', background: 'linear-gradient(135deg, #FF7A00 0%, #facc15 100%)' }} />
+          <div className="liquid-blob absolute" style={{ width: '20vw', height: '20vw', maxWidth: '250px', maxHeight: '250px', bottom: '20%', left: '10%', animationDelay: '-5s', animationDuration: '14s', background: 'linear-gradient(135deg, #a855f7 0%, #FF0066 100%)' }} />
         </div>
 
-        {/* Frosted Glass Content */}
         <div className="relative z-10 max-w-5xl mx-auto">
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-10 backdrop-blur-xl border border-white/20 dark:border-white/10 bg-white/40 dark:bg-white/5 shadow-lg">
+          <div className="aura-fade-1 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-10 backdrop-blur-xl border border-white/20 dark:border-white/10 bg-white/40 dark:bg-white/5 shadow-lg">
             <Sparkles className="w-4 h-4 text-orange-500" />
             <span className="text-sm font-semibold text-foreground/90 tracking-wide">The AI companion for everyone</span>
+            <span className="ml-1 px-2 py-0.5 rounded-full text-xs font-bold text-white" style={{ background: 'linear-gradient(135deg,#FF7A00,#FF0066)' }}>NEW</span>
           </div>
 
           {/* Headline */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] mb-8">
+          <h1 className="aura-fade-2 text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.05] mb-8">
             <span className="block text-foreground">Intelligence</span>
-            <span
-              className="block"
-              style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066, #9333ea)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
-            >
-              that flows with you.
-            </span>
+            <span className="shimmer-text block">that flows with you.</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
+          <p className="aura-fade-3 text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
             Aura AI is your personal, conversational AI companion. Ask questions, get code, spark ideas — all in one beautiful chat experience.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="aura-fade-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/signup"
-              className="group inline-flex items-center justify-center gap-3 px-10 py-4 text-lg font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              className="aura-glow-btn group inline-flex items-center justify-center gap-3 px-10 py-4 text-lg font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1"
               style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)', boxShadow: '0 8px 30px -5px rgba(255, 122, 0, 0.4)' }}
             >
               Start Chatting Free
@@ -149,10 +118,10 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Scroll Hint */}
+        {/* Animated scroll hint */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
           <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center pt-1.5">
-            <div className="w-1.5 h-2.5 bg-muted-foreground/40 rounded-full"></div>
+            <div className="w-1.5 h-2.5 bg-orange-400 rounded-full"></div>
           </div>
         </div>
       </section>
@@ -168,8 +137,8 @@ const Home = () => {
           <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground mb-12">Built for every kind of mind</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {useCases.map((uc) => (
-              <div key={uc.title} className="group p-6 rounded-2xl text-center border border-border/70 bg-background/60 backdrop-blur-md hover:border-orange-500/40 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-default">
-                <div className="text-4xl mb-3">{uc.emoji}</div>
+              <div key={uc.title} className="group p-6 rounded-2xl text-center border border-border/70 bg-background/60 backdrop-blur-md hover:border-orange-500/50 hover:-translate-y-3 hover:shadow-[0_20px_60px_-15px_rgba(255,122,0,0.25)] transition-all duration-500 cursor-default">
+                <div className="text-4xl mb-3 group-hover:scale-125 transition-transform duration-300">{uc.emoji}</div>
                 <h3 className="font-bold text-base mb-1">{uc.title}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
               </div>
@@ -195,14 +164,14 @@ const Home = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {capabilities.map((cap) => (
-              <div key={cap.title} className="group p-7 rounded-2xl border border-border/70 bg-background/60 backdrop-blur-md hover:border-border hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
-                <div className={`w-12 h-12 rounded-xl ${cap.bg} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
+            {capabilities.map((cap, idx) => (
+              <div key={cap.title} className="group p-7 rounded-2xl border border-border/70 bg-background/60 backdrop-blur-md hover:border-orange-500/30 hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.2)] transition-all duration-500" style={{ animationDelay: `${idx * 80}ms` }}>
+                <div className={`w-12 h-12 rounded-xl ${cap.bg} flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
                   <div className={`bg-gradient-to-br ${cap.color} rounded-lg p-2`}>
                     <cap.icon className="w-5 h-5 text-white" />
                   </div>
                 </div>
-                <h3 className="text-xl font-bold mb-3">{cap.title}</h3>
+                <h3 className="text-xl font-bold mb-3 group-hover:text-orange-500 transition-colors duration-300">{cap.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{cap.description}</p>
               </div>
             ))}

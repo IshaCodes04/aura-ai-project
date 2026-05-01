@@ -329,10 +329,49 @@
 .liquid-blob {
   animation: morph 15s ease-in-out infinite;
   background: linear-gradient(135deg, #FF7A00 0%, #FF0066 50%, #7000FF 100%);
-  filter: blur(20px);
-  opacity: 0.15;
+  filter: blur(60px);
+  opacity: 0.12;
 }
 
 .dark .liquid-blob {
-  opacity: 0.25;
+  opacity: 0.22;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(255,122,0,0.3), 0 0 60px rgba(255,122,0,0.1); }
+  50% { box-shadow: 0 0 40px rgba(255,122,0,0.6), 0 0 80px rgba(255,0,102,0.2); }
+}
+
+.aura-fade-1 { animation: fadeSlideUp 0.7s ease-out 0.1s both; }
+.aura-fade-2 { animation: fadeSlideUp 0.7s ease-out 0.25s both; }
+.aura-fade-3 { animation: fadeSlideUp 0.7s ease-out 0.4s both; }
+.aura-fade-4 { animation: fadeSlideUp 0.7s ease-out 0.55s both; }
+
+.aura-glow-btn {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #FF7A00 0%, #FF0066 25%, #9333ea 50%, #FF0066 75%, #FF7A00 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
 }
