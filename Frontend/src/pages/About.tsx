@@ -1,93 +1,156 @@
 import { Link } from 'react-router-dom';
+import { ArrowRight, Sparkles, Brain, Cpu, ShieldCheck, Heart, Zap } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import FloatingElements from '@/components/FloatingElements';
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
       <Navbar />
 
-      {/* Floating Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <FloatingElements />
+      {/* ─── LIQUID BACKGROUND ─── */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="liquid-blob absolute opacity-20 dark:opacity-30" style={{ width: '60vw', height: '60vw', top: '-10%', left: '-10%', background: 'linear-gradient(135deg, #FF7A00 0%, #FF0066 100%)' }} />
+        <div className="liquid-blob absolute opacity-10 dark:opacity-20" style={{ width: '40vw', height: '40vw', bottom: '10%', right: '10%', animationDelay: '-5s', background: 'linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%)' }} />
       </div>
 
-      {/* Content Section */}
-      <section className="relative z-10 pt-32 pb-12">
+      <section className="relative z-10 pt-32 pb-20 px-4 md:px-8">
         
-        {/* Header */}
-        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center mb-20">
-          <h1 className="text-5xl lg:text-7xl font-black text-foreground mb-6 tracking-tight">
-            Meet <span className="text-transparent bg-clip-text gradient-orange">Aura AI</span>
+        {/* ─── HERO SECTION ─── */}
+        <div className="max-w-4xl mx-auto text-center mb-24">
+          <div className="aura-fade-1 inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 backdrop-blur-xl border border-orange-500/20 bg-orange-500/5 text-orange-500 text-sm font-bold tracking-wide uppercase">
+            <Sparkles className="w-4 h-4" />
+            Our Story & Vision
+          </div>
+          <h1 className="aura-fade-2 text-5xl md:text-7xl font-black tracking-tight mb-8 leading-[1.1]">
+            We're defining the <br />
+            <span className="shimmer-text">future of synergy.</span>
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto font-medium">
-            We are building the most intuitive, fast, and personalized AI companion for developers and creators around the world.
+          <p className="aura-fade-3 text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-medium">
+            Aura AI isn't just a chatbot. It's a living intelligence designed to amplify human potential through speed, memory, and intuition.
           </p>
         </div>
 
-        {/* The Story Section */}
-        <div className="max-w-7xl mx-auto px-6 md:px-12 mb-24 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="order-2 lg:order-1">
-            <h2 className="text-3xl font-bold mb-6">The Story Behind Aura</h2>
-            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
-              <p>
-                Aura AI wasn't built just to be another chatbot. It was born out of frustration with slow, generic, and forgetful AI tools. We wanted an assistant that feels alive—one that remembers your past conversations, understands your code structure, and responds instantly.
-              </p>
-              <p>
-                By combining the raw intelligence of Google's Gemini models with the incredible long-term memory capabilities of Pinecone Vector Databases, Aura bridges the gap between a temporary script and a lifelong digital companion.
-              </p>
-            </div>
-          </div>
-          <div className="order-1 lg:order-2">
-            <div className="relative rounded-3xl overflow-hidden aspect-video border border-white/10 shadow-2xl group">
-              <div className="absolute inset-0 bg-linear-to-br from-orange-500/20 to-blue-600/20 mix-blend-overlay z-10 group-hover:opacity-50 transition-opacity"></div>
-              <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop" alt="AI Abstract" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
-            </div>
-          </div>
-        </div>
-
-        {/* The Architecture */}
-        <div className="bg-muted/30 border-y border-border/50 py-24 mb-24">
-          <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">
-            <h2 className="text-3xl font-bold mb-16">The Brain Architecture</h2>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="auth-card p-8 bg-background/50 hover:-translate-y-2 transition-transform">
-                <div className="text-4xl mb-4">🧠</div>
-                <h3 className="text-xl font-bold mb-2">Gemini Engine</h3>
-                <p className="text-muted-foreground text-sm">State-of-the-art multimodal reasoning, capable of writing code, analyzing logic, and engaging in deep human-like conversation.</p>
+        {/* ─── THE PHILOSOPHY ─── */}
+        <div className="max-w-4xl mx-auto mb-32">
+          <div className="aura-fade-4 grid md:grid-cols-2 gap-12 items-center">
+            <div className="relative group">
+              <div className="absolute -inset-4 bg-gradient-to-r from-orange-500 to-rose-500 rounded-[2.5rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+              <div className="relative rounded-3xl overflow-hidden aspect-square border border-white/10 shadow-2xl">
+                <img 
+                  src="https://images.unsplash.com/photo-1620712943543-bcc4638ef808?q=80&w=1000&auto=format&fit=crop" 
+                  alt="AI Human Synergy" 
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
+                  <p className="text-white font-medium text-lg leading-snug italic">"Intelligence is not just about answers, it's about understanding the journey of thought."</p>
+                </div>
               </div>
-              <div className="auth-card p-8 bg-background/50 hover:-translate-y-2 transition-transform">
-                <div className="text-4xl mb-4">📚</div>
-                <h3 className="text-xl font-bold mb-2">Pinecone Vector Memory</h3>
-                <p className="text-muted-foreground text-sm">Every chat is embedded as a dense vector. Aura retrieves context from weeks ago in milliseconds.</p>
-              </div>
-              <div className="auth-card p-8 bg-background/50 hover:-translate-y-2 transition-transform">
-                <div className="text-4xl mb-4">⚡</div>
-                <h3 className="text-xl font-bold mb-2">Socket WebSockets</h3>
-                <p className="text-muted-foreground text-sm">Real-time bidirectional data streams ensure you see Aura typing exactly as it thinks, zero lag.</p>
+            </div>
+            <div className="space-y-6">
+              <h2 className="text-3xl font-bold tracking-tight">The Aura Philosophy</h2>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                Most AI tools today are transactional—you ask, they answer, they forget. We believe intelligence should be <strong>relational</strong>.
+              </p>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                By integrating long-term vector memory with state-of-the-art reasoning, Aura grows with you. It learns your style, remembers your projects, and becomes an extension of your own mind.
+              </p>
+              <div className="flex gap-4 pt-2">
+                <div className="flex flex-col items-center">
+                  <div className="h-10 w-1 bg-orange-500 rounded-full"></div>
+                </div>
+                <p className="text-foreground font-semibold italic text-lg leading-tight">
+                  "Built for the curious, the creators, and the visionaries."
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* CTA Bottom */}
-        <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-3xl font-bold mb-6">Experience the difference.</h2>
-          <div className="mt-8 flex justify-center gap-4">
-            <Link to="/signup" className="btn-primary inline-flex items-center gap-2 px-8 py-3">
-              Join Aura Free
+        {/* ─── ARCHITECTURE SECTION ─── */}
+        <div className="max-w-4xl mx-auto mb-32">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black mb-4 tracking-tight">The Core Pillars</h2>
+            <p className="text-muted-foreground text-lg">How we bridge the gap between human and machine.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { 
+                icon: Brain, 
+                title: 'Infinite Memory', 
+                desc: 'Powered by Pinecone Vector indexing, Aura never forgets a detail you care about.',
+                color: 'text-orange-500',
+                bg: 'bg-orange-500/10'
+              },
+              { 
+                icon: Cpu, 
+                title: 'Deep Logic', 
+                desc: 'Leveraging Google Gemini Pro for complex reasoning and flawless code generation.',
+                color: 'text-blue-500',
+                bg: 'bg-blue-500/10'
+              },
+              { 
+                icon: Zap, 
+                title: 'Instant Flow', 
+                desc: 'Zero-latency WebSocket streaming. Because your thoughts wait for no one.',
+                color: 'text-yellow-500',
+                bg: 'bg-yellow-500/10'
+              }
+            ].map((pillar, i) => (
+              <div key={i} className="group p-8 rounded-3xl border border-border/60 bg-background/50 backdrop-blur-md hover:border-orange-500/30 hover:-translate-y-2 transition-all duration-500">
+                <div className={`w-12 h-12 rounded-2xl ${pillar.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  <pillar.icon className={`w-6 h-6 ${pillar.color}`} />
+                </div>
+                <h3 className="text-xl font-bold mb-3">{pillar.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{pillar.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ─── VALUES SECTION ─── */}
+        <div className="max-w-4xl mx-auto mb-32 p-10 md:p-16 rounded-[3rem] border border-border/50 bg-muted/20 backdrop-blur-3xl relative overflow-hidden text-center">
+          <div className="absolute top-0 right-0 p-8 opacity-10">
+            <ShieldCheck className="w-32 h-32 text-orange-500" />
+          </div>
+          <h2 className="text-3xl font-bold mb-6">Privacy as a Foundation</h2>
+          <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10">
+            Your data is your property. Every conversation with Aura is end-to-end encrypted and we never use your personal data to train public models. Trust is our most valuable feature.
+          </p>
+          <div className="inline-flex items-center gap-2 text-orange-500 font-bold">
+            <Heart className="w-5 h-5 fill-current" />
+            <span>Built with Integrity</span>
+          </div>
+        </div>
+
+        {/* ─── FINAL CTA ─── */}
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-8">
+            Ready to flow with <br />
+            <span className="gradient-text-orange">Liquid Intelligence?</span>
+          </h2>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link 
+              to="/signup" 
+              className="group inline-flex items-center justify-center gap-3 px-10 py-4 text-lg font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)', boxShadow: '0 8px 30px -5px rgba(255, 122, 0, 0.4)' }}
+            >
+              Get Started Free
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link to="/" className="btn-outline inline-flex items-center gap-2 px-8 py-3">
-              Back to Home
+            <Link 
+              to="/" 
+              className="inline-flex items-center justify-center px-10 py-4 text-lg font-semibold rounded-2xl border border-border backdrop-blur-md bg-background/50 hover:bg-background/80 hover:-translate-y-1 transition-all duration-300"
+            >
+              Explore Home
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Simple Footer */}
-      <footer className="relative z-10 border-t border-border/50 py-8 text-center text-muted-foreground">
-        <p>© {new Date().getFullYear()} Aura AI. Built with ❤️ for the future.</p>
+      {/* ─── FOOTER ─── */}
+      <footer className="relative z-10 border-t border-border/50 py-12 text-center text-muted-foreground">
+        <p className="text-sm">© {new Date().getFullYear()} <span className="font-bold text-foreground">Aura AI</span>. Crafting the next dimension of AI interaction.</p>
       </footer>
     </div>
   );
