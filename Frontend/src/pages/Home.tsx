@@ -144,71 +144,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ─── INTERACTIVE PREVIEW ─── */}
-      <section className="relative z-10 py-28 px-4 md:px-8 overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="liquid-blob absolute opacity-5 dark:opacity-10"
-            style={{ width: '700px', height: '700px', top: '0', right: '-10%', animationDelay: '-10s', animationDuration: '25s', background: 'linear-gradient(135deg, #FF0066, #FF7A00)' }}
-          />
-        </div>
-        <div className="max-w-4xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-purple-500 mb-4">See it in action</p>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">A chat that <span style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>feels alive.</span></h2>
-          </div>
-
-          {/* Chat Preview */}
-          <div className="rounded-3xl overflow-hidden border border-border/70 shadow-2xl bg-background/80 backdrop-blur-2xl">
-            {/* Window bar */}
-            <div className="flex items-center gap-2 px-6 py-4 bg-muted/40 border-b border-border">
-              <div className="w-3 h-3 rounded-full bg-red-400"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-              <div className="w-3 h-3 rounded-full bg-green-400"></div>
-              <div className="flex-1 flex justify-center">
-                <div className="px-4 py-1 rounded-full bg-background/70 text-xs text-muted-foreground font-medium border border-border/50">aura-ai.app · New Chat</div>
-              </div>
-            </div>
-            {/* Messages */}
-            <div className="p-6 md:p-10 space-y-6">
-              {/* User message */}
-              <div className="flex gap-3 justify-end">
-                <div className="max-w-[80%] px-5 py-3.5 rounded-2xl rounded-br-sm text-white text-sm leading-relaxed" style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)' }}>
-                  Hey Aura, can you write me a function in Python to reverse a string?
-                </div>
-                <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0 ring-2 ring-background shadow">U</div>
-              </div>
-              {/* AI message */}
-              <div className="flex gap-3">
-                <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0 ring-2 ring-background shadow" style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)' }}>A</div>
-                <div className="max-w-[85%] bg-muted/60 border border-border/60 px-5 py-4 rounded-2xl rounded-bl-sm text-sm leading-relaxed space-y-3">
-                  <p>Of course! Here's a clean Python function to reverse a string:</p>
-                  <div className="bg-background rounded-xl p-4 border border-border font-mono text-xs leading-6 overflow-x-auto">
-                    <span className="text-blue-500">def</span> <span className="text-yellow-500">reverse_string</span>(<span className="text-orange-400">text</span>:<span className="text-blue-400"> str</span>) -&gt; <span className="text-blue-400">str</span>:<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-purple-400">"""Reverses a given string."""</span><br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-500">return</span> text[<span className="text-orange-400">::-1</span>]<br /><br />
-                    <span className="text-gray-400"># Example</span><br />
-                    <span className="text-green-500">print</span>(reverse_string(<span className="text-orange-400">"Hello Aura"</span>)) <span className="text-gray-500"># Output: aruA olleH</span>
-                  </div>
-                  <p className="text-muted-foreground">The <code className="text-orange-500 bg-orange-500/10 px-1 rounded">::-1</code> slice is a pythonic way to reverse any sequence. Let me know if you want a loop-based version too! 🐍</p>
-                </div>
-              </div>
-              {/* Prompt Bar */}
-              <div className="flex items-center gap-3 bg-muted/30 border border-border/60 rounded-2xl px-5 py-3.5 mt-4">
-                <span className="text-muted-foreground text-base">✨</span>
-                <span className="flex-1 text-sm text-muted-foreground/60 font-medium">Ask Aura anything — code, questions, ideas...</span>
-                <div className="shrink-0 w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)' }}>
-                  <ArrowRight className="w-4 h-4 text-white" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ─── STATS ─── */}
-      <section className="relative z-10 py-24 px-4 md:px-8 overflow-hidden" style={{ background: 'linear-gradient(135deg, #FF7A00 0%, #FF0066 50%, #9333ea 100%)' }}>
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
+      <section className="relative z-10 py-8 px-4 md:px-8 overflow-hidden" style={{ background: 'linear-gradient(135deg, #FF7A00 0%, #FF8C00 60%, #FF6B00 100%)' }}>
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
             {[
               { stat: '∞', label: 'Memory Capacity' },
               { stat: '<1s', label: 'Response Time' },
@@ -216,8 +155,8 @@ const Home = () => {
               { stat: '24/7', label: 'Always Available' },
             ].map(({ stat, label }) => (
               <div key={label}>
-                <div className="text-5xl md:text-6xl font-black mb-2">{stat}</div>
-                <div className="text-white/70 text-sm font-semibold uppercase tracking-widest">{label}</div>
+                <div className="text-3xl md:text-4xl font-black mb-1">{stat}</div>
+                <div className="text-white/80 text-[10px] md:text-[11px] font-bold uppercase tracking-wider">{label}</div>
               </div>
             ))}
           </div>
