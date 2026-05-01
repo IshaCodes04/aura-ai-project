@@ -1,176 +1,177 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Brain, Cpu, ShieldCheck, Heart, Zap, Globe, Users, Trophy, Code2, Database, Layout, Shield } from 'lucide-react';
+import { ArrowRight, Sparkles, Brain, Cpu, ShieldCheck, Heart, Zap, Globe, Users, Trophy, Target, Shield, MessageSquare } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
+    <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden" style={{ fontFamily: "'Inter', sans-serif" }}>
       <Navbar />
 
-      {/* ─── INTENSE LIQUID BACKGROUND ─── */}
+      {/* ─── LIQUID BACKGROUND (Subtle & Pro) ─── */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="liquid-blob absolute opacity-30 dark:opacity-50" style={{ width: '85vw', height: '85vw', top: '-25%', left: '-20%', background: 'linear-gradient(135deg, #FF7A00 0%, #FF0066 50%, #9333ea 100%)' }} />
-        <div className="liquid-blob absolute opacity-20 dark:opacity-30" style={{ width: '65vw', height: '65vw', bottom: '-10%', right: '0%', animationDelay: '-5s', background: 'linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 50%, #ec4899 100%)' }} />
-        <div className="liquid-blob absolute opacity-10 dark:opacity-20" style={{ width: '40vw', height: '40vw', top: '35%', right: '15%', animationDelay: '-12s', background: 'linear-gradient(135deg, #FF7A00 0%, #facc15 100%)' }} />
+        <div className="liquid-blob absolute opacity-20 dark:opacity-25" style={{ width: '60vw', height: '60vw', top: '-10%', left: '-10%', background: 'linear-gradient(135deg, #FF7A00 0%, #FF0066 100%)' }} />
+        <div className="liquid-blob absolute opacity-10 dark:opacity-15" style={{ width: '40vw', height: '40vw', bottom: '10%', right: '5%', animationDelay: '-5s', background: 'linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%)' }} />
       </div>
 
-      <section className="relative z-10 pt-40 pb-20 px-4 md:px-8">
+      <section className="relative z-10 pt-32 pb-20">
         
         {/* ─── HERO SECTION ─── */}
-        <div className="max-w-5xl mx-auto text-center mb-40">
-          <div className="aura-fade-1 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-10 backdrop-blur-3xl border border-orange-500/20 bg-orange-500/5 text-orange-500 shadow-xl">
-            <Sparkles className="w-5 h-5 animate-spin-slow" />
-            <span className="text-xs font-black uppercase tracking-[0.3em]">The Aura Legacy</span>
+        <div className="max-w-4xl mx-auto text-center px-6 mb-20">
+          <div className="aura-fade-1 inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 backdrop-blur-xl border border-orange-500/20 bg-orange-500/5 text-orange-500 text-xs font-bold tracking-widest uppercase">
+            <Sparkles className="w-3.5 h-3.5" />
+            Defining Synergy
           </div>
-          <h1 className="aura-fade-2 text-7xl md:text-9xl font-black tracking-tighter mb-10 leading-[0.9]">
-            Where code <br />
-            <span className="shimmer-text italic">meets soul.</span>
+          <h1 className="aura-fade-2 text-5xl md:text-7xl font-black tracking-tight mb-8 leading-tight">
+            The future of <br />
+            <span className="shimmer-text">Human Intelligence.</span>
           </h1>
-          <p className="aura-fade-3 text-2xl md:text-3xl text-muted-foreground leading-relaxed max-w-3xl mx-auto font-medium italic">
-            "We aren't building a tool. We are building the first intelligence that truly remembers you."
+          <p className="aura-fade-3 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-medium">
+            Aura AI is an ethereal fusion of human creativity and machine precision. We build intelligent systems that don't just answer, but understand.
           </p>
         </div>
 
-        {/* ─── THE PHILOSOPHY (Glow Card Style) ─── */}
-        <div className="max-w-6xl mx-auto mb-40">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div className="aura-fade-left relative group p-[2px] rounded-[4rem] overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-500 via-rose-500 to-purple-600 opacity-30 group-hover:opacity-100 transition-opacity duration-1000"></div>
-              <div className="relative rounded-[3.9rem] overflow-hidden aspect-square border border-white/10">
-                <img 
-                  src="https://images.unsplash.com/photo-1620712943543-bcc4638ef808?q=80&w=1000&auto=format&fit=crop" 
-                  alt="AI Human Synergy" 
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-12">
-                  <p className="text-white font-black text-2xl md:text-3xl leading-tight italic">"Intelligence is not just about answers, it's about the journey of understanding."</p>
+        {/* ─── STATS STRIP (Same as Home Page) ─── */}
+        <section className="relative z-10 py-10 px-4 md:px-8 mb-32 border-y border-white/5 bg-white/5 backdrop-blur-md">
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              {[
+                { stat: '500k+', label: 'Global Users' },
+                { stat: '<1s', label: 'Response Time' },
+                { stat: '100%', label: 'Privacy Oath' },
+                { stat: '24/7', label: 'Availability' },
+              ].map(({ stat, label }) => (
+                <div key={label}>
+                  <div className="text-3xl md:text-4xl font-black text-foreground mb-1">{stat}</div>
+                  <div className="text-muted-foreground text-[10px] font-bold uppercase tracking-widest">{label}</div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ─── THE MISSION ─── */}
+        <div className="max-w-6xl mx-auto px-6 mb-40">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="relative group">
+              <div className="absolute -inset-4 bg-orange-500/10 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="relative rounded-[2.5rem] overflow-hidden aspect-[4/3] border border-white/10 shadow-2xl">
+                <img 
+                  src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop" 
+                  alt="AI Mission" 
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
+                />
               </div>
             </div>
-            <div className="space-y-10 aura-fade-right">
-              <div className="space-y-4">
-                <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-tight">The Aura <br/><span className="gradient-text-orange italic">Philosophy</span></h2>
-                <div className="h-2 w-32 bg-gradient-to-r from-orange-500 to-rose-500 rounded-full"></div>
-              </div>
-              <p className="text-xl text-muted-foreground leading-relaxed font-semibold">
-                Most AI tools today are transactional—you ask, they answer, they forget. We believe intelligence should be <strong>relational</strong>.
+            <div className="space-y-6">
+              <h2 className="text-4xl font-black tracking-tight">Our Mission is <br/><span className="text-orange-500 italic">Relational.</span></h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Most AI tools today are transactional—you ask, they answer, they forget. We believe intelligence should be <strong>relational</strong>. 
               </p>
-              <p className="text-xl text-muted-foreground leading-relaxed font-semibold">
+              <p className="text-lg text-muted-foreground leading-relaxed">
                 By integrating long-term vector memory with state-of-the-art reasoning, Aura grows with you. It learns your style, remembers your projects, and becomes an extension of your own mind.
               </p>
-              <div className="pt-6">
-                 <Link to="/signup" className="text-orange-500 font-black text-3xl flex items-center gap-4 group">
-                   Join the Synergy <ArrowRight className="w-8 h-8 group-hover:translate-x-4 transition-transform" />
-                 </Link>
+              <div className="flex gap-4 pt-4 border-t border-white/5">
+                <div className="flex flex-col items-center">
+                   <div className="h-10 w-1 bg-orange-500 rounded-full"></div>
+                </div>
+                <p className="text-foreground font-semibold italic text-lg leading-tight italic">
+                  "Built for the curious, the creators, and the visionaries."
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* ─── TECHNOLOGY STACK (Glow Grid) ─── */}
-        <div className="max-w-6xl mx-auto mb-40">
-           <div className="text-center mb-20">
-            <h2 className="text-5xl font-black mb-6 tracking-tight">Built on the <span className="text-orange-500">Bleeding Edge.</span></h2>
-            <p className="text-xl text-muted-foreground font-bold">The sophisticated stack that powers every liquid interaction.</p>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: Cpu, name: 'Gemini Pro', desc: 'Reasoning Engine', color: 'from-orange-500/40 to-rose-500/40' },
-              { icon: Database, name: 'Pinecone', desc: 'Vector Memory', color: 'from-blue-500/40 to-cyan-500/40' },
-              { icon: Zap, name: 'WebSockets', desc: 'Real-time Flow', color: 'from-yellow-500/40 to-orange-500/40' },
-              { icon: Shield, name: 'Encryption', desc: 'AES-256 Vault', color: 'from-purple-500/40 to-pink-500/40' },
-            ].map((tech, i) => (
-              <div key={i} className="group relative p-[1px] rounded-[3rem] overflow-hidden transition-all duration-500 hover:-translate-y-4">
-                <div className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-20 group-hover:opacity-100 transition-opacity`}></div>
-                <div className="relative p-10 rounded-[2.9rem] bg-background/80 backdrop-blur-3xl border border-white/5 text-center">
-                  <div className={`w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform`}>
-                    <tech.icon className="w-8 h-8 text-orange-500" />
+        {/* ─── THE PILLARS (Clean Cards) ─── */}
+        <div className="max-w-6xl mx-auto px-6 mb-40">
+           <div className="text-center mb-16">
+             <h2 className="text-4xl font-black mb-4 tracking-tight">The Core Pillars</h2>
+             <p className="text-muted-foreground font-medium">Built on top of a zero-compromise architecture.</p>
+           </div>
+           <div className="grid md:grid-cols-3 gap-8">
+             {[
+               { icon: Brain, title: 'Infinite Memory', desc: 'Powered by Pinecone Vector indexing, Aura never forgets a detail you care about.', color: 'text-orange-500' },
+               { icon: Cpu, title: 'Deep Logic', desc: 'Leveraging Google Gemini Pro for complex reasoning and flawless code generation.', color: 'text-blue-500' },
+               { icon: Zap, title: 'Instant Flow', desc: 'Zero-latency WebSocket streaming. Because your thoughts wait for no one.', color: 'text-purple-500' }
+             ].map((p, i) => (
+               <div key={i} className="p-10 rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-3xl hover:border-orange-500/30 transition-all duration-500">
+                  <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6">
+                    <p.icon className={`w-6 h-6 ${p.color}`} />
                   </div>
-                  <h3 className="font-black text-2xl mb-2">{tech.name}</h3>
-                  <p className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground font-black opacity-60">{tech.desc}</p>
+                  <h3 className="text-xl font-bold mb-3">{p.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{p.desc}</p>
+               </div>
+             ))}
+           </div>
+        </div>
+
+        {/* ─── TECH STACK (Professional Band) ─── */}
+        <div className="max-w-6xl mx-auto px-6 mb-40">
+           <div className="grid md:grid-cols-2 gap-20 items-center">
+              <div className="order-2 md:order-1 space-y-8">
+                <h2 className="text-4xl font-black tracking-tight">Enterprise-Grade <br/><span className="text-orange-500">Technology.</span></h2>
+                <div className="grid grid-cols-2 gap-6">
+                  {[
+                    { icon: Shield, t: 'AES-256', d: 'End-to-end data vaulting.' },
+                    { icon: Globe, t: 'Global CDN', d: 'Zero lag anywhere on earth.' },
+                    { icon: Target, t: 'RAG 2.0', d: 'The latest in vector retrieval.' },
+                    { icon: Users, t: 'Multi-User', d: 'Scale seamlessly with your team.' },
+                  ].map((item, i) => (
+                    <div key={i} className="space-y-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <item.icon className="w-4 h-4 text-orange-500" />
+                        <span className="font-bold text-sm">{item.t}</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground">{item.d}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ─── ROADMAP (Interactive Path) ─── */}
-        <div className="max-w-6xl mx-auto mb-40">
-           <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div className="aura-fade-up">
-               <h2 className="text-5xl md:text-7xl font-black mb-10 tracking-tighter">The Future is <br/><span className="shimmer-text">Liquid.</span></h2>
-               <div className="space-y-10">
-                 {[
-                   { t: 'Multi-modal Vision', d: 'Soon Aura will see and perceive the world just as you do.' },
-                   { t: 'Autonomous Coding', d: 'Aura won\'t just suggest logic; it will build entire ecosystems.' },
-                   { t: 'Decentralized Intelligence', d: 'Giving you 100% ownership over your neural clusters.' },
-                 ].map((step, i) => (
-                   <div key={i} className="flex gap-8 group">
-                     <div className="w-14 h-14 rounded-full border-2 border-orange-500/50 bg-orange-500/10 flex items-center justify-center text-orange-500 font-black text-xl shrink-0 group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white transition-all">{i+1}</div>
-                     <div>
-                       <h4 className="font-black text-2xl text-foreground mb-1">{step.t}</h4>
-                       <p className="text-lg text-muted-foreground font-medium">{step.d}</p>
-                     </div>
-                   </div>
-                 ))}
-               </div>
-            </div>
-            <div className="relative aura-fade-up">
-               <div className="absolute -inset-10 bg-orange-500/10 rounded-full blur-[100px] animate-pulse"></div>
-               <div className="relative p-12 md:p-16 rounded-[4rem] border border-white/10 bg-white/5 backdrop-blur-3xl text-center shadow-2xl overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-rose-500/10 opacity-50"></div>
-                  <Trophy className="relative z-10 w-24 h-24 text-orange-500 mx-auto mb-10 group-hover:scale-110 transition-transform" />
-                  <h3 className="relative z-10 text-4xl font-black mb-4 tracking-tight">User Driven</h3>
-                  <p className="relative z-10 text-lg text-muted-foreground font-bold leading-relaxed mb-10">
-                    Aura is built by the dreamers of the digital world. Join 120,000+ creators shaping the future.
-                  </p>
-                  <div className="relative z-10 flex justify-center -space-x-4">
-                    {[1,2,3,4,5].map(n => (
-                      <div key={n} className="w-14 h-14 rounded-full border-4 border-background bg-muted overflow-hidden shadow-2xl">
-                        <img src={`https://i.pravatar.cc/150?u=about-${n}`} alt="user" />
-                      </div>
-                    ))}
-                    <div className="w-14 h-14 rounded-full border-4 border-background bg-gradient-to-br from-orange-500 to-rose-500 flex items-center justify-center text-white text-xs font-black">+120k</div>
-                  </div>
-               </div>
-            </div>
-           </div>
-        </div>
-
-        {/* ─── VALUES (Hyper-Glow Card) ─── */}
-        <div className="max-w-5xl mx-auto mb-40 relative group">
-           <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 via-rose-500 to-purple-600 rounded-[4rem] blur-xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
-           <div className="relative p-16 md:p-24 rounded-[4rem] border border-white/10 bg-background/60 backdrop-blur-3xl text-center">
-              <ShieldCheck className="w-24 h-24 text-orange-500 mx-auto mb-10 animate-pulse" />
-              <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter">Privacy as an <span className="text-orange-500">Oath.</span></h2>
-              <p className="text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-12 font-bold italic">
-                "In a world where data is sold, Aura is a vault. Every thought you sync is encrypted, private, and yours alone."
-              </p>
-              <div className="flex justify-center items-center gap-4 text-orange-500 font-black text-xl uppercase tracking-widest">
-                <Heart className="w-8 h-8 fill-current" />
-                <span>Built with Integrity</span>
+              <div className="order-1 md:order-2 rounded-[2.5rem] overflow-hidden border border-white/10 aspect-square md:aspect-auto md:h-[400px]">
+                <img 
+                  src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop" 
+                  alt="Tech Stack" 
+                  className="w-full h-full object-cover" 
+                />
               </div>
            </div>
         </div>
 
-        {/* ─── FINAL CALL TO ACTION ─── */}
-        <div className="max-w-4xl mx-auto text-center aura-fade-up">
-          <h2 className="text-5xl md:text-8xl font-black tracking-tighter mb-12 leading-[0.95]">
-            Ready to <br />
-            <span className="shimmer-text italic">join the flow?</span>
+        {/* ─── SECURITY & PRIVACY ─── */}
+        <div className="max-w-4xl mx-auto px-6 mb-40">
+          <div className="p-12 md:p-16 rounded-[3rem] border border-border/50 bg-muted/20 backdrop-blur-3xl text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-8 opacity-5">
+              <ShieldCheck className="w-32 h-32 text-orange-500" />
+            </div>
+            <h2 className="text-3xl font-bold mb-6">Privacy as a Foundation</h2>
+            <p className="text-xl text-muted-foreground leading-relaxed mb-10 font-medium">
+              Your data is your property. Every conversation with Aura is end-to-end encrypted and we never use your personal data to train public models.
+            </p>
+            <div className="inline-flex items-center gap-2 text-orange-500 font-black tracking-widest text-sm uppercase">
+              <Heart className="w-4 h-4 fill-current" />
+              <span>Built with Integrity</span>
+            </div>
+          </div>
+        </div>
+
+        {/* ─── FINAL CTA ─── */}
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-8">
+            Experience the <br />
+            <span className="shimmer-text italic">Aura difference.</span>
           </h2>
-          <div className="flex flex-col sm:flex-row justify-center gap-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link 
               to="/signup" 
-              className="group inline-flex items-center justify-center gap-4 px-12 py-5 text-2xl font-black text-white rounded-[2.5rem] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(255,122,0,0.5)]"
-              style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)' }}
+              className="group inline-flex items-center justify-center gap-3 px-10 py-4 text-lg font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)', boxShadow: '0 8px 30px -5px rgba(255, 122, 0, 0.4)' }}
             >
               Get Started Free
-              <ArrowRight className="w-7 h-7 group-hover:translate-x-2 transition-transform" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link 
               to="/" 
-              className="inline-flex items-center justify-center px-12 py-5 text-xl font-bold rounded-[2.5rem] border border-white/10 backdrop-blur-xl bg-white/5 hover:bg-white/10 hover:-translate-y-2 transition-all duration-500"
+              className="inline-flex items-center justify-center px-10 py-4 text-lg font-semibold rounded-2xl border border-border backdrop-blur-md bg-background/50 hover:bg-background/80 transition-all"
             >
               Back to Home
             </Link>
@@ -178,9 +179,8 @@ const About = () => {
         </div>
       </section>
 
-      {/* ─── FOOTER ─── */}
-      <footer className="relative z-10 border-t border-white/5 py-20 text-center text-muted-foreground">
-        <p className="text-xs font-black tracking-[0.4em] uppercase opacity-30">Aura AI · Digital Legacy</p>
+      <footer className="relative z-10 border-t border-white/5 py-16 text-center text-muted-foreground">
+        <p className="text-xs font-bold tracking-[0.3em] uppercase opacity-30">Aura AI · Human Architecture</p>
       </footer>
     </div>
   );
