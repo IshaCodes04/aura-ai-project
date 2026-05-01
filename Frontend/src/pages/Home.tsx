@@ -111,20 +111,101 @@ const Home = () => {
       </section>
 
       {/* Trusted By / Stats Section */}
-      <section className="relative z-10 border-t border-border/50 bg-muted/30 py-12">
+      <section className="relative z-10 border-y border-border/50 bg-muted/30 py-12">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <p className="text-center text-sm font-semibold text-muted-foreground tracking-widest uppercase mb-8">
-            Empowering Next-Generation Creators
+            Powered by Next-Generation Tech
           </p>
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-             <div className="text-xl font-bold font-mono">React</div>
-             <div className="text-xl font-bold font-mono">Node.js</div>
-             <div className="text-xl font-bold font-mono">Gemini AI</div>
-             <div className="text-xl font-bold font-mono">MongoDB</div>
-             <div className="text-xl font-bold font-mono">Pinecone</div>
+             <div className="text-xl font-bold font-mono text-blue-500">React 18</div>
+             <div className="text-xl font-bold font-mono text-green-500">Node.js</div>
+             <div className="text-xl font-bold font-mono text-purple-500">Google Gemini</div>
+             <div className="text-xl font-bold font-mono text-green-600">MongoDB</div>
+             <div className="text-xl font-bold font-mono text-indigo-500">Pinecone Vector</div>
           </div>
         </div>
       </section>
+
+      {/* Capabilities Section */}
+      <section className="relative z-10 py-24 px-6 md:px-12 bg-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Everything you need. <span className="text-orange-500">In one brain.</span></h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Aura AI isn't just a chatbot. It's a complete intelligent ecosystem designed to handle your most complex workflows.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Capability 1 */}
+            <div className="auth-card p-8 group hover:-translate-y-2 transition-all duration-300">
+              <div className="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <span className="text-2xl">💻</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-3">Masterful Coding</h3>
+              <p className="text-muted-foreground leading-relaxed">From debugging complex React components to writing robust Node.js backends, Aura understands your stack and writes clean, production-ready code.</p>
+            </div>
+            
+            {/* Capability 2 */}
+            <div className="auth-card p-8 group hover:-translate-y-2 transition-all duration-300">
+              <div className="w-14 h-14 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <span className="text-2xl">🧠</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-3">Long-Term Memory</h3>
+              <p className="text-muted-foreground leading-relaxed">Powered by Pinecone Vector DB, Aura remembers your past conversations. It doesn't just answer; it learns your context over time.</p>
+            </div>
+
+            {/* Capability 3 */}
+            <div className="auth-card p-8 group hover:-translate-y-2 transition-all duration-300">
+              <div className="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <span className="text-2xl">⚡</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-3">Real-time Speed</h3>
+              <p className="text-muted-foreground leading-relaxed">Built on a highly optimized Socket.io architecture, you get streaming responses instantly. No more waiting for loaders to finish.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="relative z-10 py-20 bg-orange-500 text-white overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-5xl font-black mb-2">0ms</div>
+              <div className="text-orange-100 font-medium tracking-wide uppercase text-sm">Latency Feel</div>
+            </div>
+            <div>
+              <div className="text-5xl font-black mb-2">Infinite</div>
+              <div className="text-orange-100 font-medium tracking-wide uppercase text-sm">Memory Capacity</div>
+            </div>
+            <div>
+              <div className="text-5xl font-black mb-2">100%</div>
+              <div className="text-orange-100 font-medium tracking-wide uppercase text-sm">Data Privacy</div>
+            </div>
+            <div>
+              <div className="text-5xl font-black mb-2">24/7</div>
+              <div className="text-orange-100 font-medium tracking-wide uppercase text-sm">Availability</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Bottom */}
+      <section className="relative z-10 py-32 px-6 md:px-12 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold mb-6">Ready to step into the future?</h2>
+          <p className="text-xl text-muted-foreground mb-10">Join the next generation of builders, creators, and thinkers who are scaling their minds with Aura AI.</p>
+          <Link to="/signup" className="btn-primary inline-flex items-center justify-center gap-2 px-10 py-4 text-xl rounded-full shadow-[0_0_40px_rgba(249,115,22,0.3)] hover:shadow-[0_0_60px_rgba(249,115,22,0.5)] transition-all">
+            Start Chatting Now
+            <ArrowRight className="w-6 h-6" />
+          </Link>
+        </div>
+      </section>
+
+      {/* Simple Footer */}
+      <footer className="relative z-10 border-t border-border/50 py-8 text-center text-muted-foreground">
+        <p>© {new Date().getFullYear()} Aura AI. Built with ❤️ for the future.</p>
+      </footer>
 
     </div>
   );
