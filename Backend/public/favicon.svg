@@ -1,18 +1,16 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="auraGradientFav" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stopColor="#FF7A00" />
-      <stop offset="100%" stopColor="#FF0066" />
+    <linearGradient id="auraGradientFavFix" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stopColor="#FF7A00" />
+      <stop offset="1" stopColor="#FF0066" />
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="16" fill="url(#auraGradientFav)" />
+  <rect width="64" height="64" rx="16" fill="url(#auraGradientFavFix)" />
   <text 
-    x="50%" 
-    y="52%" 
-    dominant-baseline="middle" 
-    text-anchor="middle" 
+    x="32" 
+    y="42" 
     fill="white" 
-    style="font-family: sans-serif; font-weight: 900; font-size: 26px; letter-spacing: -0.02em;"
+    style="font-family: system-ui, -apple-system, sans-serif; font-weight: 800; font-size: 28px; letter-spacing: -0.04em; text-anchor: middle;"
   >
     AI
   </text>
