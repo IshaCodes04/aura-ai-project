@@ -53,70 +53,48 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 px-4 md:px-8 py-3">
-      {/* Liquid glow behind navbar */}
-      <div
-        className="absolute inset-0 -z-10 transition-opacity duration-500"
-        style={{ opacity: scrolled ? 1 : 0, background: 'linear-gradient(to bottom, rgba(255,122,0,0.04) 0%, transparent 100%)' }}
-      />
-
+    <nav className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 px-4 md:px-8 py-4 ${scrolled ? 'translate-y-0' : 'translate-y-1'}`}>
       <div className="max-w-7xl mx-auto">
         <div
-          className="flex items-center justify-between gap-3 md:gap-6 rounded-2xl border backdrop-blur-2xl transition-all duration-500"
+          className={`flex items-center justify-between gap-4 p-2 rounded-[2rem] border transition-all duration-700 ${
+            scrolled 
+              ? "shadow-[0_20px_50px_-20px_rgba(255,122,0,0.15)]" 
+              : "shadow-none"
+          }`}
           style={{
-            background: scrolled
-              ? theme === 'dark' ? 'rgba(10,10,15,0.92)' : 'rgba(255,255,255,0.92)'
-              : theme === 'dark' ? 'rgba(10,10,15,0.6)' : 'rgba(255,255,255,0.6)',
-            borderColor: scrolled
-              ? theme === 'dark' ? 'rgba(255,122,0,0.15)' : 'rgba(255,122,0,0.12)'
-              : theme === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.9)',
-            boxShadow: scrolled
-              ? theme === 'dark'
-                ? '0 8px 40px -10px rgba(255,122,0,0.2), 0 0 0 1px rgba(255,122,0,0.08)'
-                : '0 8px 40px -10px rgba(255,122,0,0.15), 0 0 0 1px rgba(255,122,0,0.06)'
-              : 'none',
+            background: theme === 'dark' 
+              ? `rgba(10,10,15, ${scrolled ? '0.85' : '0.4'})` 
+              : `rgba(255,255,255, ${scrolled ? '0.85' : '0.4'})`,
+            backdropFilter: 'blur(20px)',
+            borderColor: theme === 'dark' 
+              ? scrolled ? 'rgba(255,122,0,0.2)' : 'rgba(255,255,255,0.05)'
+              : scrolled ? 'rgba(255,122,0,0.1)' : 'rgba(0,0,0,0.05)',
           }}
         >
-          {/* Logo */}
+          {/* Logo Section */}
           <Link
             to="/"
-            className="flex items-center pl-4 pr-2 py-1 group transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
+            className="flex items-center pl-4 group transition-transform duration-300 hover:scale-[1.02]"
           >
             <AuraAILogo size="sm" showText={true} />
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Center Navigation - Floating Pill Style */}
           <div className="hidden md:flex flex-1 items-center justify-center">
-            <div className="inline-flex items-center gap-1 rounded-full px-1.5 py-1 border"
-              style={{
-                background: theme === 'dark' ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.7)',
-                borderColor: theme === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.9)',
-              }}
-            >
+            <div className="inline-flex items-center gap-1 p-1.5 rounded-full border border-border/40 bg-background/20 backdrop-blur-md">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="relative px-4 py-2 rounded-full text-sm font-medium tracking-tight transition-all duration-200"
+                  className={`relative px-5 py-2 rounded-full text-xs font-black uppercase tracking-[0.15em] transition-all duration-500 ${
+                    isActive(link.path) 
+                      ? 'text-white shadow-lg' 
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
                   style={isActive(link.path) ? {
                     background: 'linear-gradient(135deg, #FF7A00, #FF0066)',
-                    color: 'white',
                     boxShadow: '0 4px 15px -3px rgba(255,122,0,0.4)',
-                  } : {
-                    color: theme === 'dark' ? 'rgba(255,255,255,0.75)' : 'rgba(30,30,30,0.75)',
-                  }}
-                  onMouseEnter={e => {
-                    if (!isActive(link.path)) {
-                      (e.currentTarget as HTMLElement).style.color = theme === 'dark' ? 'white' : '#111';
-                      (e.currentTarget as HTMLElement).style.background = theme === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.9)';
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (!isActive(link.path)) {
-                      (e.currentTarget as HTMLElement).style.color = theme === 'dark' ? 'rgba(255,255,255,0.75)' : 'rgba(30,30,30,0.75)';
-                      (e.currentTarget as HTMLElement).style.background = 'transparent';
-                    }
-                  }}
+                  } : {}}
                 >
                   {link.name}
                 </Link>
@@ -124,65 +102,50 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Desktop Auth / Theme */}
-          <div className="hidden md:flex items-center gap-2 pr-4">
+          {/* Right Section - Auth & Utils */}
+          <div className="hidden md:flex items-center gap-3 pr-2">
             <button
               type="button"
               onClick={toggleTheme}
-              className="group inline-flex items-center justify-center h-9 w-9 rounded-full border transition-all duration-200 hover:scale-110"
-              style={{
-                background: theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.7)',
-                borderColor: theme === 'dark' ? 'rgba(255,255,255,0.12)' : 'rgba(200,200,200,0.6)',
-                color: theme === 'dark' ? 'white' : '#333',
-              }}
-              aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+              className="flex items-center justify-center h-10 w-10 rounded-full border border-border/50 bg-card/40 hover:bg-orange-500/10 hover:border-orange-500/30 transition-all duration-300 group"
+              aria-label="Toggle theme"
             >
-              {theme === 'dark' ? <Sun className="w-4 h-4 text-orange-400" /> : <Moon className="w-4 h-4" />}
+              {theme === 'dark' ? <Sun className="w-4.5 h-4.5 text-orange-400 group-hover:rotate-45 transition-transform duration-500" /> : <Moon className="w-4.5 h-4.5" />}
             </button>
+            
+            <div className="h-6 w-[1px] bg-border/50 mx-1" />
+
             <Link
               to="/login"
-              className="inline-flex items-center justify-center h-9 px-4 rounded-full text-sm font-medium transition-all duration-200 border"
-              style={{
-                background: 'transparent',
-                borderColor: theme === 'dark' ? 'rgba(255,255,255,0.15)' : 'rgba(200,200,200,0.6)',
-                color: theme === 'dark' ? 'rgba(255,255,255,0.85)' : '#333',
-              }}
+              className="text-xs font-black uppercase tracking-[0.2em] px-4 text-muted-foreground hover:text-foreground transition-colors"
             >
-              Log in
+              Sync
             </Link>
+            
             <Link
               to="/signup"
-              className="inline-flex items-center justify-center gap-1.5 h-9 px-5 rounded-full text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-              style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)', boxShadow: '0 4px 15px -3px rgba(255,122,0,0.5)' }}
+              className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] text-white shadow-xl transition-all duration-500 hover:-translate-y-1 active:scale-95"
+              style={{ 
+                background: 'linear-gradient(135deg, #FF7A00, #FF0066)',
+                boxShadow: '0 10px 30px -10px rgba(255,0,102,0.4)'
+              }}
             >
               <Sparkles className="w-3.5 h-3.5" />
-              Get started
+              Join Aura
             </Link>
           </div>
 
-          {/* Mobile right side */}
-          <div className="flex items-center gap-2 pr-3 md:hidden">
+          {/* Mobile UI */}
+          <div className="flex items-center gap-2 pr-2 md:hidden">
             <button
-              type="button"
               onClick={toggleTheme}
-              className="inline-flex items-center justify-center h-9 w-9 rounded-full border transition-all"
-              style={{
-                borderColor: theme === 'dark' ? 'rgba(255,255,255,0.15)' : 'rgba(200,200,200,0.6)',
-                background: theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.7)',
-                color: theme === 'dark' ? 'white' : '#333',
-              }}
-              aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+              className="h-10 w-10 flex items-center justify-center rounded-full border border-border/50 bg-card/40 text-foreground"
             >
               {theme === 'dark' ? <Sun className="w-4 h-4 text-orange-400" /> : <Moon className="w-4 h-4" />}
             </button>
             <button
-              className="inline-flex items-center justify-center h-9 w-9 rounded-full border transition-all"
-              style={{
-                borderColor: theme === 'dark' ? 'rgba(255,255,255,0.15)' : 'rgba(200,200,200,0.6)',
-                background: theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.7)',
-                color: theme === 'dark' ? 'white' : '#333',
-              }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="h-10 w-10 flex items-center justify-center rounded-xl bg-foreground text-background"
             >
               {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -193,49 +156,50 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div
-          className="md:hidden absolute inset-x-4 top-[4.5rem] mt-2 rounded-2xl border p-4 shadow-2xl backdrop-blur-2xl"
+          className="md:hidden absolute inset-x-4 top-[5.5rem] rounded-[2rem] border p-5 shadow-2xl backdrop-blur-3xl animate-in slide-in-from-top-5 duration-500"
           style={{
-            background: theme === 'dark' ? 'rgba(10,10,15,0.97)' : 'rgba(255,255,255,0.97)',
-            borderColor: theme === 'dark' ? 'rgba(255,122,0,0.15)' : 'rgba(255,122,0,0.1)',
-            boxShadow: '0 20px 60px -15px rgba(255,122,0,0.2)',
+            background: theme === 'dark' ? 'rgba(15,15,20,0.95)' : 'rgba(255,255,255,0.95)',
+            borderColor: theme === 'dark' ? 'rgba(255,122,0,0.2)' : 'rgba(255,122,0,0.1)',
+            boxShadow: '0 30px 60px -15px rgba(0,0,0,0.4)',
           }}
         >
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-2">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className="px-4 py-3 rounded-xl text-base font-semibold transition-all duration-200"
+                className={`px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-[0.2em] transition-all duration-300 ${
+                  isActive(link.path) 
+                    ? 'text-white shadow-lg' 
+                    : 'text-foreground/70 hover:text-foreground'
+                }`}
                 style={isActive(link.path) ? {
                   background: 'linear-gradient(135deg, #FF7A00, #FF0066)',
-                  color: 'white',
-                } : {
-                  color: theme === 'dark' ? 'rgba(255,255,255,0.85)' : '#111',
-                }}
+                } : {}}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.name}
               </Link>
             ))}
-            <div className="flex flex-col gap-3 pt-4 mt-2 border-t" style={{ borderColor: theme === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)' }}>
+            <div className="h-px bg-border/50 my-4" />
+            <div className="flex flex-col gap-3">
               <Link
                 to="/signup"
-                className="text-center py-3 rounded-xl font-bold text-white transition-all"
-                style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)', boxShadow: '0 4px 20px -5px rgba(255,122,0,0.5)' }}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Start Chatting Free ✨
-              </Link>
-              <Link
-                to="/login"
-                className="text-center py-3 rounded-xl font-semibold border transition-all"
-                style={{
-                  borderColor: theme === 'dark' ? 'rgba(255,255,255,0.15)' : 'rgba(200,200,200,0.8)',
-                  color: theme === 'dark' ? 'rgba(255,255,255,0.85)' : '#333',
+                className="text-center py-4 rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] text-white transition-all shadow-xl active:scale-95"
+                style={{ 
+                  background: 'linear-gradient(135deg, #FF7A00, #FF0066)',
+                  boxShadow: '0 10px 20px -5px rgba(255,122,0,0.4)'
                 }}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Log in
+                Join Aura ✨
+              </Link>
+              <Link
+                to="/login"
+                className="text-center py-4 rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] border border-border/50 text-foreground/80 transition-all hover:bg-card active:scale-95"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Sync Access
               </Link>
             </div>
           </div>
