@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { io, Socket } from "socket.io-client";
 import { useTracking } from "../hooks/useTracking";
+import AuraAILogo from "../components/AuraAILogo";
 
 interface Message {
   id: string;
@@ -483,10 +484,7 @@ const Chat = () => {
           <div className="flex items-center gap-3 mb-4">
             {/* Aura Orb */}
             <div className="relative">
-              <div className="absolute inset-0 w-10 h-10 rounded-full gradient-orange blur-md opacity-40 animate-pulse"></div>
-              <div className="relative w-10 h-10 rounded-full gradient-orange flex items-center justify-center text-white font-bold shadow-md">
-                A
-              </div>
+              <AuraAILogo size="sm" showText={false} />
             </div>
 
             <div className="flex-1">
@@ -640,8 +638,8 @@ const Chat = () => {
                 <Menu className="w-5 h-5 text-muted-foreground" />
               )}
             </button>
-            <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl gradient-orange flex items-center justify-center text-white font-bold text-sm shadow-sm shrink-0">
-              A
+            <div className="shrink-0">
+              <AuraAILogo size="sm" showText={false} />
             </div>
             <div className="min-w-0">
               <h1 className="text-sm md:text-base font-bold text-foreground truncate">
@@ -736,21 +734,8 @@ const Chat = () => {
                 <div className="absolute w-16 h-16 rounded-full gradient-orange blur-xl opacity-40 animate-pulse"></div>
 
                 {/* Core Orb */}
-                <div className="relative w-16 h-16 rounded-full gradient-orange flex items-center justify-center shadow-lg animate-pulse">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-7 h-7 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364l-1.414 1.414M7.05 16.95l-1.414 1.414m12.728 0l-1.414-1.414M7.05 7.05 5.636 5.636"
-                    />
-                  </svg>
+                <div className="relative flex items-center justify-center shadow-lg animate-pulse">
+                  <AuraAILogo size="xl" showText={false} />
                 </div>
               </div>
 

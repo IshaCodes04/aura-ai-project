@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Check, ArrowRight, Zap, Star, Minus, Sparkles, ShieldCheck } from 'lucide-react';
+import { Check, ArrowRight, Star, Minus, ShieldCheck } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 
 const Pricing = () => {
@@ -39,22 +39,22 @@ const Pricing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden" style={{ fontFamily: "'Inter', 'Poppins', sans-serif" }}>
       <Navbar />
 
-      {/* ─── THEME: LIQUID BACKGROUND (Same as Home) ─── */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="liquid-blob absolute opacity-20 dark:opacity-30" style={{ width: '70vw', height: '70vw', top: '-10%', left: '-10%', background: 'linear-gradient(135deg, #FF7A00 0%, #FF0066 100%)' }} />
-        <div className="liquid-blob absolute opacity-15 dark:opacity-20" style={{ width: '50vw', height: '50vw', bottom: '0%', right: '0%', animationDelay: '-7s', background: 'linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%)' }} />
+      {/* ─── LIQUID BACKGROUND (Sync with Home) ─── */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="liquid-blob absolute" style={{ width: '60vw', height: '60vw', maxWidth: '750px', maxHeight: '750px', top: '-15%', left: '-20%', background: 'linear-gradient(135deg, #FF7A00 0%, #FF0066 50%, #9333ea 100%)', opacity: 0.15 }} />
+        <div className="liquid-blob absolute" style={{ width: '50vw', height: '50vw', maxWidth: '650px', maxHeight: '650px', bottom: '-10%', right: '-15%', animationDelay: '-7s', animationDuration: '20s', background: 'linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 50%, #ec4899 100%)', opacity: 0.1 }} />
       </div>
 
       <section className="relative z-10 pt-40 pb-20">
         
-        {/* ─── CONTENT: HERO (Same punchy style as Home) ─── */}
+        {/* ─── HERO SECTION ─── */}
         <div className="max-w-4xl mx-auto text-center px-6 mb-20">
-          <div className="aura-fade-1 inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 backdrop-blur-xl border border-orange-500/20 bg-orange-500/5 text-orange-500 text-[10px] font-black uppercase tracking-[0.3em]">
-            <Star className="w-3.5 h-3.5 fill-current animate-pulse" />
-            Pricing for Visionaries
+          <div className="aura-fade-1 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-8 backdrop-blur-xl border border-white/20 dark:border-white/10 bg-white/40 dark:bg-white/5 shadow-lg">
+            <Star className="w-4 h-4 text-orange-500 fill-current animate-pulse" />
+            <span className="text-sm font-semibold text-foreground/90 tracking-wide">Pricing for Visionaries</span>
           </div>
           <h1 className="aura-fade-2 text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.95]">
             Simple plans. <br />
@@ -65,74 +65,80 @@ const Pricing = () => {
           </p>
         </div>
 
-        {/* ─── THEME: STATS STRIP (Mirror of Home Page) ─── */}
-        <section className="relative z-10 py-12 px-4 md:px-8 mb-32 border-y border-white/5 bg-white/5 backdrop-blur-md">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-wrap justify-center gap-12 md:gap-20 text-center">
-              {[
-                { val: '500k+', label: 'Daily Syncs' },
-                { val: 'No CC', label: 'Required for Free' },
-                { val: '256-bit', label: 'SSL Secured' },
-                { val: '24/7', label: 'Support Sync' },
-              ].map((s, i) => (
-                <div key={i}>
-                  <div className="text-3xl md:text-4xl font-black text-foreground mb-1">{s.val}</div>
-                  <div className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">{s.label}</div>
-                </div>
-              ))}
+        {/* ─── STATS STRIP ─── */}
+        <section className="relative z-10 px-4 md:px-8 mb-32">
+          <div className="max-w-5xl mx-auto">
+            <div className="p-8 md:p-12 rounded-[3rem] border border-border/50 bg-card/30 backdrop-blur-2xl shadow-sm">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-center">
+                {[
+                  { val: '500k+', label: 'Daily Syncs', color: 'text-orange-500' },
+                  { val: 'No CC', label: 'Required', color: 'text-foreground' },
+                  { val: '256-bit', label: 'SSL Secured', color: 'text-foreground' },
+                  { val: '24/7', label: 'Always Live', color: 'text-orange-500' },
+                ].map((s, i) => (
+                  <div key={i} className="text-center group">
+                    <div className={`text-4xl md:text-5xl font-black mb-2 tracking-tighter transition-transform group-hover:scale-105 duration-300 ${s.color}`}>{s.val}</div>
+                    <div className="text-muted-foreground text-[10px] font-black uppercase tracking-[0.3em] opacity-60">{s.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ─── THEME: PRICING CARDS (Glass Cards like Home) ─── */}
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 px-6 mb-40">
+        {/* ─── PRICING CARDS ─── */}
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 px-6 mb-40 items-center">
            {plans.map((plan, i) => (
              <div 
                key={plan.name}
-               className={`aura-fade-${i+1} relative p-12 rounded-[3.5rem] bg-white/5 backdrop-blur-3xl border border-white/10 flex flex-col hover:-translate-y-2 transition-all duration-500 group ${
-                 plan.highlighted ? 'md:scale-105 border-orange-500/30 ring-1 ring-orange-500/20 shadow-2xl' : ''
+               className={`relative p-10 md:p-12 rounded-[3rem] border transition-all duration-500 group flex flex-col h-full ${
+                 plan.highlighted 
+                 ? "bg-background shadow-[0_30px_70px_-20px_rgba(255,122,0,0.25)] border-orange-500/30 ring-1 ring-orange-500/10 z-20 md:scale-105" 
+                 : "bg-card/40 backdrop-blur-xl border-border/50 hover:border-orange-500/20 hover:shadow-2xl z-10"
                }`}
              >
                 {plan.highlighted && (
-                  <div className="absolute top-8 right-8 px-5 py-1.5 rounded-full text-[10px] font-black text-white uppercase tracking-[0.2em] shadow-xl" style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)' }}>
-                    Recommended
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-2 rounded-full text-[11px] font-black text-white uppercase tracking-[0.2em] shadow-xl z-30" style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)' }}>
+                    Most Popular
                   </div>
                 )}
                 
-                <h3 className={`text-3xl font-black mb-2 ${plan.highlighted ? 'text-orange-500' : 'text-foreground'}`}>{plan.name}</h3>
-                <p className="text-muted-foreground text-sm font-bold uppercase tracking-widest mb-10 opacity-60">{plan.description}</p>
+                <div className="mb-8">
+                  <h3 className={`text-3xl font-black mb-2 tracking-tight ${plan.highlighted ? 'text-orange-500' : 'text-foreground'}`}>{plan.name}</h3>
+                  <p className="text-muted-foreground text-xs font-bold uppercase tracking-[0.2em] opacity-70">{plan.description}</p>
+                </div>
                 
-                <div className="flex items-baseline gap-2 mb-12">
+                <div className="flex items-baseline gap-1 mb-10">
                    <span className="text-6xl font-black tracking-tighter text-foreground">${plan.price}</span>
-                   <span className="text-muted-foreground text-xs font-black uppercase tracking-widest">{plan.period}</span>
+                   <span className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">{plan.period}</span>
                 </div>
 
-                <ul className="space-y-5 mb-12 flex-grow border-t border-white/5 pt-10">
+                <div className="space-y-5 mb-12 flex-grow border-t border-border/50 pt-10">
                    {plan.features.map((f, idx) => (
-                     <li key={idx} className="flex items-center gap-4 text-sm font-bold">
-                        <div className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${plan.highlighted ? 'bg-orange-500/20 text-orange-500' : 'bg-white/5 text-white/50'}`}>
-                           <Check className="w-3.5 h-3.5" />
+                     <li key={idx} className="flex items-center gap-4 text-sm font-semibold list-none">
+                        <div className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${plan.highlighted ? 'bg-orange-500/20 text-orange-500' : 'bg-muted text-muted-foreground'}`}>
+                           <Check className="w-3.5 h-3.5 stroke-[3]" />
                         </div>
-                        <span className="text-foreground/70">{f}</span>
+                        <span className="text-foreground/80">{f}</span>
                      </li>
                    ))}
-                </ul>
+                </div>
 
                 <Link
                   to="/signup"
-                  className={`w-full inline-flex items-center justify-center gap-3 py-5 rounded-[2.5rem] font-black text-sm transition-all duration-500 ${
-                    plan.highlighted ? 'text-white' : 'border border-white/10 hover:bg-white/10'
+                  className={`w-full inline-flex items-center justify-center gap-3 py-5 rounded-2xl font-black text-sm transition-all duration-300 group/btn ${
+                    plan.highlighted ? 'text-white' : 'bg-foreground text-background hover:opacity-90'
                   }`}
-                  style={plan.highlighted ? { background: 'linear-gradient(135deg, #FF7A00, #FF0066)', boxShadow: '0 15px 45px -10px rgba(255, 0, 102, 0.5)' } : {}}
+                  style={plan.highlighted ? { background: 'linear-gradient(135deg, #FF7A00, #FF0066)', boxShadow: '0 15px 45px -10px rgba(255, 0, 102, 0.4)' } : {}}
                 >
-                  Choose {plan.name}
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                  Get Started
+                  <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1.5 transition-transform" />
                 </Link>
              </div>
            ))}
         </div>
 
-        {/* ─── THEME: COMPARISON TABLE (Mirror Style) ─── */}
+        {/* ─── COMPARISON TABLE ─── */}
         <div className="max-w-5xl mx-auto px-6 mb-40">
            <div className="text-center mb-16">
              <h2 className="text-4xl font-black mb-4 tracking-tight">Capability Matrix</h2>
@@ -161,7 +167,7 @@ const Pricing = () => {
            </div>
         </div>
 
-        {/* ─── THEME: TRUST BAND (Mirror Style) ─── */}
+        {/* ─── TRUST BAND ─── */}
         <div className="max-w-4xl mx-auto px-6 mb-40 text-center">
            <div className="p-16 rounded-[4rem] border border-white/5 bg-white/5 backdrop-blur-3xl relative overflow-hidden">
               <ShieldCheck className="w-20 h-20 text-orange-500 mx-auto mb-10 animate-pulse" />

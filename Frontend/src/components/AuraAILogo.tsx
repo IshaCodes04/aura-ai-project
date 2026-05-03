@@ -25,29 +25,27 @@ const AuraAILogo: React.FC<AuraAILogoProps> = ({ size = 'md', showText = true })
         viewBox="0 0 64 64"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="shrink-0"
+        className="shrink-0 drop-shadow-sm"
       >
-        {/* Rounded Square Background */}
-        <rect
-          x="0"
-          y="0"
-          width="64"
-          height="64"
-          rx="14"
-          ry="14"
-          fill="#F97316"
-        />
-
-        {/* "AI" Text */}
-        <text
-          x="32"
-          y="42"
-          fontSize="28"
-          fontWeight="700"
-          fill="white"
-          textAnchor="middle"
-          fontFamily="'Inter', 'Poppins', 'SF Pro Display', sans-serif"
-          letterSpacing="-0.5"
+        <defs>
+          <linearGradient id="auraGradientFinal" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FF7A00" />
+            <stop offset="100%" stopColor="#FF0066" />
+          </linearGradient>
+        </defs>
+        <rect width="64" height="64" rx="16" fill="url(#auraGradientFinal)" />
+        <text 
+          x="50%" 
+          y="52%" 
+          dominantBaseline="middle" 
+          textAnchor="middle" 
+          fill="white" 
+          style={{ 
+            fontFamily: "'Inter', sans-serif", 
+            fontWeight: '900', 
+            fontSize: '26px',
+            letterSpacing: '-0.02em'
+          }}
         >
           AI
         </text>
@@ -56,10 +54,9 @@ const AuraAILogo: React.FC<AuraAILogoProps> = ({ size = 'md', showText = true })
       {/* Logo Text */}
       {showText && (
         <span
-          className={`${config.text} font-semibold text-foreground whitespace-nowrap`}
-          style={{ fontFamily: "'Inter', 'Poppins', 'SF Pro Display', sans-serif" }}
+          className={`${config.text} font-black text-foreground tracking-tighter whitespace-nowrap`}
         >
-          Aura AI
+          Aura <span className="shimmer-text">AI</span>
         </span>
       )}
     </div>

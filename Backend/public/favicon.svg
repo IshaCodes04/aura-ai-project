@@ -1,21 +1,18 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect
-    x="0"
-    y="0"
-    width="64"
-    height="64"
-    rx="14"
-    ry="14"
-    fill="#F97316"
-  />
-  <text
-    x="32"
-    y="44"
-    font-size="28"
-    font-weight="700"
-    fill="white"
-    text-anchor="middle"
-    font-family="sans-serif"
+  <defs>
+    <linearGradient id="auraGradientFav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#FF7A00" />
+      <stop offset="100%" stopColor="#FF0066" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#auraGradientFav)" />
+  <text 
+    x="50%" 
+    y="52%" 
+    dominant-baseline="middle" 
+    text-anchor="middle" 
+    fill="white" 
+    style="font-family: sans-serif; font-weight: 900; font-size: 26px; letter-spacing: -0.02em;"
   >
     AI
   </text>
