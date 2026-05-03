@@ -10,33 +10,32 @@ const Logo: React.FC<LogoProps> = ({ className = "", size = 40 }) => {
     <svg 
       width={size} 
       height={size} 
-      viewBox="0 0 60 60" 
+      viewBox="0 0 64 64" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg" 
-      className={`drop-shadow-md hover:drop-shadow-xl transition-all duration-300 ${className}`}
+      className={`drop-shadow-lg transition-all duration-300 ${className}`}
     >
       <defs>
-        <linearGradient id="auraGradientLogo" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FF7A00" />
-          <stop offset="100%" stopColor="#FF0066" />
+        <linearGradient id="auraGradientFinalFix" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#FF7A00" />
+          <stop offset="1" stopColor="#FF0066" />
         </linearGradient>
       </defs>
       
       {/* Rounded Icon Container */}
-      <rect width="60" height="60" rx="16" fill="url(#auraGradientLogo)" />
+      <rect width="64" height="64" rx="16" fill="url(#auraGradientFinalFix)" />
       
-      {/* The AI Typography */}
+      {/* The AI Typography - Exact Match */}
       <text 
-        x="50%" 
-        y="52%" 
-        dominantBaseline="middle" 
-        textAnchor="middle" 
+        x="32" 
+        y="42" 
         fill="white" 
         style={{ 
-          fontFamily: "'Inter', sans-serif", 
-          fontWeight: '900', 
-          fontSize: '24px',
-          letterSpacing: '-0.02em'
+          fontFamily: "system-ui, -apple-system, sans-serif", 
+          fontWeight: '800', 
+          fontSize: '28px',
+          letterSpacing: '-0.04em',
+          textAnchor: 'middle'
         }}
       >
         AI
