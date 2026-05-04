@@ -820,7 +820,7 @@ const Chat = () => {
                 onKeyPress={handleKeyPress}
                 placeholder="Ask Aura anything… code, ideas, or solutions"
                 disabled={!isOnline}
-                className="flex-1 bg-transparent border-none text-sm md:text-base font-medium text-foreground placeholder:text-muted-foreground/50 focus:ring-0 px-2"
+                className="flex-1 bg-transparent border-none outline-none ring-0 focus:ring-0 focus:outline-none text-sm md:text-base font-medium text-foreground placeholder:text-muted-foreground/40 px-2"
               />
 
               <button className="hidden md:flex p-3.5 hover:bg-muted/60 rounded-full transition-all text-muted-foreground hover:text-orange-500 shrink-0">
