@@ -78,8 +78,8 @@
   }
 
   html {
-    font-family: 'Poppins', sans-serif;
-    scroll-behavior: auto;
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -89,17 +89,37 @@
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
     overflow-x: hidden;
+    line-height: 1.6;
   }
 
   /* Fix text selection */
   ::selection {
-    background-color: hsl(var(--primary));
-    color: white;
+    background-color: rgba(255, 122, 0, 0.15);
+    color: #FF7A00;
   }
 
   ::-moz-selection {
-    background-color: hsl(var(--primary));
-    color: white;
+    background-color: rgba(255, 122, 0, 0.15);
+    color: #FF7A00;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
   }
 
   /* Make muted text more visible */
@@ -167,8 +187,8 @@
 
   .input-field:focus {
     outline: none;
-    border-color: hsl(var(--primary));
-    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+    border-color: #FF7A00;
+    box-shadow: 0 0 0 4px rgba(255, 122, 0, 0.1);
   }
 
   .btn-primary {

@@ -37,13 +37,13 @@ const Contact = () => {
         <div className="max-w-5xl mx-auto text-center mb-32 px-6">
           <div className="aura-fade-1 inline-flex items-center gap-2.5 px-5 py-2 rounded-full mb-8 backdrop-blur-xl border border-orange-500/20 bg-orange-500/5 shadow-lg">
             <Zap className="w-4 h-4 text-orange-500 animate-pulse" />
-            <span className="text-[10px] font-black text-orange-600 uppercase tracking-[0.2em]">The Human Node</span>
+            <span className="text-[10px] font-bold text-orange-600 uppercase tracking-[0.2em]">The Human Node</span>
           </div>
           <h1 className="aura-fade-2 text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.9] text-foreground">
             We're here to <br />
             <span className="shimmer-text">solve for you.</span>
           </h1>
-          <p className="aura-fade-3 text-xl text-muted-foreground max-w-2xl mx-auto font-medium leading-relaxed opacity-80">
+          <p className="aura-fade-3 text-xl text-muted-foreground max-w-2xl mx-auto font-semibold leading-relaxed opacity-80">
             Direct communication with the architects behind the intelligence. Ready to scale your vision.
           </p>
         </div>
@@ -65,7 +65,7 @@ const Contact = () => {
                          <item.icon className={`w-7 h-7 ${item.color}`} />
                       </div>
                       <div>
-                         <div className="text-[10px] uppercase font-black tracking-[0.3em] text-muted-foreground mb-1 opacity-50">{item.label}</div>
+                         <div className="text-[10px] uppercase font-bold tracking-[0.3em] text-muted-foreground mb-1 opacity-50">{item.label}</div>
                          <div className="text-xl font-bold text-foreground group-hover:text-orange-500 transition-colors tracking-tight">{item.val}</div>
                       </div>
                    </div>
@@ -80,7 +80,7 @@ const Contact = () => {
                  </div>
                  <div className="relative z-10">
                     <div className="text-lg font-black text-foreground uppercase tracking-tight">Fast Response</div>
-                    <div className="text-xs text-muted-foreground font-bold italic opacity-70">Sync within 4 hours.</div>
+                    <div className="text-xs text-muted-foreground font-semibold italic opacity-70">Sync within 4 hours.</div>
                  </div>
               </div>
 

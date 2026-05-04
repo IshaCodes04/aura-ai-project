@@ -495,26 +495,26 @@ const Chat = () => {
             </div>
 
             <div className="flex-1">
-              <h2 className="text-xl font-bold text-foreground">Aura AI</h2>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <h2 className="text-xl font-bold text-foreground tracking-tight">Aura AI</h2>
+              <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-semibold uppercase tracking-widest">
                 <span className="flex items-center gap-1">
-                  <span className={`w-2 h-2 rounded-full ${isOnline ? "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]"}`} />
+                  <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]"}`} />
                   {isOnline ? "Online" : "Offline"}
                 </span>
-                <span>• Smart Mode</span>
+                <span>• Smart Node</span>
               </div>
             </div>
           </div>
 
           <button
             onClick={handleNewChat}
-            className="w-full relative overflow-hidden rounded-[1.25rem] px-4 py-3 font-semibold text-white shadow-xl transition-all hover:-translate-y-1 active:scale-95 group"
+            className="w-full relative overflow-hidden rounded-[1.25rem] px-4 py-4 text-[11px] font-black uppercase tracking-[0.2em] text-white shadow-xl transition-all duration-500 hover:-translate-y-1 active:scale-95 group"
             style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)' }}
           >
             <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="relative text-center">
-              <div className="text-base">+ New Chat</div>
-              <p className="text-xs font-normal opacity-90">Start something new</p>
+            <div className="relative flex items-center justify-center gap-2">
+               <Plus className="w-4 h-4" />
+               Initiate Sync
             </div>
           </button>
         </div>
@@ -718,27 +718,27 @@ const Chat = () => {
                 </div>
               </div>
 
-              <p className="text-xs md:text-sm lg:text-base text-muted-foreground font-medium mb-3">
-                Good evening 👋
+              <p className="text-xs md:text-sm text-orange-500 font-bold uppercase tracking-[0.4em] mb-4 opacity-70">
+                Neural Interface Active
               </p>
               
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foreground text-center mb-6 max-w-2xl leading-tight">
-                What would you like <span className="shimmer-text">Aura</span> to help you with today?
+              <h2 className="text-2xl md:text-5xl lg:text-6xl font-black text-foreground text-center mb-8 max-w-3xl leading-[1.1] tracking-tighter">
+                What would you like <span className="shimmer-text">Aura</span> to <br className="hidden md:block" /> help you with today?
               </h2>
 
-              <p className="text-sm md:text-base lg:text-lg text-muted-foreground text-center max-w-xl mb-10 px-6 leading-relaxed opacity-80">
-                Your personal AI for <span className="text-foreground/90 font-medium">coding</span>, <span className="text-foreground/90 font-medium">creativity</span> & <span className="text-foreground/90 font-medium">clarity</span>
+              <p className="text-sm md:text-lg text-muted-foreground text-center max-w-xl mb-12 px-6 leading-relaxed font-medium opacity-60">
+                Augmenting <span className="text-foreground/90">logic</span>, <span className="text-foreground/90">creativity</span> & <span className="text-foreground/90">vision</span> in one fluid cycle.
               </p>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl px-4">
                 {actionButtons.map((btn, idx) => (
                   <button
                     key={idx}
-                    className="group relative flex flex-col items-center justify-center gap-3 p-6 bg-white/40 dark:bg-white/5 border border-border/50 rounded-2xl hover:border-orange-500/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                    className="group relative flex flex-col items-center justify-center gap-4 p-8 bg-white/40 dark:bg-white/[0.03] border border-border/40 rounded-[2rem] hover:border-orange-500/20 hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="text-3xl transform group-hover:scale-110 transition-transform">{btn.icon}</span>
-                    <span className="text-xs md:text-sm font-bold text-foreground">
+                    <span className="text-3xl transform group-hover:scale-110 transition-transform duration-500">{btn.icon}</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/70 group-hover:text-orange-500 transition-colors">
                       {btn.label}
                     </span>
                   </button>

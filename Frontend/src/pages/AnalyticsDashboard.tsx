@@ -153,12 +153,50 @@ const AnalyticsDashboard = () => {
                             </button>
                         </div>
                         
-                        <div className="flex items-end gap-6 mb-8 relative z-10">
-                            <h2 className="text-5xl font-black tracking-tighter text-foreground">{summary.totalVisitors.toLocaleString()}</h2>
-                            <div className="flex flex-col mb-1.5">
-                                <div className="flex items-center gap-1.5 text-orange-500 text-[10px] font-black uppercase tracking-widest">
+                        <div className="flex items-end gap-6 mb-12 relative z-10">
+                            <h2 className="text-5xl font-black tracking-tighter text-foreground leading-none">{summary.totalVisitors.toLocaleString()}</h2>
+                            <div className="flex flex-col mb-1">
+                                <div className="flex items-center gap-1.5 text-orange-500 text-[10px] font-bold uppercase tracking-widest">
                                     <ArrowUpRight size={14} className="stroke-[3]" />
-                                    Active Stream
+                                    Active Nodes
+                                </div>
+                                <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-tighter opacity-40">Syncing Globally</span>
+                            </div>
+                        </div>
+                        
+                        <div className="h-[280px] relative z-10">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <AreaChart data={trafficOverview}>
+                                    <defs>
+                                        <linearGradient id="auraGradient" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="#FF7A00" stopOpacity={0.2}/>
+                                            <stop offset="95%" stopColor="#FF7A00" stopOpacity={0}/>
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" opacity={0.05} />
+                                    <XAxis 
+                                        dataKey="date" 
+                                        axisLine={false} 
+                                        tickLine={false} 
+                                        tick={{fontSize: 9, fill: 'currentColor', opacity: 0.3, fontWeight: 700}} 
+                                        dy={10}
+                                    />
+                                    <YAxis 
+                                        axisLine={false} 
+                                        tickLine={false} 
+                                        tick={{fontSize: 9, fill: 'currentColor', opacity: 0.3, fontWeight: 700}} 
+                                    />
+                                    <Tooltip 
+                                        contentStyle={{ 
+                                            backgroundColor: 'rgba(255, 255, 255, 0.8)', 
+                                            backdropFilter: 'blur(20px)',
+                                            borderRadius: '20px',
+                                            border: '1px solid rgba(0,0,0,0.05)',
+                                            boxShadow: '0 20px 40px -10px rgba(0,0,0,0.1)',
+                                            fontSize: '10px',
+                                            fontWeight: '900'
+                                        }}
+                                    />
                                     <Area 
                                         type="monotone" 
                                         dataKey="count" 

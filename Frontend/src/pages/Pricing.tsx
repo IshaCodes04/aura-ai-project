@@ -60,7 +60,7 @@ const Pricing = () => {
             Simple plans. <br />
             <span className="shimmer-text">Infinite flow.</span>
           </h1>
-          <p className="aura-fade-3 text-xl text-muted-foreground max-w-2xl mx-auto font-medium leading-relaxed opacity-80">
+          <p className="aura-fade-3 text-xl text-muted-foreground max-w-2xl mx-auto font-semibold leading-relaxed opacity-80">
             Transparent pricing for minds that move at the speed of light. No hidden costs, just pure intelligence.
           </p>
         </div>
@@ -84,12 +84,12 @@ const Pricing = () => {
                 
                 <div className="mb-10">
                   <h3 className={`text-4xl font-black mb-2 tracking-tight ${plan.highlighted ? 'text-orange-500' : 'text-foreground'}`}>{plan.name}</h3>
-                  <p className="text-muted-foreground text-[10px] font-black uppercase tracking-[0.2em] opacity-60">{plan.description}</p>
+                  <p className="text-muted-foreground text-[10px] font-bold uppercase tracking-[0.2em] opacity-60">{plan.description}</p>
                 </div>
                 
                 <div className="flex items-baseline gap-2 mb-12">
                    <span className="text-7xl font-black tracking-tighter text-foreground">${plan.price}</span>
-                   <span className="text-muted-foreground text-[11px] font-black uppercase tracking-widest opacity-60">{plan.period}</span>
+                   <span className="text-muted-foreground text-[11px] font-bold uppercase tracking-widest opacity-60">{plan.period}</span>
                 </div>
 
                 <div className="space-y-6 mb-16 flex-grow border-t border-border/30 pt-12">
@@ -138,7 +138,7 @@ const Pricing = () => {
                    <tr key={i} className="group border-b border-border/30 hover:bg-orange-500/[0.02] transition-all duration-300">
                      <td className="p-10 font-black text-sm md:text-base text-foreground/80 group-hover:text-orange-500 transition-all uppercase tracking-tight">{row.feature}</td>
                      <td className="p-10 text-center font-bold text-muted-foreground/60">{typeof row.starter === 'boolean' ? (row.starter ? <Check className="w-6 h-6 mx-auto text-green-500/50" /> : <Minus className="w-6 h-6 mx-auto opacity-10" />) : row.starter}</td>
-                     <td className="p-10 text-center font-black text-lg text-orange-500 bg-orange-500/[0.01] border-x border-border/30">{typeof row.pro === 'boolean' ? (row.pro ? <Check className="w-7 h-7 mx-auto" /> : <Minus className="w-7 h-7 mx-auto opacity-10" />) : row.pro}</td>
+                     <td className="p-10 text-center font-bold text-lg text-orange-500 bg-orange-500/[0.01] border-x border-border/30">{typeof row.pro === 'boolean' ? (row.pro ? <Check className="w-7 h-7 mx-auto" /> : <Minus className="w-7 h-7 mx-auto opacity-10" />) : row.pro}</td>
                      <td className="p-10 text-center text-foreground/60 font-bold">{typeof row.business === 'boolean' ? (row.business ? <Check className="w-6 h-6 mx-auto text-green-500/50" /> : <Minus className="w-6 h-6 mx-auto opacity-10" />) : row.business}</td>
                    </tr>
                  ))}

@@ -17,7 +17,7 @@ const AuraAILogo: React.FC<AuraAILogoProps> = ({ size = 'md', showText = true })
   const iconSize = config.icon;
 
   return (
-    <div className={`flex items-center ${config.gap}`} style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div className={`flex items-center ${config.gap}`} style={{ fontFamily: "'Poppins', sans-serif" }}>
       <svg
         width={iconSize}
         height={iconSize}

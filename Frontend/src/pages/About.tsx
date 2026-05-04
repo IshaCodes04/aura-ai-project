@@ -42,7 +42,7 @@ const About = () => {
         <div className="max-w-5xl mx-auto">
           <div className="aura-fade-1 inline-flex items-center gap-2.5 px-5 py-2 rounded-full mb-8 backdrop-blur-xl border border-orange-500/20 bg-orange-500/5 shadow-lg">
             <Sparkles className="w-4 h-4 text-orange-500 animate-pulse" />
-            <span className="text-[10px] font-black text-orange-600 uppercase tracking-[0.2em]">Our Story & Vision</span>
+            <span className="text-[10px] font-bold text-orange-600 uppercase tracking-[0.2em]">Our Story & Vision</span>
           </div>
 
           <h1 className="aura-fade-2 text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8 text-foreground">
@@ -70,7 +70,7 @@ const About = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
                 <div className="absolute bottom-10 left-10 right-10 text-white">
-                  <p className="text-[10px] font-black uppercase tracking-[0.3em] mb-3 text-orange-400">The Mission</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] mb-3 text-orange-400">The Mission</p>
                   <h3 className="text-3xl font-black tracking-tight">Democratizing Intelligence</h3>
                 </div>
               </div>
@@ -79,10 +79,10 @@ const About = () => {
             <div className="space-y-12">
               <div>
                 <h2 className="text-5xl font-black mb-8 tracking-tighter leading-none text-foreground">Evolving the <br /><span className="text-orange-500">Digital Soul.</span></h2>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-8 font-medium">
+                <p className="text-lg text-muted-foreground leading-relaxed mb-8 font-semibold opacity-80">
                   In a world of generic responses, Aura stands for depth. We've integrated Pinecone Long-Term Memory with Google Gemini's reasoning to create an AI that learns your preferences, style, and goals.
                 </p>
-                <p className="text-lg text-muted-foreground leading-relaxed font-medium">
+                <p className="text-lg text-muted-foreground leading-relaxed font-semibold opacity-80">
                   Our goal is to make professional-grade AI accessible to everyone, from students drafting their first thesis to developers building the next unicorn.
                 </p>
               </div>
@@ -93,14 +93,14 @@ const About = () => {
                     <Users className="text-orange-500" size={24} />
                   </div>
                   <h4 className="text-sm font-black uppercase tracking-widest mb-2">Human Centric</h4>
-                  <p className="text-xs text-muted-foreground font-bold opacity-70">Designed for real people, not just data points.</p>
+                  <p className="text-xs text-muted-foreground font-semibold opacity-70">Designed for real people, not just data points.</p>
                 </div>
                 <div className="p-8 rounded-3xl bg-white/40 dark:bg-white/5 border border-border/50 backdrop-blur-2xl hover:border-orange-500/30 transition-all group shadow-xl shadow-black/5">
                   <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <Globe className="text-blue-500" size={24} />
                   </div>
                   <h4 className="text-sm font-black uppercase tracking-widest mb-2">Global Scale</h4>
-                  <p className="text-xs text-muted-foreground font-bold opacity-70">Intelligence that transcends borders and languages.</p>
+                  <p className="text-xs text-muted-foreground font-semibold opacity-70">Intelligence that transcends borders and languages.</p>
                 </div>
               </div>
             </div>
