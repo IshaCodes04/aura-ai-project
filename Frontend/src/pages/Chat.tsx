@@ -495,27 +495,26 @@ const Chat = () => {
             </div>
 
             <div className="flex-1">
-              <h2 className="text-xl font-black text-foreground tracking-tight">Aura <span className="shimmer-text">AI</span></h2>
-              <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-bold uppercase tracking-widest">
-                <span className="flex items-center gap-1.5">
-                  <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]"}`} />
-                  {isOnline ? "Active" : "Offline"}
+              <h2 className="text-xl font-bold text-foreground">Aura AI</h2>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <span className="flex items-center gap-1">
+                  <span className={`w-2 h-2 rounded-full ${isOnline ? "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]"}`} />
+                  {isOnline ? "Online" : "Offline"}
                 </span>
-                <span>•</span>
-                <span>v2.0</span>
+                <span>• Smart Mode</span>
               </div>
             </div>
           </div>
 
           <button
             onClick={handleNewChat}
-            className="w-full relative overflow-hidden rounded-[1.25rem] px-4 py-4 font-black uppercase text-[11px] tracking-[0.2em] text-white shadow-xl transition-all hover:-translate-y-1 active:scale-95 group"
+            className="w-full relative overflow-hidden rounded-[1.25rem] px-4 py-3 font-semibold text-white shadow-xl transition-all hover:-translate-y-1 active:scale-95 group"
             style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)' }}
           >
             <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="relative flex items-center justify-center gap-2">
-              <Plus className="w-4 h-4 stroke-[3]" />
-              New Flow
+            <div className="relative text-center">
+              <div className="text-base">+ New Chat</div>
+              <p className="text-xs font-normal opacity-90">Start something new</p>
             </div>
           </button>
         </div>
@@ -523,55 +522,65 @@ const Chat = () => {
         {/* ================= SEARCH ================= */}
         <div className="px-6 py-4 shrink-0">
           <div className="relative group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground transition-colors group-focus-within:text-orange-500" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
-              placeholder="Search flows..."
-              className="w-full pl-11 pr-4 py-3 bg-muted/30 border border-border/50 rounded-2xl text-[13px] font-medium focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/5 transition-all"
+              placeholder="Search chats or topics…"
+              className="w-full pl-11 pr-4 py-2.5 bg-muted/30 border border-border/50 rounded-xl text-sm focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/5 transition-all"
             />
           </div>
         </div>
 
-        {/* ================= RECENT CHATS ================= */}
-        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-6">
-          <div className="flex items-center justify-between px-2">
-            <h3 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.25em]">
-              Chronicles
-            </h3>
-            <button className="text-[10px] font-bold text-orange-500 hover:underline uppercase tracking-widest opacity-70">Clear</button>
+        {/* ================= QUICK ACTIONS ================= */}
+        <div className="px-6 py-2 shrink-0">
+          <div className="grid grid-cols-3 gap-2 text-xs font-medium text-foreground/90">
+            <button className="flex flex-col items-center gap-1 py-2 rounded-xl hover:bg-muted/40 transition-colors">
+              ⚡<span>Templates</span>
+            </button>
+            <button className="flex flex-col items-center gap-1 py-2 rounded-xl hover:bg-muted/40 transition-colors">
+              🧠<span>Think</span>
+            </button>
+            <button className="flex flex-col items-center gap-1 py-2 rounded-xl hover:bg-muted/40 transition-colors">
+              📂<span>Files</span>
+            </button>
           </div>
+        </div>
+
+        {/* ================= RECENT CHATS ================= */}
+        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+          <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider px-2">
+            Recent Conversations
+          </h3>
 
           <div className="space-y-1">
             {chatSessions.length === 0 ? (
-              <div className="text-center py-10">
-                <div className="w-12 h-12 bg-muted/30 rounded-2xl flex items-center justify-center mx-auto mb-3">
-                  <MessageSquare className="w-5 h-5 text-muted-foreground/40" />
-                </div>
-                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest opacity-50">Empty Space</p>
+              <div className="text-center py-10 text-sm text-muted-foreground">
+                No chats yet
+                <p className="text-xs opacity-70 mt-1">Start your first conversation</p>
               </div>
             ) : (
               chatSessions.map((chat) => (
                 <div
                   key={chat.id}
                   onClick={() => handleSelectChat(chat.id)}
-                  className={`group relative px-4 py-3.5 rounded-[1.25rem] cursor-pointer transition-all duration-300 ${
+                  className={`group relative px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 ${
                     activeChatId === chat.id
-                      ? "bg-white dark:bg-white/5 shadow-lg border border-orange-500/20"
-                      : "hover:bg-white/40 dark:hover:bg-white/5 border border-transparent"
+                      ? "bg-white dark:bg-white/5 shadow-md border border-orange-200/50 dark:border-orange-500/20"
+                      : "hover:bg-white/40 dark:hover:bg-white/5"
                   }`}
                 >
+                  {activeChatId === chat.id && (
+                    <span className="absolute left-0 top-3 bottom-3 w-1 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)]"></span>
+                  )}
+                  
                   <div className="flex items-start gap-3">
-                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
-                      activeChatId === chat.id ? "bg-orange-500/10 text-orange-500" : "bg-muted/40 text-muted-foreground/60"
-                    }`}>
-                      <MessageSquare className="w-4 h-4" />
-                    </div>
+                    <MessageSquare className={`w-4 h-4 mt-0.5 ${activeChatId === chat.id ? "text-orange-500" : "text-muted-foreground/70"}`} />
                     <div className="flex-1 min-w-0">
-                      <p className={`text-sm font-bold truncate ${activeChatId === chat.id ? "text-foreground" : "text-foreground/70"}`}>
+                      <p className="text-sm font-medium text-foreground truncate">
                         {chat.title}
                       </p>
-                      <p className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-wider mt-0.5">
-                        {formatTime(chat.timestamp)}
+                      <p className="text-[11px] text-muted-foreground">
+                        {formatDateTime(chat.timestamp)}
                       </p>
                     </div>
                     <button
@@ -579,7 +588,7 @@ const Chat = () => {
                         e.stopPropagation();
                         handleDeleteChat(chat.id);
                       }}
-                      className="opacity-0 group-hover:opacity-100 p-1.5 hover:bg-red-500/10 rounded-lg transition-all"
+                      className="opacity-0 group-hover:opacity-100 p-1.5 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition-all"
                     >
                       <Trash2 className="w-3.5 h-3.5 text-red-500" />
                     </button>
@@ -592,21 +601,13 @@ const Chat = () => {
 
         {/* ================= FOOTER ================= */}
         <div className="p-4 shrink-0">
-          <div className="px-5 py-4 bg-white/40 dark:bg-white/5 rounded-[1.5rem] border border-border/50 backdrop-blur-xl group cursor-pointer hover:border-orange-500/30 transition-all">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-white font-black text-sm shadow-inner group-hover:scale-105 transition-transform">
-                {getUserInitial()}
-              </div>
-              <div className="min-w-0">
-                <p className="text-sm font-black text-foreground truncate">
-                  {user ? `${user.fullName.firstName}` : "Guest"}
-                </p>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] font-bold text-orange-500 uppercase tracking-widest">Visionary</span>
-                  <div className="w-1 h-1 rounded-full bg-border" />
-                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Pro</span>
-                </div>
-              </div>
+          <div className="px-5 py-4 bg-white/40 dark:bg-white/5 rounded-2xl border border-border/50 backdrop-blur-xl">
+            <p className="text-sm font-bold text-foreground truncate">
+              {user ? `${user.fullName.firstName} ${user.fullName.lastName}` : "Guest User"}
+            </p>
+            <div className="flex items-center gap-2 mt-1">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+              <p className="text-[11px] text-muted-foreground font-medium">Free Plan • Encrypted</p>
             </div>
           </div>
         </div>
@@ -615,7 +616,7 @@ const Chat = () => {
       {/* Mobile Overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-md z-40 lg:hidden transition-all duration-500"
+          className="fixed inset-0 bg-black/40 backdrop-blur-md z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -623,26 +624,25 @@ const Chat = () => {
       {/* ==================== MAIN CHAT AREA ==================== */}
       <div className="flex-1 flex flex-col bg-background min-w-0 relative z-10">
         {/* ==================== TOP HEADER ==================== */}
-        <header className="flex items-center justify-between px-6 py-4 bg-background/50 backdrop-blur-2xl border-b border-border/40 sticky top-0 z-30">
+        <header className="flex items-center justify-between px-6 py-3 bg-background/50 backdrop-blur-2xl border-b border-border/40 sticky top-0 z-30">
           <div className="flex items-center gap-4 min-w-0">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="lg:hidden p-2.5 bg-muted/40 rounded-2xl transition-all active:scale-90"
+              className="lg:hidden p-2 hover:bg-muted/40 rounded-xl transition-all"
             >
               {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
             
             <div className="flex items-center gap-3">
-              <div className="relative">
-                <div className="absolute inset-0 bg-orange-500/20 blur-lg rounded-full" />
-                <AuraAILogo size="sm" showText={false} />
-              </div>
+              <AuraAILogo size="sm" showText={false} />
               <div>
-                <h1 className="text-sm font-black text-foreground tracking-tight">Liquid <span className="shimmer-text">Core</span></h1>
+                <h1 className="text-sm md:text-base font-bold text-foreground truncate tracking-tight">
+                  Aura AI Assistant
+                </h1>
                 <div className="flex items-center gap-1.5">
-                  <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"}`} />
-                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-                    {isOnline ? "Synced" : "Paused"}
+                  <div className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"}`} />
+                  <p className="text-[10px] md:text-xs text-muted-foreground font-medium capitalize">
+                    {isOnline ? "Online" : "Offline"}
                   </p>
                 </div>
               </div>
@@ -650,49 +650,55 @@ const Chat = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 bg-muted/40 rounded-full border border-border/50 mr-2">
-              <Zap className="w-3.5 h-3.5 text-orange-500" />
-              <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">High Speed</span>
-            </div>
-
             <button
               onClick={toggleTheme}
-              className="p-3 hover:bg-muted/60 rounded-2xl transition-all active:scale-90 text-muted-foreground"
+              className="p-2.5 hover:bg-muted/60 rounded-xl transition-all text-muted-foreground"
             >
-              {theme === 'dark' ? <Sun className="w-5 h-5 text-orange-400" /> : <Moon className="w-5 h-5" />}
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+            <button className="p-2.5 hover:bg-muted/60 rounded-xl transition-all relative text-muted-foreground">
+              <Bell className="w-5 h-5" />
+              <div className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-red-500 border-2 border-background"></div>
             </button>
 
             <div className="relative">
               <button
                 onClick={() => setShowUserMenu(!showUserMenu)}
-                className="w-10 h-10 rounded-2xl bg-gradient-to-br from-orange-400 to-pink-600 flex items-center justify-center text-white font-black text-xs shadow-lg hover:shadow-orange-500/20 transition-all active:scale-90 overflow-hidden group"
+                className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-xs ring-2 ring-blue-100 hover:ring-blue-300 transition-all cursor-pointer overflow-hidden group"
               >
                 <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                 {getUserInitial()}
               </button>
 
               {showUserMenu && (
-                <div className="absolute right-0 mt-4 w-64 bg-background/95 backdrop-blur-2xl rounded-[1.75rem] shadow-2xl border border-border/50 p-2 z-[100] animate-in fade-in zoom-in-95 duration-300 origin-top-right">
-                  <div className="px-5 py-4 border-b border-border/40">
-                    <p className="text-sm font-black text-foreground">
+                <div className="absolute right-0 mt-3 w-60 bg-background/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-border/50 p-2 z-[100] animate-in fade-in zoom-in-95 duration-200 origin-top-right">
+                  <div className="px-4 py-3 border-b border-border/40">
+                    <p className="text-sm font-bold text-foreground">
                       {user ? `${user.fullName.firstName} ${user.fullName.lastName}` : "User"}
                     </p>
-                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mt-1">
+                    <p className="text-xs text-muted-foreground truncate mt-0.5">
                       {user?.email}
                     </p>
                   </div>
 
-                  <div className="p-1 space-y-1 mt-1">
-                    <button className="w-full flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-widest text-foreground/70 hover:text-foreground hover:bg-muted/50 rounded-xl transition-all">
+                  <div className="py-1 space-y-1">
+                    <button className="w-full flex items-center gap-3 px-4 py-2 text-sm text-foreground/80 hover:bg-muted/50 rounded-lg transition-all text-left">
                       <Settings className="w-4 h-4" />
-                      Settings
+                      Account Settings
                     </button>
+                    <button className="w-full flex items-center gap-3 px-4 py-2 text-sm text-foreground/80 hover:bg-muted/50 rounded-lg transition-all text-left">
+                      <Bell className="w-4 h-4" />
+                      Notifications
+                    </button>
+                  </div>
+
+                  <div className="border-t border-border/40 mt-1 pt-1">
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-widest text-red-500 hover:bg-red-500/10 rounded-xl transition-all"
+                      className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition-all text-left font-medium"
                     >
                       <LogOut className="w-4 h-4" />
-                      Sign Out
+                      Log out
                     </button>
                   </div>
                 </div>
@@ -704,80 +710,74 @@ const Chat = () => {
         {/* ==================== MESSAGES / WELCOME AREA ==================== */}
         <main className="flex-1 overflow-y-auto relative scrollbar-thin scrollbar-thumb-orange-500/20 scrollbar-track-transparent">
           {messages.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center px-6 py-12 max-w-4xl mx-auto">
-              <div className="relative mb-12">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-pink-500 blur-[60px] opacity-20 animate-pulse rounded-full" />
-                <div className="relative transform hover:scale-110 transition-transform duration-700 active:scale-95 cursor-pointer">
+            <div className="h-full flex flex-col items-center justify-center px-6 py-8">
+              <div className="relative mb-8">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-pink-500 blur-[50px] opacity-20 animate-pulse rounded-full" />
+                <div className="relative transform hover:scale-105 transition-transform duration-500">
                   <AuraAILogo size="xl" showText={false} />
                 </div>
               </div>
 
-              <div className="text-center space-y-6">
-                <div className="aura-fade-1 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-500/20 bg-orange-500/5 text-orange-500 text-[10px] font-black uppercase tracking-[0.25em]">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  Synchronizing Intelligence
-                </div>
-                
-                <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground leading-[1.1] max-w-2xl">
-                  What would you like <br />
-                  <span className="shimmer-text">Aura</span> to solve today?
-                </h2>
+              <p className="text-xs md:text-sm lg:text-base text-muted-foreground font-medium mb-3">
+                Good evening 👋
+              </p>
+              
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foreground text-center mb-6 max-w-2xl leading-tight">
+                What would you like <span className="shimmer-text">Aura</span> to help you with today?
+              </h2>
 
-                <p className="text-lg md:text-xl text-muted-foreground max-w-lg mx-auto font-medium leading-relaxed opacity-80">
-                  Ready to assist with coding, creative strategy, or complex reasoning.
-                </p>
-              </div>
+              <p className="text-sm md:text-base lg:text-lg text-muted-foreground text-center max-w-xl mb-10 px-6 leading-relaxed opacity-80">
+                Your personal AI for <span className="text-foreground/90 font-medium">coding</span>, <span className="text-foreground/90 font-medium">creativity</span> & <span className="text-foreground/90 font-medium">clarity</span>
+              </p>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mt-16">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl px-4">
                 {actionButtons.map((btn, idx) => (
                   <button
                     key={idx}
-                    className="group relative p-6 bg-white/40 dark:bg-white/5 border border-border/50 rounded-[2rem] hover:border-orange-500/30 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden"
+                    className="group relative flex flex-col items-center justify-center gap-3 p-6 bg-white/40 dark:bg-white/5 border border-border/50 rounded-2xl hover:border-orange-500/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="relative flex flex-col items-center gap-4">
-                      <span className="text-4xl transform group-hover:scale-125 transition-transform duration-500">{btn.icon}</span>
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/70 group-hover:text-orange-500 transition-colors">
-                        {btn.label}
-                      </span>
-                    </div>
+                    <span className="text-3xl transform group-hover:scale-110 transition-transform">{btn.icon}</span>
+                    <span className="text-xs md:text-sm font-bold text-foreground">
+                      {btn.label}
+                    </span>
                   </button>
                 ))}
               </div>
             </div>
           ) : (
-            <div className="max-w-4xl mx-auto w-full px-6 md:px-12 py-12 space-y-10">
+            <div className="max-w-4xl mx-auto w-full px-6 md:px-12 py-10 space-y-8">
               {messages.map((message, idx) => (
                 <div
                   key={message.id}
-                  className={`flex gap-4 md:gap-6 animate-fade-in-up group ${
+                  className={`flex gap-4 md:gap-6 animate-fade-in-up ${
                     message.sender === "user" ? "justify-end" : "justify-start"
                   }`}
-                  style={{ animationDelay: `${idx * 100}ms` }}
+                  style={{ animationDelay: `${idx * 50}ms` }}
                 >
                   {message.sender === "ai" && (
-                    <div className="w-10 h-10 rounded-[1.25rem] bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center text-white font-black text-sm shrink-0 shadow-lg shadow-orange-500/20 self-end mb-1">
+                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-lg shadow-orange-500/20 self-end mb-1">
                       A
                     </div>
                   )}
 
-                  <div className={`relative max-w-[85%] md:max-w-[80%] ${message.sender === "user" ? "text-right" : "text-left"}`}>
+                  <div className={`relative max-w-[85%] md:max-w-[75%] ${message.sender === "user" ? "text-right" : "text-left"}`}>
                     <div
-                      className={`px-6 py-4 rounded-[2rem] text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words shadow-sm ${
+                      className={`px-5 py-3.5 rounded-2xl text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words shadow-sm ${
                         message.sender === "user"
-                          ? "bg-gradient-to-br from-orange-500 to-pink-600 text-white rounded-br-none font-medium shadow-orange-500/20"
+                          ? "bg-gradient-to-br from-orange-500 to-pink-600 text-white rounded-br-none font-medium"
                           : "bg-white/60 dark:bg-white/5 backdrop-blur-xl text-foreground rounded-bl-none border border-border/50"
                       }`}
                     >
                       {message.content}
                     </div>
-                    <p className={`text-[10px] font-black uppercase tracking-widest mt-2 opacity-40 px-2 ${message.sender === "user" ? "text-orange-500" : "text-muted-foreground"}`}>
+                    <p className={`text-[10px] font-bold uppercase tracking-wider mt-2 opacity-50 px-1 ${message.sender === "user" ? "text-orange-500" : "text-muted-foreground"}`}>
                       {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </div>
 
                   {message.sender === "user" && (
-                    <div className="w-10 h-10 rounded-[1.25rem] bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-500 font-black text-xs shrink-0 self-end mb-1">
+                    <div className="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-500 font-bold text-xs shrink-0 self-end mb-1">
                       {getUserInitial()}
                     </div>
                   )}
@@ -786,11 +786,11 @@ const Chat = () => {
 
               {isAiTyping && (
                 <div className="flex gap-6 animate-fade-in-up">
-                  <div className="w-10 h-10 rounded-[1.25rem] bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center text-white font-black text-sm shrink-0 shadow-lg shadow-orange-500/20 self-end mb-1">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-lg shadow-orange-500/20 self-end mb-1">
                     A
                   </div>
-                  <div className="px-8 py-5 rounded-[2rem] bg-white/40 dark:bg-white/5 backdrop-blur-xl border border-border/50">
-                    <div className="flex gap-2">
+                  <div className="px-7 py-4 rounded-2xl bg-white/40 dark:bg-white/5 backdrop-blur-xl border border-border/50">
+                    <div className="flex gap-1.5">
                       <div className="w-2 h-2 rounded-full bg-orange-500/60 animate-bounce" style={{ animationDelay: "0ms" }} />
                       <div className="w-2 h-2 rounded-full bg-orange-500/60 animate-bounce" style={{ animationDelay: "150ms" }} />
                       <div className="w-2 h-2 rounded-full bg-orange-500/60 animate-bounce" style={{ animationDelay: "300ms" }} />
@@ -804,12 +804,12 @@ const Chat = () => {
         </main>
 
         {/* ==================== INPUT AREA ==================== */}
-        <footer className="relative z-20 px-6 py-6 md:pb-10 shrink-0">
+        <footer className="px-6 py-6 md:pb-10 shrink-0 bg-background/50 backdrop-blur-xl">
           <div className="max-w-4xl mx-auto relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-pink-600 blur-2xl opacity-5 dark:opacity-10 rounded-[2.5rem] -z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-pink-600 blur-2xl opacity-5 dark:opacity-10 rounded-3xl -z-10" />
             
-            <div className="flex items-center gap-3 p-2 bg-white/60 dark:bg-white/5 backdrop-blur-3xl border border-border/50 rounded-[2.5rem] shadow-2xl transition-all focus-within:border-orange-500/30 focus-within:shadow-orange-500/5">
-              <button className="p-4 hover:bg-muted/60 rounded-full transition-all active:scale-90 shrink-0 text-muted-foreground hover:text-orange-500">
+            <div className="flex items-center gap-2 p-2 bg-white/60 dark:bg-white/5 backdrop-blur-3xl border border-border/50 rounded-[1.75rem] shadow-2xl transition-all focus-within:border-orange-500/30">
+              <button className="p-3.5 hover:bg-muted/60 rounded-full transition-all text-muted-foreground hover:text-orange-500 shrink-0">
                 <Paperclip className="w-5 h-5" />
               </button>
 
@@ -818,12 +818,12 @@ const Chat = () => {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ask Aura anything..."
+                placeholder="Ask Aura anything… code, ideas, or solutions"
                 disabled={!isOnline}
-                className="flex-1 bg-transparent border-none text-base font-medium text-foreground placeholder:text-muted-foreground/50 focus:ring-0 px-2"
+                className="flex-1 bg-transparent border-none text-sm md:text-base font-medium text-foreground placeholder:text-muted-foreground/50 focus:ring-0 px-2"
               />
 
-              <button className="hidden md:flex p-4 hover:bg-muted/60 rounded-full transition-all active:scale-90 shrink-0 text-muted-foreground hover:text-orange-500">
+              <button className="hidden md:flex p-3.5 hover:bg-muted/60 rounded-full transition-all text-muted-foreground hover:text-orange-500 shrink-0">
                 <Mic className="w-5 h-5" />
               </button>
 
@@ -831,26 +831,30 @@ const Chat = () => {
                 onClick={handleSendMessage}
                 disabled={inputValue.trim() === "" || !isOnline}
                 className={`
-                  p-4 rounded-full flex items-center justify-center transition-all duration-500 active:scale-90
+                  p-3.5 rounded-2xl flex items-center justify-center transition-all duration-300
                   ${inputValue.trim() === "" || !isOnline
                     ? "bg-muted/40 text-muted-foreground/30 cursor-not-allowed"
-                    : "bg-gradient-to-br from-orange-500 to-pink-600 text-white shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105"
+                    : "bg-gradient-to-br from-orange-500 to-pink-600 text-white shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:scale-105 active:scale-95"
                   }
                 `}
               >
-                <Send className={`w-5 h-5 ${inputValue.trim() !== "" ? "translate-x-0.5 -translate-y-0.5 rotate-12 transition-transform" : ""}`} />
+                <Send className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="mt-4 flex items-center justify-center gap-6 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">
-              <div className="flex items-center gap-1.5">
-                <div className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"}`} />
-                {isOnline ? "Aura Active" : "Searching for Hub"}
+            <div className="mt-4 text-center space-y-1">
+              <div className="flex items-center justify-center gap-3 text-xs text-muted-foreground font-medium">
+                <span className="flex items-center gap-1.5">
+                  <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"}`} />
+                  {isOnline ? "AI Online" : "AI Offline"}
+                </span>
+                <span className="opacity-40">•</span>
+                <span>🔒 End-to-end encrypted</span>
               </div>
-              <div className="w-1 h-1 rounded-full bg-border" />
-              <div>AES-256 Protocol</div>
-              <div className="w-1 h-1 rounded-full bg-border" />
-              <div className="text-orange-500/80">Powered by Liquid Core</div>
+
+              <p className="text-[10px] text-muted-foreground/60 font-medium">
+                Voice enabled • <span className="text-orange-600/80">Powered by Aura AI</span>
+              </p>
             </div>
           </div>
         </footer>
