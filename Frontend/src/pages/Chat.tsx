@@ -466,150 +466,145 @@ const Chat = () => {
 
   return (
     <div className="fixed inset-0 flex overflow-hidden bg-background selection:bg-orange-100 selection:text-orange-900">
+      {/* ─── LIQUID BACKGROUND BLOBS ─── */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-40 dark:opacity-20">
+        <div className="liquid-blob absolute" style={{ width: '40vw', height: '40vw', top: '-10%', left: '-10%', background: 'linear-gradient(135deg, #FF7A00 0%, #FF0066 50%, #9333ea 100%)', opacity: 0.15 }} />
+        <div className="liquid-blob absolute" style={{ width: '30vw', height: '30vw', bottom: '10%', right: '10%', animationDelay: '-7s', background: 'linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 50%, #ec4899 100%)', opacity: 0.1 }} />
+      </div>
+
       {/* ==================== SIDEBAR ==================== */}
       <div
         className={`
-    fixed lg:static inset-y-0 left-0
-    w-[280px] md:w-72 lg:w-80
-    bg-card
-    border-r border-border
-    z-50 flex flex-col
-    transform transition-transform duration-300 ease-out shadow-xl lg:shadow-none
-    ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
-  `}
+          fixed lg:static inset-y-0 left-0
+          w-[280px] md:w-72 lg:w-80
+          bg-background/40 backdrop-blur-3xl
+          border-r border-border/50
+          z-50 flex flex-col
+          transform transition-transform duration-500 ease-out shadow-2xl lg:shadow-none
+          ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
+        `}
       >
         {/* ================= HEADER ================= */}
-        <div className="px-4 py-6 border-b border-border shrink-0">
-          {/* Brand */}
-          <div className="flex items-center gap-3 mb-4">
-            {/* Aura Orb */}
-            <div className="relative">
+        <div className="px-6 py-8 border-b border-border/40 shrink-0">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="relative group">
+              <div className="absolute inset-0 bg-orange-500/20 blur-xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity" />
               <AuraAILogo size="sm" showText={false} />
             </div>
 
             <div className="flex-1">
-              <h2 className="text-lg font-bold text-foreground">Aura AI</h2>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span className="flex items-center gap-1">
-                  <span
-                    className={`w-2 h-2 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"
-                      }`}
-                  ></span>
-                  {isOnline ? "Online" : "Offline"}
+              <h2 className="text-xl font-black text-foreground tracking-tight">Aura <span className="shimmer-text">AI</span></h2>
+              <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-bold uppercase tracking-widest">
+                <span className="flex items-center gap-1.5">
+                  <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]"}`} />
+                  {isOnline ? "Active" : "Offline"}
                 </span>
-                <span>• Smart Mode</span>
+                <span>•</span>
+                <span>v2.0</span>
               </div>
             </div>
           </div>
 
-          {/* New Chat CTA */}
           <button
             onClick={handleNewChat}
-            className="w-full gradient-orange text-white rounded-xl px-4 py-3 font-semibold shadow-sm hover:shadow-md transition-all active:scale-95"
+            className="w-full relative overflow-hidden rounded-[1.25rem] px-4 py-4 font-black uppercase text-[11px] tracking-[0.2em] text-white shadow-xl transition-all hover:-translate-y-1 active:scale-95 group"
+            style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)' }}
           >
-            <div className="text-base">+ New Chat</div>
-            <p className="text-xs font-normal opacity-90 mt-0.5">
-              Start something new
-            </p>
+            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="relative flex items-center justify-center gap-2">
+              <Plus className="w-4 h-4 stroke-[3]" />
+              New Flow
+            </div>
           </button>
         </div>
 
         {/* ================= SEARCH ================= */}
-        <div className="px-4 py-3 border-b border-border shrink-0">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/70" />
+        <div className="px-6 py-4 shrink-0">
+          <div className="relative group">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground transition-colors group-focus-within:text-orange-500" />
             <input
               type="text"
-              placeholder="Search chats or topics…"
-              className="w-full pl-10 pr-4 py-2 bg-muted border border-input rounded-lg text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+              placeholder="Search flows..."
+              className="w-full pl-11 pr-4 py-3 bg-muted/30 border border-border/50 rounded-2xl text-[13px] font-medium focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/5 transition-all"
             />
           </div>
         </div>
 
-        {/* ================= QUICK ACTIONS ================= */}
-        <div className="px-4 py-3 border-b border-border shrink-0">
-          <div className="grid grid-cols-3 gap-2 text-xs font-medium text-foreground/90">
-            <button className="flex flex-col items-center gap-1 py-2 rounded-lg hover:bg-muted">
-              ⚡<span>Templates</span>
-            </button>
-            <button className="flex flex-col items-center gap-1 py-2 rounded-lg hover:bg-muted">
-              🧠
-              <span>Think</span>
-            </button>
-            <button className="flex flex-col items-center gap-1 py-2 rounded-lg hover:bg-muted">
-              📂
-              <span>Files</span>
-            </button>
+        {/* ================= RECENT CHATS ================= */}
+        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-6">
+          <div className="flex items-center justify-between px-2">
+            <h3 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.25em]">
+              Chronicles
+            </h3>
+            <button className="text-[10px] font-bold text-orange-500 hover:underline uppercase tracking-widest opacity-70">Clear</button>
+          </div>
+
+          <div className="space-y-1">
+            {chatSessions.length === 0 ? (
+              <div className="text-center py-10">
+                <div className="w-12 h-12 bg-muted/30 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                  <MessageSquare className="w-5 h-5 text-muted-foreground/40" />
+                </div>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest opacity-50">Empty Space</p>
+              </div>
+            ) : (
+              chatSessions.map((chat) => (
+                <div
+                  key={chat.id}
+                  onClick={() => handleSelectChat(chat.id)}
+                  className={`group relative px-4 py-3.5 rounded-[1.25rem] cursor-pointer transition-all duration-300 ${
+                    activeChatId === chat.id
+                      ? "bg-white dark:bg-white/5 shadow-lg border border-orange-500/20"
+                      : "hover:bg-white/40 dark:hover:bg-white/5 border border-transparent"
+                  }`}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                      activeChatId === chat.id ? "bg-orange-500/10 text-orange-500" : "bg-muted/40 text-muted-foreground/60"
+                    }`}>
+                      <MessageSquare className="w-4 h-4" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className={`text-sm font-bold truncate ${activeChatId === chat.id ? "text-foreground" : "text-foreground/70"}`}>
+                        {chat.title}
+                      </p>
+                      <p className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-wider mt-0.5">
+                        {formatTime(chat.timestamp)}
+                      </p>
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteChat(chat.id);
+                      }}
+                      className="opacity-0 group-hover:opacity-100 p-1.5 hover:bg-red-500/10 rounded-lg transition-all"
+                    >
+                      <Trash2 className="w-3.5 h-3.5 text-red-500" />
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
 
-        {/* ================= RECENT CHATS ================= */}
-        <div className="flex-1 overflow-y-auto px-3 py-4 space-y-4">
-          <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider px-1">
-            Recent Conversations
-          </h3>
-
-          {chatSessions.length === 0 ? (
-            <div className="text-center text-sm text-muted-foreground mt-10">
-              No chats yet
-              <p className="text-xs text-muted-foreground/70 mt-1">
-                Start your first conversation
-              </p>
-            </div>
-          ) : (
-            chatSessions.map((chat) => (
-              <div
-                key={chat.id}
-                onClick={() => handleSelectChat(chat.id)}
-                className={`group relative px-3 py-3 rounded-lg cursor-pointer transition-all ${activeChatId === chat.id
-                  ? "bg-background shadow-sm border border-orange-200"
-                  : "hover:bg-background"
-                  }`}
-              >
-                {/* Active Indicator */}
-                {activeChatId === chat.id && (
-                  <span className="absolute left-0 top-2 bottom-2 w-1 rounded-full bg-orange-500"></span>
-                )}
-
-                <div className="flex items-start gap-2">
-                  <MessageSquare
-                    className={`w-4 h-4 mt-0.5 ${activeChatId === chat.id
-                      ? "text-orange-500"
-                      : "text-muted-foreground/70"
-                      }`}
-                  />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-foreground truncate">
-                      {chat.title}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {formatDateTime(chat.timestamp)}
-                    </p>
-                  </div>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDeleteChat(chat.id);
-                    }}
-                    className="opacity-0 group-hover:opacity-100 p-1 hover:bg-red-50 rounded"
-                  >
-                    <Trash2 className="w-3.5 h-3.5 text-red-500" />
-                  </button>
+        {/* ================= FOOTER ================= */}
+        <div className="p-4 shrink-0">
+          <div className="px-5 py-4 bg-white/40 dark:bg-white/5 rounded-[1.5rem] border border-border/50 backdrop-blur-xl group cursor-pointer hover:border-orange-500/30 transition-all">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-white font-black text-sm shadow-inner group-hover:scale-105 transition-transform">
+                {getUserInitial()}
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-black text-foreground truncate">
+                  {user ? `${user.fullName.firstName}` : "Guest"}
+                </p>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] font-bold text-orange-500 uppercase tracking-widest">Visionary</span>
+                  <div className="w-1 h-1 rounded-full bg-border" />
+                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Pro</span>
                 </div>
               </div>
-            ))
-          )}
-        </div>
-
-        {/* ================= FOOTER ================= */}
-        <div className="border-t border-border bg-background p-4 shrink-0">
-          <div className="px-3 py-3 bg-card rounded-xl border border-border shadow-sm">
-            <p className="text-sm font-bold text-foreground truncate">
-              {user ? `${user.fullName.firstName} ${user.fullName.lastName}` : "Guest User"}
-            </p>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-              <p className="text-[11px] text-muted-foreground font-medium">Free Plan • Encrypted</p>
             </div>
           </div>
         </div>
@@ -618,323 +613,245 @@ const Chat = () => {
       {/* Mobile Overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/40 backdrop-blur-md z-40 lg:hidden transition-all duration-500"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* ==================== MAIN CHAT AREA ==================== */}
-      <div className="flex-1 flex flex-col bg-background min-w-0">
+      <div className="flex-1 flex flex-col bg-background min-w-0 relative z-10">
         {/* ==================== TOP HEADER ==================== */}
-        <div className="flex items-center justify-between px-4 md:px-6 lg:px-8 py-3 bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-20 shrink-0">
-          <div className="flex items-center gap-3 min-w-0">
+        <header className="flex items-center justify-between px-6 py-4 bg-background/50 backdrop-blur-2xl border-b border-border/40 sticky top-0 z-30">
+          <div className="flex items-center gap-4 min-w-0">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="lg:hidden p-2 -ml-2 hover:bg-muted rounded-xl transition-colors duration-150"
+              className="lg:hidden p-2.5 bg-muted/40 rounded-2xl transition-all active:scale-90"
             >
-              {sidebarOpen ? (
-                <X className="w-5 h-5 text-muted-foreground" />
-              ) : (
-                <Menu className="w-5 h-5 text-muted-foreground" />
-              )}
+              {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-            <div className="shrink-0">
-              <AuraAILogo size="sm" showText={false} />
-            </div>
-            <div className="min-w-0">
-              <h1 className="text-sm md:text-base font-bold text-foreground truncate">
-                Aura AI Assistant
-              </h1>
-              <div className="flex items-center gap-1.5">
-                <div
-                  className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"
-                    }`}
-                ></div>
-                <p className="text-[10px] md:text-xs text-muted-foreground font-medium capitalize">
-                  {isOnline ? "Online" : "Offline"}
-                </p>
+            
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <div className="absolute inset-0 bg-orange-500/20 blur-lg rounded-full" />
+                <AuraAILogo size="sm" showText={false} />
+              </div>
+              <div>
+                <h1 className="text-sm font-black text-foreground tracking-tight">Liquid <span className="shimmer-text">Core</span></h1>
+                <div className="flex items-center gap-1.5">
+                  <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"}`} />
+                  <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
+                    {isOnline ? "Synced" : "Paused"}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 md:gap-3">
+
+          <div className="flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 bg-muted/40 rounded-full border border-border/50 mr-2">
+              <Zap className="w-3.5 h-3.5 text-orange-500" />
+              <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">High Speed</span>
+            </div>
+
             <button
               onClick={toggleTheme}
-              className="p-2 hover:bg-muted rounded-xl transition-colors text-muted-foreground cursor-pointer"
-              aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+              className="p-3 hover:bg-muted/60 rounded-2xl transition-all active:scale-90 text-muted-foreground"
             >
-              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
-            <button className="p-2 hover:bg-muted rounded-xl transition-colors relative text-muted-foreground">
-              <Bell className="w-5 h-5" />
-              <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-red-500 border-2 border-white"></div>
+              {theme === 'dark' ? <Sun className="w-5 h-5 text-orange-400" /> : <Moon className="w-5 h-5" />}
             </button>
 
-            {/* User Profile Menu */}
             <div className="relative">
               <button
                 onClick={() => setShowUserMenu(!showUserMenu)}
-                className="w-8 h-8 rounded-full bg-linear-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-xs ring-2 ring-blue-100 hover:ring-blue-300 transition-all cursor-pointer"
+                className="w-10 h-10 rounded-2xl bg-gradient-to-br from-orange-400 to-pink-600 flex items-center justify-center text-white font-black text-xs shadow-lg hover:shadow-orange-500/20 transition-all active:scale-90 overflow-hidden group"
               >
+                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                 {getUserInitial()}
               </button>
 
               {showUserMenu && (
-                <div className="absolute right-0 mt-2 w-56 bg-background rounded-xl shadow-xl border border-border py-2 z-[100] animate-in fade-in zoom-in duration-200 origin-top-right">
-                  <div className="px-4 py-3 border-b border-border">
-                    <p className="text-sm font-bold text-foreground">
+                <div className="absolute right-0 mt-4 w-64 bg-background/95 backdrop-blur-2xl rounded-[1.75rem] shadow-2xl border border-border/50 p-2 z-[100] animate-in fade-in zoom-in-95 duration-300 origin-top-right">
+                  <div className="px-5 py-4 border-b border-border/40">
+                    <p className="text-sm font-black text-foreground">
                       {user ? `${user.fullName.firstName} ${user.fullName.lastName}` : "User"}
                     </p>
-                    <p className="text-xs text-muted-foreground truncate mt-0.5">
+                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mt-1">
                       {user?.email}
                     </p>
                   </div>
 
-                  <div className="py-1">
-                    <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-foreground/90 hover:bg-card transition-colors text-left">
-                      <Settings className="w-4 h-4 text-muted-foreground/70" />
-                      Account Settings
+                  <div className="p-1 space-y-1 mt-1">
+                    <button className="w-full flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-widest text-foreground/70 hover:text-foreground hover:bg-muted/50 rounded-xl transition-all">
+                      <Settings className="w-4 h-4" />
+                      Settings
                     </button>
-                    <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-foreground/90 hover:bg-card transition-colors text-left">
-                      <Bell className="w-4 h-4 text-muted-foreground/70" />
-                      Notifications
-                    </button>
-                  </div>
-
-                  <div className="border-t border-border mt-1 pt-1">
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors text-left font-medium"
+                      className="w-full flex items-center gap-3 px-4 py-3 text-xs font-bold uppercase tracking-widest text-red-500 hover:bg-red-500/10 rounded-xl transition-all"
                     >
                       <LogOut className="w-4 h-4" />
-                      Log out
+                      Sign Out
                     </button>
                   </div>
                 </div>
               )}
-
-              {/* Overlay to close menu */}
-              {showUserMenu && (
-                <div
-                  className="fixed inset-0 z-0"
-                  onClick={() => setShowUserMenu(false)}
-                />
-              )}
             </div>
           </div>
-        </div>
+        </header>
 
         {/* ==================== MESSAGES / WELCOME AREA ==================== */}
-        <div className="flex-1 overflow-y-auto min-h-0">
+        <main className="flex-1 overflow-y-auto relative scrollbar-thin scrollbar-thumb-orange-500/20 scrollbar-track-transparent">
           {messages.length === 0 ? (
-            // Welcome Screen
-            <div className="h-full flex flex-col items-center justify-center px-4 py-8">
-              {/* Aura Glow Orb */}
-              <div className="relative mb-8 flex items-center justify-center">
-                {/* Glow Layer */}
-                <div className="absolute w-16 h-16 rounded-full gradient-orange blur-xl opacity-40 animate-pulse"></div>
-
-                {/* Core Orb */}
-                <div className="relative flex items-center justify-center shadow-lg animate-pulse">
+            <div className="h-full flex flex-col items-center justify-center px-6 py-12 max-w-4xl mx-auto">
+              <div className="relative mb-12">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-pink-500 blur-[60px] opacity-20 animate-pulse rounded-full" />
+                <div className="relative transform hover:scale-110 transition-transform duration-700 active:scale-95 cursor-pointer">
                   <AuraAILogo size="xl" showText={false} />
                 </div>
               </div>
 
-              {/* Greeting */}
-              <p className="text-xs md:text-sm lg:text-base text-muted-foreground font-medium mb-3">
-                Good evening 👋
-              </p>
+              <div className="text-center space-y-6">
+                <div className="aura-fade-1 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-500/20 bg-orange-500/5 text-orange-500 text-[10px] font-black uppercase tracking-[0.25em]">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Synchronizing Intelligence
+                </div>
+                
+                <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground leading-[1.1] max-w-2xl">
+                  What would you like <br />
+                  <span className="shimmer-text">Aura</span> to solve today?
+                </h2>
 
-              {/* Main Heading */}
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-6 max-w-2xl leading-tight px-4">
-                What would you like Aura to help you with today?
-              </h2>
+                <p className="text-lg md:text-xl text-muted-foreground max-w-lg mx-auto font-medium leading-relaxed opacity-80">
+                  Ready to assist with coding, creative strategy, or complex reasoning.
+                </p>
+              </div>
 
-              {/* Tagline */}
-              <p className="text-sm md:text-base lg:text-lg text-muted-foreground text-center max-w-xl mb-10 px-6">
-                Your personal AI for{" "}
-                <span className="text-foreground/90 font-medium">coding</span>,{" "}
-                <span className="text-foreground/90 font-medium">creativity</span> &{" "}
-                <span className="text-foreground/90 font-medium">clarity</span>
-              </p>
-
-              {/* Action Buttons */}
-              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 w-full max-w-3xl px-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mt-16">
                 {actionButtons.map((btn, idx) => (
                   <button
                     key={idx}
-                    className="flex items-center justify-center lg:justify-start gap-2 px-4 py-3 md:py-4 bg-card border border-border rounded-xl hover:bg-muted hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                    className="group relative p-6 bg-white/40 dark:bg-white/5 border border-border/50 rounded-[2rem] hover:border-orange-500/30 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden"
                   >
-                    <span className="text-lg md:text-xl">{btn.icon}</span>
-                    <span className="text-xs md:text-sm font-semibold text-foreground">
-                      {btn.label}
-                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="relative flex flex-col items-center gap-4">
+                      <span className="text-4xl transform group-hover:scale-125 transition-transform duration-500">{btn.icon}</span>
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/70 group-hover:text-orange-500 transition-colors">
+                        {btn.label}
+                      </span>
+                    </div>
                   </button>
                 ))}
               </div>
             </div>
           ) : (
-            // Messages Area
-            <div className="h-full">
-              <div className="max-w-4xl mx-auto w-full px-4 md:px-6 lg:px-12 py-6 md:py-10 space-y-6">
-                {messages.map((message) => (
-                  <div
-                    key={message.id}
-                    className={`flex gap-3 md:gap-4 animate-fade-in-up ${message.sender === "user"
-                      ? "justify-end"
-                      : "justify-start"
-                      }`}
-                  >
-                    {message.sender === "ai" && (
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl gradient-orange flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-sm self-end">
-                        A
-                      </div>
-                    )}
-
-                    <div
-                      className={`max-w-[85%] md:max-w-[75%] px-4 md:px-5 py-3 rounded-2xl shadow-sm ${message.sender === "user"
-                        ? "bg-orange-500 text-white rounded-br-none"
-                        : "bg-muted text-foreground rounded-bl-none border border-border"
-                        }`}
-                    >
-                      <p className="text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words">
-                        {message.content}
-                      </p>
-                      <p
-                        className={`text-[10px] mt-2 font-medium ${message.sender === "user"
-                          ? "text-orange-100"
-                          : "text-muted-foreground/70"
-                          }`}
-                      >
-                        {new Date(message.timestamp).toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
-                      </p>
-                    </div>
-
-                    {message.sender === "user" && (
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-xs shrink-0 shadow-sm self-end ring-2 ring-blue-50">
-                        {getUserInitial()}
-                      </div>
-                    )}
-                  </div>
-                ))}
-
-                {/* AI Typing Indicator */}
-                {isAiTyping && (
-                  <div className="flex gap-4 animate-fade-in-up">
-                    <div className="w-9 h-9 rounded-lg gradient-orange flex items-center justify-center text-white font-bold text-sm shrink-0">
+            <div className="max-w-4xl mx-auto w-full px-6 md:px-12 py-12 space-y-10">
+              {messages.map((message, idx) => (
+                <div
+                  key={message.id}
+                  className={`flex gap-4 md:gap-6 animate-fade-in-up group ${
+                    message.sender === "user" ? "justify-end" : "justify-start"
+                  }`}
+                  style={{ animationDelay: `${idx * 100}ms` }}
+                >
+                  {message.sender === "ai" && (
+                    <div className="w-10 h-10 rounded-[1.25rem] bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center text-white font-black text-sm shrink-0 shadow-lg shadow-orange-500/20 self-end mb-1">
                       A
                     </div>
-                    <div className="max-w-xl px-5 py-3 rounded-lg bg-muted">
-                      <div className="flex gap-1">
-                        <div
-                          className="w-2 h-2 rounded-full bg-muted-foreground/50 animate-bounce"
-                          style={{ animationDelay: "0ms" }}
-                        ></div>
-                        <div
-                          className="w-2 h-2 rounded-full bg-muted-foreground/50 animate-bounce"
-                          style={{ animationDelay: "150ms" }}
-                        ></div>
-                        <div
-                          className="w-2 h-2 rounded-full bg-muted-foreground/50 animate-bounce"
-                          style={{ animationDelay: "300ms" }}
-                        ></div>
-                      </div>
+                  )}
+
+                  <div className={`relative max-w-[85%] md:max-w-[80%] ${message.sender === "user" ? "text-right" : "text-left"}`}>
+                    <div
+                      className={`px-6 py-4 rounded-[2rem] text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words shadow-sm ${
+                        message.sender === "user"
+                          ? "bg-gradient-to-br from-orange-500 to-pink-600 text-white rounded-br-none font-medium shadow-orange-500/20"
+                          : "bg-white/60 dark:bg-white/5 backdrop-blur-xl text-foreground rounded-bl-none border border-border/50"
+                      }`}
+                    >
+                      {message.content}
+                    </div>
+                    <p className={`text-[10px] font-black uppercase tracking-widest mt-2 opacity-40 px-2 ${message.sender === "user" ? "text-orange-500" : "text-muted-foreground"}`}>
+                      {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </p>
+                  </div>
+
+                  {message.sender === "user" && (
+                    <div className="w-10 h-10 rounded-[1.25rem] bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-500 font-black text-xs shrink-0 self-end mb-1">
+                      {getUserInitial()}
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              {isAiTyping && (
+                <div className="flex gap-6 animate-fade-in-up">
+                  <div className="w-10 h-10 rounded-[1.25rem] bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center text-white font-black text-sm shrink-0 shadow-lg shadow-orange-500/20 self-end mb-1">
+                    A
+                  </div>
+                  <div className="px-8 py-5 rounded-[2rem] bg-white/40 dark:bg-white/5 backdrop-blur-xl border border-border/50">
+                    <div className="flex gap-2">
+                      <div className="w-2 h-2 rounded-full bg-orange-500/60 animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <div className="w-2 h-2 rounded-full bg-orange-500/60 animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <div className="w-2 h-2 rounded-full bg-orange-500/60 animate-bounce" style={{ animationDelay: "300ms" }} />
                     </div>
                   </div>
-                )}
-
-                <div ref={messagesEndRef} />
-              </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} className="h-4" />
             </div>
           )}
-        </div>
+        </main>
+
         {/* ==================== INPUT AREA ==================== */}
-        <div className="border-t border-border bg-background px-4 pt-3 pb-6 md:py-5 shrink-0">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center gap-2 md:gap-3">
-              {/* Attachment */}
-              <button className="p-2 hover:bg-muted rounded-lg transition shrink-0">
-                <Paperclip className="w-5 h-5 text-muted-foreground" />
+        <footer className="relative z-20 px-6 py-6 md:pb-10 shrink-0">
+          <div className="max-w-4xl mx-auto relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-pink-600 blur-2xl opacity-5 dark:opacity-10 rounded-[2.5rem] -z-10" />
+            
+            <div className="flex items-center gap-3 p-2 bg-white/60 dark:bg-white/5 backdrop-blur-3xl border border-border/50 rounded-[2.5rem] shadow-2xl transition-all focus-within:border-orange-500/30 focus-within:shadow-orange-500/5">
+              <button className="p-4 hover:bg-muted/60 rounded-full transition-all active:scale-90 shrink-0 text-muted-foreground hover:text-orange-500">
+                <Paperclip className="w-5 h-5" />
               </button>
 
-              {/* INPUT */}
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ask Aura anything… code, ideas, or solutions"
+                placeholder="Ask Aura anything..."
                 disabled={!isOnline}
-                className="
-         flex-1 min-w-0
-  px-4 md:px-5 py-3 md:py-4
-  bg-card border border-input rounded-xl
-          text-sm md:text-base text-foreground
-          placeholder-muted-foreground
-          focus:outline-none
-          focus:border-orange-500
-          focus:ring-2 focus:ring-orange-200
-          shadow-sm
-          disabled:opacity-50 disabled:cursor-not-allowed
-        "
+                className="flex-1 bg-transparent border-none text-base font-medium text-foreground placeholder:text-muted-foreground/50 focus:ring-0 px-2"
               />
 
-              {/* Mic */}
-              <button className="p-2 hover:bg-muted rounded-lg transition shrink-0">
-                <Mic className="w-5 h-5 text-muted-foreground" />
+              <button className="hidden md:flex p-4 hover:bg-muted/60 rounded-full transition-all active:scale-90 shrink-0 text-muted-foreground hover:text-orange-500">
+                <Mic className="w-5 h-5" />
               </button>
 
-              {/* SEND BUTTON */}
               <button
                 onClick={handleSendMessage}
                 disabled={inputValue.trim() === "" || !isOnline}
-                title="Send"
                 className={`
-            relative shrink-0
-  px-4 md:px-5 py-3 md:py-4
-          rounded-xl
-          flex items-center justify-center
-          transition-all duration-200
-          ${inputValue.trim() === "" || !isOnline
-                    ? "bg-green-300 cursor-not-allowed opacity-50"
-                    : "bg-green-500 hover:bg-green-600 shadow-lg hover:shadow-green-400/40"
+                  p-4 rounded-full flex items-center justify-center transition-all duration-500 active:scale-90
+                  ${inputValue.trim() === "" || !isOnline
+                    ? "bg-muted/40 text-muted-foreground/30 cursor-not-allowed"
+                    : "bg-gradient-to-br from-orange-500 to-pink-600 text-white shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105"
                   }
-        `}
+                `}
               >
-                {/* Glow */}
-                {inputValue.trim() !== "" && isOnline && (
-                  <span className="absolute inset-0 rounded-xl bg-green-400 opacity-20 blur-md"></span>
-                )}
-
-                <Send className="relative w-5 h-5 text-white" />
+                <Send className={`w-5 h-5 ${inputValue.trim() !== "" ? "translate-x-0.5 -translate-y-0.5 rotate-12 transition-transform" : ""}`} />
               </button>
             </div>
 
-            {/* Footer Status */}
-            <div className="mt-3 text-center space-y-1">
-              <div className="flex items-center justify-center gap-3 text-xs text-muted-foreground font-medium">
-                <span className="flex items-center gap-1">
-                  <span
-                    className={`w-2 h-2 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"
-                      }`}
-                  ></span>
-                  {isOnline ? "AI Online" : "AI Offline"}
-                </span>
-                <span>•</span>
-                <span>🔒 End-to-end encrypted</span>
+            <div className="mt-4 flex items-center justify-center gap-6 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">
+              <div className="flex items-center gap-1.5">
+                <div className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"}`} />
+                {isOnline ? "Aura Active" : "Searching for Hub"}
               </div>
-
-              <p className="text-xs text-muted-foreground/70">
-                Voice enabled •{" "}
-                <span className="text-orange-600 font-medium">
-                  Powered by Aura AI
-                </span>
-              </p>
+              <div className="w-1 h-1 rounded-full bg-border" />
+              <div>AES-256 Protocol</div>
+              <div className="w-1 h-1 rounded-full bg-border" />
+              <div className="text-orange-500/80">Powered by Liquid Core</div>
             </div>
           </div>
-        </div>
+        </footer>
       </div>
     </div>
   );
