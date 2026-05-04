@@ -842,18 +842,9 @@ const Chat = () => {
               </button>
             </div>
 
-            <div className="mt-4 text-center space-y-1">
-              <div className="flex items-center justify-center gap-3 text-xs text-muted-foreground font-medium">
-                <span className="flex items-center gap-1.5">
-                  <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"}`} />
-                  {isOnline ? "AI Online" : "AI Offline"}
-                </span>
-                <span className="opacity-40">•</span>
-                <span>🔒 End-to-end encrypted</span>
-              </div>
-
-              <p className="text-[10px] text-muted-foreground/60 font-medium">
-                Voice enabled • <span className="text-orange-600/80">Powered by Aura AI</span>
+            <div className="mt-3 text-center">
+              <p className="text-[11px] text-muted-foreground/50 font-medium tracking-wide">
+                Aura can make mistakes. Check important info.
               </p>
             </div>
           </div>
