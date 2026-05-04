@@ -61,8 +61,8 @@ const AnalyticsDashboard = () => {
                         </div>
                     </div>
                     <div>
-                        <span className="text-xl font-black tracking-tighter text-foreground block">Aura <span className="shimmer-text">Core</span></span>
-                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Intelligence v2</span>
+                        <span className="text-xl font-bold tracking-tighter text-foreground block">Aura <span className="shimmer-text">Core</span></span>
+                        <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">Intelligence v2</span>
                     </div>
                 </div>
 
@@ -78,7 +78,7 @@ const AnalyticsDashboard = () => {
                 </div>
 
                 <nav className="flex-1 px-4 space-y-1">
-                    <p className="px-4 text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] mb-4 opacity-50">Pulse Center</p>
+                    <p className="px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-4 opacity-40">Pulse Center</p>
                     <SidebarItem icon={<LayoutDashboard size={18} />} label="Overview" active={activeTab === 'Dashboard'} onClick={() => setActiveTab('Dashboard')} />
                     <SidebarItem icon={<Sparkles size={18} />} label="AI Evolution" />
                     <SidebarItem icon={<Users size={18} />} label="User Journeys" />
@@ -107,8 +107,8 @@ const AnalyticsDashboard = () => {
                 {/* Header */}
                 <div className="flex justify-between items-center mb-12">
                     <div>
-                        <h1 className="text-4xl font-black text-foreground tracking-tighter leading-none mb-2">Metrics <span className="shimmer-text">Sync</span></h1>
-                        <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Global Intelligence Oversight</p>
+                        <h1 className="text-4xl font-bold text-foreground tracking-tighter leading-none mb-2">Metrics <span className="shimmer-text">Sync</span></h1>
+                        <p className="text-sm font-semibold text-muted-foreground uppercase tracking-widest opacity-60">Global Intelligence Oversight</p>
                     </div>
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2 px-4 py-2 bg-white/40 dark:bg-white/5 backdrop-blur-xl border border-border/50 rounded-2xl">
@@ -119,12 +119,12 @@ const AnalyticsDashboard = () => {
                             <Bell size={20} />
                         </button>
                         <div className="flex items-center gap-3 bg-white/60 dark:bg-white/5 backdrop-blur-xl p-1.5 pr-5 rounded-2xl border border-border/50 shadow-xl shadow-black/5 group cursor-pointer hover:border-orange-500/30 transition-all">
-                            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FF7A00] to-[#FF0066] flex items-center justify-center text-white font-black text-xs shadow-lg transform group-hover:scale-105 transition-transform">
+                            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FF7A00] to-[#FF0066] flex items-center justify-center text-white font-bold text-xs shadow-lg transform group-hover:scale-105 transition-transform">
                                 A
                             </div>
                             <div>
-                                <span className="text-[11px] font-black text-foreground block uppercase tracking-wider">Aura Admin</span>
-                                <span className="text-[9px] font-bold text-orange-500 uppercase tracking-widest">Master Node</span>
+                                <span className="text-[11px] font-bold text-foreground block uppercase tracking-wider">Aura Admin</span>
+                                <span className="text-[9px] font-semibold text-orange-500 uppercase tracking-widest">Master Node</span>
                             </div>
                         </div>
                     </div>
@@ -145,10 +145,10 @@ const AnalyticsDashboard = () => {
                         
                         <div className="flex justify-between items-center mb-10 relative z-10">
                             <div>
-                                <h3 className="text-xl font-black text-foreground tracking-tight">Intelligence Flow</h3>
-                                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mt-1">Real-time Traffic Synthesis</p>
+                                <h3 className="text-xl font-bold text-foreground tracking-tight">Intelligence Flow</h3>
+                                <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.2em] mt-1 opacity-50">Real-time Traffic Synthesis</p>
                             </div>
-                            <button className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-foreground/60 bg-background/50 px-4 py-2.5 rounded-xl border border-border/50 hover:border-orange-500/30 transition-all">
+                            <button className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-foreground/60 bg-background/50 px-4 py-2.5 rounded-xl border border-border/50 hover:border-orange-500/30 transition-all">
                                 Last Cycle <ChevronDown size={14} className="text-orange-500" />
                             </button>
                         </div>
@@ -159,45 +159,6 @@ const AnalyticsDashboard = () => {
                                 <div className="flex items-center gap-1.5 text-orange-500 text-[10px] font-black uppercase tracking-widest">
                                     <ArrowUpRight size={14} className="stroke-[3]" />
                                     Active Stream
-                                </div>
-                                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-tighter">Nodes synced globally</span>
-                            </div>
-                        </div>
-
-                        <div className="h-[320px] relative z-10">
-                            <ResponsiveContainer width="100%" height="100%">
-                                <AreaChart data={trafficOverview}>
-                                    <defs>
-                                        <linearGradient id="auraGradient" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#FF7A00" stopOpacity={0.2}/>
-                                            <stop offset="50%" stopColor="#FF0066" stopOpacity={0.05}/>
-                                            <stop offset="95%" stopColor="#FF0066" stopOpacity={0}/>
-                                        </linearGradient>
-                                    </defs>
-                                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.03)" />
-                                    <XAxis 
-                                        dataKey="date" 
-                                        axisLine={false} 
-                                        tickLine={false} 
-                                        tick={{fontSize: 9, fill: '#94a3b8', fontWeight: 800}} 
-                                        dy={15} 
-                                    />
-                                    <YAxis 
-                                        axisLine={false} 
-                                        tickLine={false} 
-                                        tick={{fontSize: 9, fill: '#94a3b8', fontWeight: 800}} 
-                                    />
-                                    <Tooltip 
-                                        contentStyle={{ 
-                                            backgroundColor: 'rgba(255, 255, 255, 0.8)', 
-                                            backdropFilter: 'blur(10px)',
-                                            borderRadius: '16px',
-                                            border: '1px solid rgba(0,0,0,0.05)',
-                                            boxShadow: '0 10px 30px -10px rgba(0,0,0,0.1)',
-                                            fontSize: '10px',
-                                            fontWeight: 'bold'
-                                        }}
-                                    />
                                     <Area 
                                         type="monotone" 
                                         dataKey="count" 
@@ -253,8 +214,8 @@ const AnalyticsDashboard = () => {
                 <div className="bg-white/40 dark:bg-white/5 backdrop-blur-3xl rounded-[2.5rem] border border-border/50 shadow-2xl shadow-black/5 overflow-hidden">
                     <div className="p-8 flex justify-between items-center border-b border-border/40">
                         <div className="flex bg-background/50 p-1.5 rounded-2xl border border-border/50">
-                            <button className="px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest bg-white shadow-xl text-orange-600 transition-all">Neural Activity</button>
-                            <button className="px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:text-foreground transition-all">User Nodes</button>
+                            <button className="px-6 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest bg-white shadow-xl text-orange-600 transition-all">Neural Activity</button>
+                            <button className="px-6 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-all">User Nodes</button>
                         </div>
                         <div className="flex items-center gap-3">
                             <button className="text-[10px] font-black uppercase tracking-widest text-muted-foreground flex items-center gap-2 hover:text-foreground transition-all">
@@ -293,7 +254,7 @@ const SidebarItem = ({ icon, label, active = false, onClick }: any) => (
         }`}
     >
         <span className={`${active ? 'text-white' : 'text-muted-foreground group-hover:text-orange-500'} transition-colors`}>{icon}</span>
-        <span className="text-[13px] font-black uppercase tracking-widest">{label}</span>
+        <span className="text-[13px] font-bold uppercase tracking-widest">{label}</span>
     </button>
 );
 
@@ -305,15 +266,15 @@ const StatCard = ({ label, value, trend, icon }: any) => (
             {icon}
         </div>
         
-        <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] mb-2">{label}</p>
+        <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-2 opacity-50">{label}</p>
         <h4 className="text-4xl font-black text-foreground mb-4 tracking-tighter">{typeof value === 'number' ? value.toLocaleString() : value}</h4>
         
         <div className="flex items-center justify-between mt-auto">
-            <div className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest flex items-center gap-1.5 bg-orange-500/10 text-orange-500`}>
+            <div className={`px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest flex items-center gap-1.5 bg-orange-500/10 text-orange-500`}>
                 <ArrowUpRight size={12} className="stroke-[3]" />
                 {trend}
             </div>
-            <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-tighter">vs Last Cycle</span>
+            <span className="text-[9px] font-semibold text-muted-foreground uppercase tracking-tighter opacity-40">vs Last Cycle</span>
         </div>
     </div>
 );
@@ -332,19 +293,19 @@ const TableRow = ({ name, value, rate, time, width }: any) => (
                 <div className="w-9 h-9 bg-gradient-to-br from-orange-500/10 to-pink-500/10 rounded-xl flex items-center justify-center text-orange-500 border border-orange-500/20 group-hover:scale-110 transition-transform">
                     <Sparkles size={16} />
                 </div>
-                <span className="text-sm font-black text-foreground tracking-tight">{name}</span>
+                <span className="text-sm font-bold text-foreground tracking-tight">{name}</span>
             </div>
         </td>
         <td className="py-6">
             <div className="flex items-center gap-6">
-                <span className="text-sm font-black text-foreground min-w-[3rem]">{value}</span>
+                <span className="text-sm font-bold text-foreground min-w-[3rem]">{value}</span>
                 <div className="w-48 h-2 bg-muted/20 rounded-full overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-[#FF7A00] to-[#FF0066] rounded-full" style={{ width }}></div>
                 </div>
             </div>
         </td>
-        <td className="py-6 text-right font-black text-foreground/70 uppercase tracking-widest">{rate}</td>
-        <td className="py-6 text-right font-black text-orange-500/70 tracking-widest">{time}</td>
+        <td className="py-6 text-right font-bold text-foreground/70 uppercase tracking-widest">{rate}</td>
+        <td className="py-6 text-right font-bold text-orange-500/70 tracking-widest">{time}</td>
     </tr>
 );
 
