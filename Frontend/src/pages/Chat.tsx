@@ -15,7 +15,9 @@ import {
   Sun,
   Moon,
   Bell,
-  LogOut
+  LogOut,
+  Zap,
+  Sparkles
 } from "lucide-react";
 import { io, Socket } from "socket.io-client";
 import { useTracking } from "../hooks/useTracking";
