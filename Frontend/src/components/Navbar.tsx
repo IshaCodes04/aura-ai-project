@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, Moon, Sun, X, Sparkles } from 'lucide-react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import AuraAILogo from './AuraAILogo';
 
@@ -28,21 +28,17 @@ const Navbar = () => {
     setTheme(isDark ? 'dark' : 'light');
   }, []);
 
-  // Track scroll to change navbar opacity and visibility
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
-      // Change opacity/background
       setScrolled(currentScrollY > 20);
 
-      // Hide on scroll down, show on scroll up
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
@@ -63,57 +59,65 @@ const Navbar = () => {
 
   const toggleTheme = () => {
     const isDark = document.documentElement.classList.contains('dark');
-    const next: 'light' | 'dark' = isDark ? 'light' : 'dark';
-    setThemeAndPersist(next);
+    setThemeAndPersist(isDark ? 'light' : 'dark');
   };
 
   const isActive = (path: string) => location.pathname === path;
 
+  const navLinkClass = (path: string) =>
+    `px-5 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.12em] transition-all duration-300 ${
+      isActive(path)
+        ? 'text-white shadow-sm'
+        : 'text-black dark:text-foreground/80 hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5'
+    }`;
+
   return (
-    <nav className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 px-4 md:px-8 py-4 ${isVisible ? 'translate-y-0' : '-translate-y-32 opacity-0'}`}>
+    <nav
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 px-4 md:px-8 py-4 ${
+        isVisible ? 'translate-y-0' : '-translate-y-32 opacity-0'
+      }`}
+    >
       <div className="max-w-7xl mx-auto">
         <div
-          className={`grid grid-cols-2 md:grid-cols-3 items-center gap-4 p-2 rounded-[2.5rem] border transition-all duration-700 ${
-            scrolled 
-              ? "shadow-[0_20px_50px_-20px_rgba(255,122,0,0.2)]" 
-              : "shadow-none"
+          className={`flex items-center justify-between gap-3 px-3 md:px-4 py-2.5 rounded-full border transition-all duration-500 ${
+            scrolled
+              ? 'shadow-[0_8px_32px_-12px_rgba(26,26,46,0.12)]'
+              : 'shadow-[0_4px_24px_-8px_rgba(26,26,46,0.06)]'
           }`}
           style={{
-            background: theme === 'dark' 
-              ? `rgba(10,10,15, ${scrolled ? '0.8' : '0.4'})` 
-              : `rgba(255,255,255, ${scrolled ? '0.8' : '0.4'})`,
-            backdropFilter: 'blur(20px)',
-            borderColor: theme === 'dark' 
-              ? 'rgba(255,255,255,0.08)'
-              : 'rgba(0,0,0,0.05)',
+            background:
+              theme === 'dark'
+                ? `rgba(15, 15, 22, ${scrolled ? '0.92' : '0.78'})`
+                : `rgba(255, 255, 255, ${scrolled ? '0.92' : '0.82'})`,
+            backdropFilter: 'blur(16px)',
+            borderColor:
+              theme === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(122, 140, 94, 0.12)',
           }}
         >
-          {/* Logo Section */}
-          <div className="flex justify-start pl-4">
-            <Link
-              to="/"
-              className="flex items-center group transition-transform duration-300 hover:scale-[1.02]"
-            >
-              <AuraAILogo size="sm" showText={true} />
-            </Link>
-          </div>
+          {/* Logo */}
+          <Link
+            to="/"
+            className="flex items-center shrink-0 pl-1 md:pl-2 transition-opacity duration-300 hover:opacity-90"
+          >
+            <AuraAILogo size="sm" showText textBlack />
+          </Link>
 
-          {/* Center Navigation - Floating Pill Style */}
-          <div className="hidden md:flex justify-center">
-            <div className="inline-flex items-center gap-1 p-1.5 rounded-full border border-border/40 bg-background/20 backdrop-blur-xl shadow-inner">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center justify-center flex-1">
+            <div className="inline-flex items-center gap-1 p-1 rounded-full border border-border/50 bg-background/40 dark:bg-white/[0.03]">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`relative px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500 ${
-                    isActive(link.path) 
-                      ? 'text-white' 
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                  style={isActive(link.path) ? {
-                    background: 'linear-gradient(135deg, #FF7A00, #FF0066)',
-                    boxShadow: '0 8px 20px -6px rgba(255,0,102,0.5)',
-                  } : {}}
+                  className={navLinkClass(link.path)}
+                  style={
+                    isActive(link.path)
+                      ? {
+                          background: 'hsl(var(--primary))',
+                          boxShadow: '0 4px 14px -4px rgba(122, 140, 94, 0.45)',
+                        }
+                      : undefined
+                  }
                 >
                   {link.name}
                 </Link>
@@ -121,56 +125,66 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Right Section - Auth & Utils */}
-          <div className="hidden md:flex items-center justify-end gap-4 pr-3">
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center gap-3 shrink-0 pr-1">
             <button
               type="button"
               onClick={toggleTheme}
-              className="flex items-center justify-center h-10 w-10 rounded-full border border-border/40 bg-background/20 hover:bg-orange-500/10 hover:border-orange-500/30 transition-all duration-300 group"
+              className="flex items-center justify-center h-9 w-9 rounded-full border border-border/50 bg-background/30 hover:bg-primary/10 hover:border-primary/30 transition-all duration-300"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? (
-                <Sun className="w-4.5 h-4.5 text-orange-400 group-hover:rotate-45 transition-transform duration-500" />
+                <Sun className="w-4 h-4 text-secondary" />
               ) : (
-                <Moon className="w-4.5 h-4.5 text-slate-700" />
+                <Moon className="w-4 h-4" style={{ color: 'hsl(var(--navy-blue))' }} />
               )}
             </button>
-            
-            <div className="h-8 w-[1px] bg-border/40 mx-1" />
+
+            <div className="h-6 w-px bg-border/60" />
 
             <Link
               to="/login"
-              className="text-[10px] font-bold uppercase tracking-[0.2em] px-2 text-muted-foreground hover:text-foreground transition-colors"
+              className="text-[11px] font-semibold uppercase tracking-[0.12em] px-2 transition-colors hover:opacity-80"
+              style={{ color: 'hsl(var(--navy-blue))' }}
             >
-              Sync
+              Sign In
             </Link>
-            
+
             <Link
               to="/signup"
-              className="inline-flex items-center justify-center gap-2 h-11 px-7 rounded-[1.25rem] text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-orange-500/20 active:scale-95"
-              style={{ 
-                background: 'linear-gradient(135deg, #FF7A00, #FF0066)',
-                boxShadow: '0 10px 25px -8px rgba(255,0,102,0.4)'
+              className="inline-flex items-center justify-center h-10 px-6 rounded-full text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98]"
+              style={{
+                background: 'hsl(var(--secondary))',
+                color: 'hsl(var(--navy-blue))',
+                boxShadow: '0 6px 20px -6px rgba(232, 197, 71, 0.55)',
               }}
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              Join Aura
+              Get Started
             </Link>
           </div>
 
-          {/* Mobile UI */}
-          <div className="flex items-center justify-end gap-3 pr-2 md:hidden">
+          {/* Mobile Controls */}
+          <div className="flex items-center gap-2 md:hidden pr-1">
             <button
+              type="button"
               onClick={toggleTheme}
-              className="h-10 w-10 flex items-center justify-center rounded-full border border-border/40 bg-background/20 text-foreground"
+              className="h-9 w-9 flex items-center justify-center rounded-full border border-border/50 bg-background/30"
+              aria-label="Toggle theme"
             >
-              {theme === 'dark' ? <Sun className="w-4.5 h-4.5 text-orange-400" /> : <Moon className="w-4.5 h-4.5" />}
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-secondary" />
+              ) : (
+                <Moon className="w-4 h-4" style={{ color: 'hsl(var(--navy-blue))' }} />
+              )}
             </button>
             <button
+              type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="h-10 w-10 flex items-center justify-center rounded-2xl bg-foreground text-background transition-transform active:scale-90"
+              className="h-9 w-9 flex items-center justify-center rounded-full border border-border/50 transition-colors"
+              style={{ background: 'hsl(var(--primary))', color: 'white' }}
+              aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </div>
@@ -179,58 +193,53 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div
-          className="md:hidden absolute inset-x-4 top-[5.5rem] rounded-[2.5rem] border p-6 shadow-2xl backdrop-blur-3xl animate-in slide-in-from-top-5 duration-500 overflow-hidden"
+          className="md:hidden absolute inset-x-4 top-[5rem] rounded-3xl border p-5 shadow-2xl backdrop-blur-2xl animate-in slide-in-from-top-4 duration-300"
           style={{
-            background: theme === 'dark' ? 'rgba(15,15,22,0.95)' : 'rgba(255,255,255,0.95)',
-            borderColor: theme === 'dark' ? 'rgba(255,122,0,0.15)' : 'rgba(255,122,0,0.1)',
+            background: theme === 'dark' ? 'rgba(15, 15, 22, 0.96)' : 'rgba(255, 255, 255, 0.96)',
+            borderColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(122, 140, 94, 0.15)',
           }}
         >
-          {/* Background Glow */}
-          <div className="absolute -top-24 -right-24 w-48 h-48 bg-orange-500/10 blur-[80px] rounded-full pointer-events-none" />
-          
-          <div className="relative flex flex-col gap-2">
+          <div className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link
-                key={link.name}
+                key={link.path}
                 to={link.path}
-                className={`px-8 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 ${
-                  isActive(link.path) 
-                    ? 'text-white shadow-lg' 
-                    : 'text-foreground/60 hover:text-foreground hover:bg-foreground/5'
+                className={`px-5 py-3.5 rounded-2xl text-[11px] font-semibold uppercase tracking-[0.12em] transition-all ${
+                  isActive(link.path)
+                    ? 'text-white'
+                    : 'text-black dark:text-foreground/80 hover:bg-black/5 dark:hover:bg-white/5'
                 }`}
-                style={isActive(link.path) ? {
-                  background: 'linear-gradient(135deg, #FF7A00, #FF0066)',
-                  boxShadow: '0 8px 20px -6px rgba(255,0,102,0.4)',
-                } : {}}
+                style={
+                  isActive(link.path)
+                    ? { background: 'hsl(var(--primary))' }
+                    : undefined
+                }
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.name}
               </Link>
             ))}
-            
-            <div className="h-px bg-border/40 my-4 mx-4" />
-            
-            <div className="flex flex-col gap-3">
-              <Link
-                to="/signup"
-                className="flex items-center justify-center gap-2 py-4.5 rounded-2xl font-bold text-[10px] uppercase tracking-[0.3em] text-white transition-all shadow-xl active:scale-95"
-                style={{ 
-                  background: 'linear-gradient(135deg, #FF7A00, #FF0066)',
-                  boxShadow: '0 10px 25px -8px rgba(255,0,102,0.4)'
-                }}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <Sparkles className="w-3.5 h-3.5" />
-                Join Aura
-              </Link>
-              <Link
-                to="/login"
-                className="text-center py-4.5 rounded-2xl font-bold text-[10px] uppercase tracking-[0.3em] border border-border/50 text-foreground/70 transition-all hover:bg-foreground/5 active:scale-95"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Sync Access
-              </Link>
-            </div>
+
+            <div className="h-px bg-border/50 my-3" />
+
+            <Link
+              to="/signup"
+              className="text-center py-3.5 rounded-2xl text-[11px] font-semibold uppercase tracking-[0.12em] transition-all active:scale-[0.98]"
+              style={{
+                background: 'hsl(var(--secondary))',
+                color: 'hsl(var(--navy-blue))',
+              }}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Get Started
+            </Link>
+            <Link
+              to="/login"
+              className="text-center py-3.5 rounded-2xl text-[11px] font-semibold uppercase tracking-[0.12em] border border-border/50 text-[hsl(var(--navy-blue))] dark:text-foreground/80 hover:bg-foreground/5 transition-all"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Sign In
+            </Link>
           </div>
         </div>
       )}

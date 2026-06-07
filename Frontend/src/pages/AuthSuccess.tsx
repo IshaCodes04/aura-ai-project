@@ -33,10 +33,10 @@ const AuthSuccess = () => {
   }, [searchParams, navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-        <p className="mt-4 text-gray-600 font-medium">Completing login...</p>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-secondary mx-auto"></div>
+        <p className="mt-4 text-muted-foreground font-medium">Completing login...</p>
       </div>
     </div>
   );

@@ -460,18 +460,18 @@ const Chat = () => {
   };
 
   const actionButtons = [
-    { icon: "🔍", label: "Deep Search", color: "from-blue-500 to-blue-600" },
-    { icon: "💭", label: "Think", color: "from-purple-500 to-purple-600" },
-    { icon: "🖼️", label: "Edit Image", color: "from-green-500 to-green-600" },
-    { icon: "📊", label: "Analyze", color: "from-orange-500 to-orange-600" },
+    { icon: "🔍", label: "Deep Search", color: "#7A8C5E" },
+    { icon: "💭", label: "Think", color: "#E8C547" },
+    { icon: "🖼️", label: "Edit Image", color: "#C4956A" },
+    { icon: "📊", label: "Analyze", color: "#7A8C5E" },
   ];
 
   return (
-    <div className="fixed inset-0 flex overflow-hidden bg-background selection:bg-orange-100 selection:text-orange-900">
+    <div className="fixed inset-0 flex overflow-hidden bg-background selection:bg-secondary/10 selection:text-foreground">
       {/* ─── LIQUID BACKGROUND BLOBS ─── */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-40 dark:opacity-20">
-        <div className="liquid-blob absolute" style={{ width: '40vw', height: '40vw', top: '-10%', left: '-10%', background: 'linear-gradient(135deg, #FF7A00 0%, #FF0066 50%, #9333ea 100%)', opacity: 0.15 }} />
-        <div className="liquid-blob absolute" style={{ width: '30vw', height: '30vw', bottom: '10%', right: '10%', animationDelay: '-7s', background: 'linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 50%, #ec4899 100%)', opacity: 0.1 }} />
+        <div className="liquid-blob absolute" style={{ width: '40vw', height: '40vw', top: '-10%', left: '-10%', background: 'transparent', opacity: 0.15 }} />
+        <div className="liquid-blob absolute" style={{ width: '30vw', height: '30vw', bottom: '10%', right: '10%', animationDelay: '-7s', background: 'transparent', opacity: 0.1 }} />
       </div>
 
       {/* ==================== SIDEBAR ==================== */}
@@ -490,15 +490,15 @@ const Chat = () => {
         <div className="px-6 py-8 border-b border-border/40 shrink-0">
           <div className="flex items-center gap-4 mb-8">
             <div className="relative group">
-              <div className="absolute inset-0 bg-orange-500/20 blur-xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-transparent rounded-full scale-150 opacity-0 group-hover:opacity-0 transition-opacity" />
               <AuraAILogo size="sm" showText={false} />
             </div>
 
             <div className="flex-1">
-              <h2 className="text-xl font-bold text-foreground tracking-tight">Aura AI</h2>
+              <h2 className="text-xl font-bold tracking-tight" style={{ color: 'hsl(var(--navy-blue))' }}>Aura AI</h2>
               <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-semibold uppercase tracking-widest">
                 <span className="flex items-center gap-1">
-                  <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]"}`} />
+                  <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-secondary shadow-[0_0_8px_rgba(232,197,71,0.6)]" : "bg-[#C4956A] shadow-[0_0_8px_rgba(196,149,106,0.6)]"}`} />
                   {isOnline ? "Online" : "Offline"}
                 </span>
                 <span>• Smart Node</span>
@@ -509,7 +509,7 @@ const Chat = () => {
           <button
             onClick={handleNewChat}
             className="w-full relative overflow-hidden rounded-[1.25rem] px-4 py-4 text-[11px] font-black uppercase tracking-[0.2em] text-white shadow-xl transition-all duration-500 hover:-translate-y-1 active:scale-95 group"
-            style={{ background: 'linear-gradient(135deg, #FF7A00, #FF0066)' }}
+            style={{ background: 'hsl(var(--secondary))' }}
           >
             <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative flex items-center justify-center gap-2">
@@ -526,7 +526,7 @@ const Chat = () => {
             <input
               type="text"
               placeholder="Search chats or topics…"
-              className="w-full pl-11 pr-4 py-2.5 bg-muted/30 border border-border/50 rounded-xl text-sm focus:outline-none focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/5 transition-all"
+              className="w-full pl-11 pr-4 py-2.5 bg-muted/30 border border-border/50 rounded-xl text-sm focus:outline-none focus:border-secondary/50 focus:ring-4 focus:ring-secondary/5 transition-all"
             />
           </div>
         </div>
@@ -565,16 +565,16 @@ const Chat = () => {
                   onClick={() => handleSelectChat(chat.id)}
                   className={`group relative px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 ${
                     activeChatId === chat.id
-                      ? "bg-white dark:bg-white/5 shadow-md border border-orange-200/50 dark:border-orange-500/20"
+                      ? "bg-white dark:bg-white/5 shadow-md border border-secondary/20 dark:border-secondary/20"
                       : "hover:bg-white/40 dark:hover:bg-white/5"
                   }`}
                 >
                   {activeChatId === chat.id && (
-                    <span className="absolute left-0 top-3 bottom-3 w-1 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)]"></span>
+                    <span className="absolute left-0 top-3 bottom-3 w-1 rounded-full bg-secondary shadow-[0_0_8px_rgba(232,197,71,0.5)]"></span>
                   )}
                   
                   <div className="flex items-start gap-3">
-                    <MessageSquare className={`w-4 h-4 mt-0.5 ${activeChatId === chat.id ? "text-orange-500" : "text-muted-foreground/70"}`} />
+                    <MessageSquare className={`w-4 h-4 mt-0.5 ${activeChatId === chat.id ? "text-secondary" : "text-muted-foreground/70"}`} />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-foreground truncate">
                         {chat.title}
@@ -588,9 +588,9 @@ const Chat = () => {
                         e.stopPropagation();
                         handleDeleteChat(chat.id);
                       }}
-                      className="opacity-0 group-hover:opacity-100 p-1.5 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition-all"
+                      className="opacity-0 group-hover:opacity-100 p-1.5 hover:bg-[#C4956A]/10 dark:hover:bg-[#C4956A]/20 rounded-lg transition-all"
                     >
-                      <Trash2 className="w-3.5 h-3.5 text-red-500" />
+                      <Trash2 className="w-3.5 h-3.5 text-[#C4956A]" />
                     </button>
                   </div>
                 </div>
@@ -606,7 +606,7 @@ const Chat = () => {
               {user ? `${user.fullName.firstName} ${user.fullName.lastName}` : "Guest User"}
             </p>
             <div className="flex items-center gap-2 mt-1">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-secondary/80 animate-pulse"></span>
               <p className="text-[11px] text-muted-foreground font-medium">Free Plan • Encrypted</p>
             </div>
           </div>
@@ -640,7 +640,7 @@ const Chat = () => {
                   Aura AI Assistant
                 </h1>
                 <div className="flex items-center gap-1.5">
-                  <div className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"}`} />
+                  <div className={`w-1.5 h-1.5 rounded-full ${isOnline ? "bg-secondary" : "bg-[#C4956A]"}`} />
                   <p className="text-[10px] md:text-xs text-muted-foreground font-medium capitalize">
                     {isOnline ? "Online" : "Offline"}
                   </p>
@@ -658,13 +658,14 @@ const Chat = () => {
             </button>
             <button className="p-2.5 hover:bg-muted/60 rounded-xl transition-all relative text-muted-foreground">
               <Bell className="w-5 h-5" />
-              <div className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-red-500 border-2 border-background"></div>
+              <div className="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-[#C4956A] border-2 border-background"></div>
             </button>
 
             <div className="relative">
               <button
                 onClick={() => setShowUserMenu(!showUserMenu)}
-                className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-xs ring-2 ring-blue-100 hover:ring-blue-300 transition-all cursor-pointer overflow-hidden group"
+                className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-xs ring-2 transition-all cursor-pointer overflow-hidden group"
+                style={{ background: 'hsl(var(--primary))', ringColor: 'hsl(var(--primary) / 0.3)' }}
               >
                 <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                 {getUserInitial()}
@@ -695,7 +696,7 @@ const Chat = () => {
                   <div className="border-t border-border/40 mt-1 pt-1">
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition-all text-left font-medium"
+                      className="w-full flex items-center gap-3 px-4 py-2 text-sm text-[#C4956A] hover:bg-[#C4956A]/10 dark:hover:bg-[#C4956A]/20 rounded-lg transition-all text-left font-medium"
                     >
                       <LogOut className="w-4 h-4" />
                       Log out
@@ -708,25 +709,25 @@ const Chat = () => {
         </header>
 
         {/* ==================== MESSAGES / WELCOME AREA ==================== */}
-        <main className="flex-1 overflow-y-auto relative scrollbar-thin scrollbar-thumb-orange-500/20 scrollbar-track-transparent">
+        <main className="flex-1 overflow-y-auto relative scrollbar-thin scrollbar-thumb-secondary/20 scrollbar-track-transparent">
           {messages.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center px-6 py-8">
               <div className="relative mb-8">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-pink-500 blur-[50px] opacity-20 animate-pulse rounded-full" />
+                <div className="absolute inset-0 rounded-full" style={{ background: 'transparent', opacity: 0.2 }} />
                 <div className="relative transform hover:scale-105 transition-transform duration-500">
                   <AuraAILogo size="xl" showText={false} />
                 </div>
               </div>
 
-              <p className="text-xs md:text-sm text-orange-500 font-bold uppercase tracking-[0.4em] mb-4 opacity-70">
+              <p className="text-xs md:text-sm text-secondary font-bold uppercase tracking-[0.4em] mb-4 opacity-70">
                 Neural Interface Active
               </p>
               
-              <h2 className="text-2xl md:text-5xl lg:text-6xl font-black text-foreground text-center mb-8 max-w-3xl leading-[1.1] tracking-tighter">
+              <h2 className="text-2xl md:text-5xl lg:text-6xl font-black text-center mb-8 max-w-3xl leading-[1.1] tracking-tighter" style={{ color: 'hsl(var(--navy-blue))' }}>
                 What would you like <span className="shimmer-text">Aura</span> to <br className="hidden md:block" /> help you with today?
               </h2>
 
-              <p className="text-sm md:text-lg text-muted-foreground text-center max-w-xl mb-12 px-6 leading-relaxed font-medium opacity-60">
+              <p className="text-sm md:text-lg text-black dark:text-muted-foreground text-center max-w-xl mb-12 px-6 leading-relaxed font-medium opacity-60">
                 Augmenting <span className="text-foreground/90">logic</span>, <span className="text-foreground/90">creativity</span> & <span className="text-foreground/90">vision</span> in one fluid cycle.
               </p>
 
@@ -734,11 +735,11 @@ const Chat = () => {
                 {actionButtons.map((btn, idx) => (
                   <button
                     key={idx}
-                    className="group relative flex flex-col items-center justify-center gap-4 p-8 bg-white/40 dark:bg-white/[0.03] border border-border/40 rounded-[2rem] hover:border-orange-500/20 hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 overflow-hidden"
+                    className="group relative flex flex-col items-center justify-center gap-4 p-8 bg-white/40 dark:bg-white/[0.03] border border-border/40 rounded-[2rem] hover:border-secondary/20 hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 overflow-hidden"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0" style={{ background: 'transparent', opacity: 0 }} />
                     <span className="text-3xl transform group-hover:scale-110 transition-transform duration-500">{btn.icon}</span>
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/70 group-hover:text-orange-500 transition-colors">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/70 group-hover:text-secondary transition-colors">
                       {btn.label}
                     </span>
                   </button>
@@ -756,7 +757,7 @@ const Chat = () => {
                   style={{ animationDelay: `${idx * 50}ms` }}
                 >
                   {message.sender === "ai" && (
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-lg shadow-orange-500/20 self-end mb-1">
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-lg self-end mb-1" style={{ background: 'hsl(var(--primary))' }}>
                       A
                     </div>
                   )}
@@ -765,19 +766,19 @@ const Chat = () => {
                     <div
                       className={`px-5 py-3.5 rounded-2xl text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words shadow-sm ${
                         message.sender === "user"
-                          ? "bg-gradient-to-br from-orange-500 to-pink-600 text-white rounded-br-none font-medium"
+                          ? "bg-primary text-white rounded-br-none font-medium"
                           : "bg-white/60 dark:bg-white/5 backdrop-blur-xl text-foreground rounded-bl-none border border-border/50"
                       }`}
                     >
                       {message.content}
                     </div>
-                    <p className={`text-[10px] font-bold uppercase tracking-wider mt-2 opacity-50 px-1 ${message.sender === "user" ? "text-orange-500" : "text-muted-foreground"}`}>
+                    <p className={`text-[10px] font-bold uppercase tracking-wider mt-2 opacity-50 px-1 ${message.sender === "user" ? "text-secondary" : "text-muted-foreground"}`}>
                       {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </div>
 
                   {message.sender === "user" && (
-                    <div className="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-500 font-bold text-xs shrink-0 self-end mb-1">
+                    <div className="w-9 h-9 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary font-bold text-xs shrink-0 self-end mb-1">
                       {getUserInitial()}
                     </div>
                   )}
@@ -786,14 +787,14 @@ const Chat = () => {
 
               {isAiTyping && (
                 <div className="flex gap-6 animate-fade-in-up">
-                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-lg shadow-orange-500/20 self-end mb-1">
+                  <div className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-lg self-end mb-1" style={{ background: 'hsl(var(--primary))' }}>
                     A
                   </div>
                   <div className="px-7 py-4 rounded-2xl bg-white/40 dark:bg-white/5 backdrop-blur-xl border border-border/50">
                     <div className="flex gap-1.5">
-                      <div className="w-2 h-2 rounded-full bg-orange-500/60 animate-bounce" style={{ animationDelay: "0ms" }} />
-                      <div className="w-2 h-2 rounded-full bg-orange-500/60 animate-bounce" style={{ animationDelay: "150ms" }} />
-                      <div className="w-2 h-2 rounded-full bg-orange-500/60 animate-bounce" style={{ animationDelay: "300ms" }} />
+                      <div className="w-2 h-2 rounded-full bg-secondary/60 animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <div className="w-2 h-2 rounded-full bg-secondary/60 animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <div className="w-2 h-2 rounded-full bg-secondary/60 animate-bounce" style={{ animationDelay: "300ms" }} />
                     </div>
                   </div>
                 </div>
@@ -806,10 +807,10 @@ const Chat = () => {
         {/* ==================== INPUT AREA ==================== */}
         <footer className="px-6 py-6 md:pb-10 shrink-0 bg-background/50 backdrop-blur-xl">
           <div className="max-w-4xl mx-auto relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-pink-600 blur-2xl opacity-5 dark:opacity-10 rounded-3xl -z-10" />
+            <div className="absolute inset-0 rounded-3xl -z-10" style={{ background: 'transparent', opacity: 0.05 }} />
             
-            <div className="flex items-center gap-2 p-2 bg-white/60 dark:bg-white/5 backdrop-blur-3xl border border-border/50 rounded-[1.75rem] shadow-2xl transition-all focus-within:border-orange-500/30">
-              <button className="p-3.5 hover:bg-muted/60 rounded-full transition-all text-muted-foreground hover:text-orange-500 shrink-0">
+            <div className="flex items-center gap-2 p-2 bg-white/60 dark:bg-white/5 backdrop-blur-3xl border border-border/50 rounded-[1.75rem] shadow-2xl transition-all focus-within:border-secondary/30">
+              <button className="p-3.5 hover:bg-muted/60 rounded-full transition-all text-muted-foreground hover:text-secondary shrink-0">
                 <Paperclip className="w-5 h-5" />
               </button>
 
@@ -823,7 +824,7 @@ const Chat = () => {
                 className="flex-1 bg-transparent border-none outline-none ring-0 focus:ring-0 focus:outline-none text-sm md:text-base font-medium text-foreground placeholder:text-muted-foreground/40 px-2"
               />
 
-              <button className="hidden md:flex p-3.5 hover:bg-muted/60 rounded-full transition-all text-muted-foreground hover:text-orange-500 shrink-0">
+              <button className="hidden md:flex p-3.5 hover:bg-muted/60 rounded-full transition-all text-muted-foreground hover:text-secondary shrink-0">
                 <Mic className="w-5 h-5" />
               </button>
 
@@ -834,7 +835,7 @@ const Chat = () => {
                   p-3.5 rounded-2xl flex items-center justify-center transition-all duration-300
                   ${inputValue.trim() === "" || !isOnline
                     ? "bg-muted/40 text-muted-foreground/30 cursor-not-allowed"
-                    : "bg-gradient-to-br from-orange-500 to-pink-600 text-white shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 hover:scale-105 active:scale-95"
+                    : "bg-secondary text-white shadow-lg hover:shadow-secondary/40 hover:scale-105 active:scale-95"
                   }
                 `}
               >

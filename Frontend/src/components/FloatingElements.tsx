@@ -4,61 +4,59 @@ const FloatingElements = () => {
   return (
     <>
       {/* Colorful Floating Sparkles */}
-      <div className="absolute top-1/4 left-[15%] floating-element opacity-60">
-        <Sparkles className="w-8 h-8 text-orange-400" />
+      <div className="absolute top-1/4 left-[5%] md:left-[10%] floating-element opacity-40">
+        <Sparkles className="w-8 h-8 text-secondary/70 blur-[1px]" />
       </div>
 
-      {/* Blue Zap */}
-      <div className="absolute top-1/3 left-[30%] floating-element-delayed opacity-70">
-        <Zap className="w-6 h-6 text-blue-400" />
+      {/* Glassmorphic Floating Card 1 - Code snippet feel */}
+      <div className="absolute top-[20%] right-[10%] floating-element hidden lg:block">
+        <div className="p-6 rounded-3xl border border-white/20 bg-white/5 backdrop-blur-2xl shadow-2xl rotate-3">
+          <div className="flex gap-2 mb-3">
+            <div className="w-2 h-2 rounded-full bg-[#E8C547]/40" />
+            <div className="w-2 h-2 rounded-full bg-secondary/30" />
+            <div className="w-2 h-2 rounded-full bg-[#7A8C5E]/40" />
+          </div>
+          <div className="space-y-2">
+            <div className="h-1.5 w-24 bg-secondary/30 rounded" />
+            <div className="h-1.5 w-32 bg-[#7A8C5E]/20 rounded" />
+            <div className="h-1.5 w-20 bg-[#C4956A]/20 rounded" />
+          </div>
+        </div>
       </div>
 
-      {/* Orange Sparkle */}
-      <div className="absolute top-[20%] left-[40%] sparkle opacity-60">
-        <Sparkles className="w-5 h-5 text-orange-300" />
+      {/* Glassmorphic Floating Card 2 - Chat bubble feel */}
+      <div className="absolute bottom-[30%] left-[8%] floating-element-delayed hidden lg:block">
+        <div className="p-5 rounded-2xl border border-white/20 bg-white/5 backdrop-blur-2xl shadow-2xl -rotate-6 max-w-[180px]">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-6 h-6 rounded-full" style={{ background: 'hsl(var(--primary))' }} />
+            <div className="h-2 w-16 bg-white/20 rounded" />
+          </div>
+          <div className="h-1.5 w-full bg-white/10 rounded mb-1" />
+          <div className="h-1.5 w-3/4 bg-white/10 rounded" />
+        </div>
+      </div>
+
+      {/* Aura Spark Zap */}
+      <div className="absolute top-1/3 left-[25%] floating-element-delayed opacity-30">
+        <Zap className="w-6 h-6 text-secondary/80" />
       </div>
 
       {/* Green Diamond */}
-      <div className="absolute bottom-1/3 left-[10%] floating-element opacity-50">
-        <Diamond className="w-7 h-7 text-green-400" />
+      <div className="absolute bottom-1/4 right-[20%] floating-element opacity-30">
+        <Diamond className="w-7 h-7 text-secondary" />
       </div>
 
-      {/* Pink Sparkles */}
-      <div className="absolute top-[45%] left-[5%] floating-element-delayed opacity-60">
-        <Sparkles className="w-6 h-6 text-pink-400" />
-      </div>
-
-      {/* Blue Sparkles Small */}
-      <div className="absolute top-[15%] left-[25%] sparkle opacity-70">
-        <Sparkles className="w-4 h-4 text-blue-300" />
-      </div>
-
-      {/* Purple Zap */}
-      <div className="absolute top-[40%] left-[35%] sparkle opacity-60" style={{ animationDelay: '-1s' }}>
-        <Zap className="w-5 h-5 text-purple-400" />
-      </div>
-
-      {/* Orange Diamond */}
-      <div className="absolute top-[55%] left-[20%] floating-element opacity-50">
-        <Diamond className="w-6 h-6 text-orange-500" />
-      </div>
-
-      {/* Yellow Zap */}
-      <div className="absolute bottom-[40%] left-[38%] floating-element-delayed opacity-60">
-        <Zap className="w-5 h-5 text-yellow-400" />
-      </div>
-
-      {/* Cyan Sparkles */}
-      <div className="absolute bottom-[20%] right-[15%] floating-element opacity-50">
-        <Sparkles className="w-7 h-7 text-cyan-400" />
-      </div>
-
-      {/* Rose Diamond */}
-      <div className="absolute top-[60%] right-[20%] floating-element-delayed opacity-60">
-        <Diamond className="w-6 h-6 text-rose-400" />
+      {/* Neural Link Nodes */}
+      <div className="absolute top-[15%] left-[20%] opacity-20 hidden md:block">
+        <div className="relative">
+          <div className="w-3 h-3 rounded-full bg-secondary" />
+          <div className="absolute top-1.5 left-3 w-20 h-[1px] rotate-12" style={{ background: 'transparent' }} />
+        </div>
       </div>
     </>
   );
 };
 
 export default FloatingElements;
+
+

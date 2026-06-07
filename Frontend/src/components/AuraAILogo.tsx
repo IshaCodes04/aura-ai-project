@@ -3,9 +3,10 @@ import React from 'react';
 interface AuraAILogoProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showText?: boolean;
+  textBlack?: boolean;
 }
 
-const AuraAILogo: React.FC<AuraAILogoProps> = ({ size = 'md', showText = true }) => {
+const AuraAILogo: React.FC<AuraAILogoProps> = ({ size = 'md', showText = true, textBlack = false }) => {
   const sizeConfig = {
     sm: { container: 'w-8 h-8', icon: 28, text: 'text-sm', gap: 'gap-2' },
     md: { container: 'w-10 h-10', icon: 36, text: 'text-base', gap: 'gap-3' },
@@ -26,13 +27,7 @@ const AuraAILogo: React.FC<AuraAILogoProps> = ({ size = 'md', showText = true })
         xmlns="http://www.w3.org/2000/svg"
         className="shrink-0 drop-shadow-md"
       >
-        <defs>
-          <linearGradient id="auraGradientComp" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stopColor="#FF7A00" />
-            <stop offset="1" stopColor="#FF0066" />
-          </linearGradient>
-        </defs>
-        <rect width="64" height="64" rx="16" fill="url(#auraGradientComp)" />
+        <rect width="64" height="64" rx="16" fill="#7A8C5E" />
         <text 
           x="32" 
           y="42" 
@@ -50,8 +45,19 @@ const AuraAILogo: React.FC<AuraAILogoProps> = ({ size = 'md', showText = true })
       </svg>
 
       {showText && (
-        <span className={`${config.text} font-black text-foreground tracking-tighter whitespace-nowrap`}>
-          Aura <span className="shimmer-text">AI</span>
+        <span
+          className={`${config.text} font-black tracking-tight whitespace-nowrap ${
+            textBlack ? 'text-black dark:text-white' : ''
+          }`}
+        >
+          {textBlack ? (
+            'Aura AI'
+          ) : (
+            <>
+              <span style={{ color: 'hsl(var(--navy-blue))' }}>Aura</span>{' '}
+              <span style={{ color: 'hsl(var(--secondary))' }}>AI</span>
+            </>
+          )}
         </span>
       )}
     </div>

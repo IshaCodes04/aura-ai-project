@@ -5,76 +5,74 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 224 71% 4%;
+    /* Palette: Cream, Olive, Mustard, Bronze, Dark */
+    --background: 37 39% 94%; /* #F5F0E8 */
+    --foreground: 240 28% 14%; /* #1A1A2E approx */
+    --navy-blue: 220 70% 25%; /* Proper Navy Blue #1a3d8f */
+    --pure-black: 0 0% 0%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 224 71% 4%;
+    --card: 37 39% 94%;
+    --card-foreground: 240 28% 14%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71% 4%;
+    --popover: 37 39% 94%;
+    --popover-foreground: 240 28% 14%;
 
-    --primary: 221 83% 53%; /* Modern Blue */
-    --primary-foreground: 210 40% 98%;
+    --primary: 83 18% 47%; /* Olive - #7A8C5E */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 25 95% 53%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 47 78% 59%; /* Mustard - #E8C547 */
+    --secondary-foreground: 240 28% 14%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 37 39% 94%;
+    --muted-foreground: 240 28% 40%;
 
-    --accent: 25 95% 53%;
+    --accent: 29 43% 59%; /* Bronze - #C4956A */
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 29 43% 59%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 221 83% 53%;
+    --border: 37 20% 88%;
+    --input: 37 20% 92%;
+    --ring: 47 78% 59%;
 
     --radius: 0.75rem;
-
-    --orange-start: 25 100% 53%;
-    --orange-end: 25 95% 50%;
-
-    --gradient-start: 210 40% 98%;
-    --gradient-mid: 220 14% 96%;
-    --gradient-end: 0 0% 100%;
   }
 
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 210 40% 98%;
+    --background: 234 22% 13%;
+    --foreground: 40 56% 94%;
+    --navy-blue: 240 28% 14%;
+    --pure-black: 0 0% 0%;
 
-    --card: 224 71% 4%;
-    --card-foreground: 210 40% 98%;
+    --card: 234 22% 13%;
+    --card-foreground: 40 56% 94%;
 
-    --popover: 224 71% 4%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 234 22% 13%;
+    --popover-foreground: 40 56% 94%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 83 18% 52%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 25 95% 53%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 47 78% 59%;
+    --secondary-foreground: 234 22% 13%;
 
-    --muted: 217 19% 14%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 234 18% 20%;
+    --muted-foreground: 44 16% 86%;
 
-    --accent: 25 95% 53%;
+    --accent: 85 18% 52%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 30 43% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217 19% 20%;
-    --input: 217 19% 20%;
-    --ring: 25 95% 53%;
+    --border: 234 18% 18%;
+    --input: 234 18% 16%;
+    --ring: 83 18% 52%;
 
-    --gradient-start: 224 71% 4%;
-    --gradient-mid: 224 71% 6%;
-    --gradient-end: 224 71% 4%;
+    --gradient-start: 234 22% 13%;
+    --gradient-mid: 206 60% 28%;
+    --gradient-end: 40 56% 94%;
   }
 
   html {
@@ -94,13 +92,13 @@
 
   /* Fix text selection */
   ::selection {
-    background-color: rgba(255, 122, 0, 0.15);
-    color: #FF7A00;
+    background-color: rgba(232, 197, 71, 0.18);
+    color: #1A1A2E;
   }
 
   ::-moz-selection {
-    background-color: rgba(255, 122, 0, 0.15);
-    color: #FF7A00;
+    background-color: rgba(232, 197, 71, 0.18);
+    color: #1A1A2E;
   }
 
   /* Custom Scrollbar */
@@ -143,16 +141,11 @@
 
 @layer components {
   .gradient-bg {
-    background: linear-gradient(135deg,
-        hsl(var(--gradient-start)) 0%,
-        hsl(var(--gradient-mid)) 45%,
-        hsl(var(--gradient-end)) 100%);
+    background: hsl(var(--background));
   }
 
   .gradient-orange {
-    background: linear-gradient(135deg,
-        hsl(var(--orange-start)) 0%,
-        hsl(var(--orange-end)) 100%);
+    background: hsl(var(--secondary));
   }
 
   .auth-card {
@@ -187,12 +180,12 @@
 
   .input-field:focus {
     outline: none;
-    border-color: #FF7A00;
-    box-shadow: 0 0 0 4px rgba(255, 122, 0, 0.1);
+    border-color: hsl(var(--secondary));
+    box-shadow: 0 0 0 4px rgba(232, 197, 71, 0.16);
   }
 
   .btn-primary {
-    background: hsl(var(--orange-start));
+    background: hsl(var(--secondary));
     color: white;
     font-weight: 600;
     padding: 0.875rem 2rem;
@@ -209,7 +202,7 @@
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.3);
+    box-shadow: 0 10px 25px -5px rgba(232, 197, 71, 0.35);
   }
 
   .btn-primary:active {
@@ -217,7 +210,7 @@
   }
 
   .btn-primary:focus {
-    outline: 2px solid hsl(var(--orange-start));
+    outline: 2px solid hsl(var(--secondary));
     outline-offset: 2px;
   }
 
@@ -350,9 +343,10 @@
 
 .liquid-blob {
   animation: morph 15s ease-in-out infinite;
-  background: linear-gradient(135deg, #FF7A00 0%, #FF0066 50%, #7000FF 100%);
-  filter: blur(60px);
-  opacity: 0.12;
+  /* removed gradient + heavy blur to keep flat palette */
+  background: transparent;
+  filter: none;
+  opacity: 0;
 }
 
 .dark .liquid-blob {
@@ -376,8 +370,8 @@
 }
 
 @keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(255,122,0,0.3), 0 0 60px rgba(255,122,0,0.1); }
-  50% { box-shadow: 0 0 40px rgba(255,122,0,0.6), 0 0 80px rgba(255,0,102,0.2); }
+  0%, 100% { box-shadow: 0 0 20px rgba(122,140,94,0.3), 0 0 60px rgba(122,140,94,0.1); }
+  50% { box-shadow: 0 0 40px rgba(232,197,71,0.6), 0 0 80px rgba(232,197,71,0.2); }
 }
 
 .aura-fade-1 { animation: fadeSlideUp 0.7s ease-out 0.1s both; }
@@ -389,11 +383,12 @@
   animation: glowPulse 3s ease-in-out infinite;
 }
 
-.shimmer-text {
-  background: linear-gradient(90deg, #FF7A00 0%, #FF0066 25%, #9333ea 50%, #FF0066 75%, #FF7A00 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 4s linear infinite;
-}
+  .shimmer-text {
+    /* Plain text color using mustard for emphasis (no gradient) */
+    color: hsl(var(--secondary));
+    -webkit-text-fill-color: unset;
+    background: transparent;
+    animation: none;
+  }
+
+
