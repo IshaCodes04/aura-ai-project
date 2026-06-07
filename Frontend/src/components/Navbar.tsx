@@ -155,7 +155,7 @@ const Navbar = () => {
               className="inline-flex items-center justify-center h-10 px-6 rounded-full text-[11px] font-semibold uppercase tracking-[0.12em] text-white transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98]"
               style={{
                 background: 'hsl(var(--secondary))',
-                color: 'hsl(var(--navy-blue))',
+                color: 'hsl(var(--secondary-foreground))',
                 boxShadow: '0 6px 20px -6px rgba(232, 197, 71, 0.55)',
               }}
             >
@@ -227,7 +227,7 @@ const Navbar = () => {
               className="text-center py-3.5 rounded-2xl text-[11px] font-semibold uppercase tracking-[0.12em] transition-all active:scale-[0.98]"
               style={{
                 background: 'hsl(var(--secondary))',
-                color: 'hsl(var(--navy-blue))',
+                color: 'hsl(var(--secondary-foreground))',
               }}
               onClick={() => setIsMenuOpen(false)}
             >

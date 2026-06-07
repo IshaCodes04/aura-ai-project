@@ -16,6 +16,9 @@ import {
   Sun,
   Moon,
   ChevronRight,
+  Zap,
+  Brain,
+  FolderOpen,
 } from "lucide-react";
 import { io, Socket } from "socket.io-client";
 import { useTracking } from "../hooks/useTracking";
@@ -59,7 +62,7 @@ const C = {
   olive: "hsl(83 18% 47%)",        // --primary
   mustard: "hsl(47 78% 59%)",      // --secondary
   bronze: "hsl(29 43% 59%)",       // --accent
-  navy: "hsl(220 70% 25%)",        // --navy-blue
+  navy: "hsl(var(--navy-blue))",   // --navy-blue
   bg: "hsl(var(--background))",
   border: "hsl(var(--border))",
 } as const;
@@ -339,7 +342,7 @@ const Chat = () => {
         className={`
           fixed lg:static inset-y-0 left-0
           w-72 flex flex-col shrink-0
-          border-r z-50 transition-transform duration-300 ease-out
+          border-r z-50 transition-all duration-300 ease-out
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
         style={{
@@ -360,14 +363,14 @@ const Chat = () => {
                 </h2>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span
-                    className="w-1.5 h-1.5 rounded-full"
+                    className="w-1.5 h-1.5 rounded-full animate-pulse"
                     style={{
                       background: isOnline ? C.mustard : C.bronze,
                       boxShadow: isOnline ? `0 0 6px ${C.mustard}` : `0 0 6px ${C.bronze}`,
                     }}
                   />
                   <span
-                    className="text-[10px] font-bold uppercase tracking-widest"
+                    className="text-[10px] font-bold uppercase tracking-widest opacity-80"
                     style={{ color: "hsl(var(--muted-foreground))" }}
                   >
                     {isOnline ? "Online · Smart Node" : "Offline"}
@@ -378,7 +381,7 @@ const Chat = () => {
             {isMobile && (
               <button
                 onClick={() => setSidebarOpen(false)}
-                className="p-1.5 rounded-lg transition-colors"
+                className="p-1.5 rounded-lg transition-colors hover:bg-muted/40"
                 style={{ color: "hsl(var(--muted-foreground))" }}
               >
                 <X className="w-4 h-4" />
@@ -389,13 +392,20 @@ const Chat = () => {
           {/* New Chat button */}
           <button
             onClick={handleNewChat}
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] text-black transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-95"
+            className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.97] cursor-pointer"
             style={{
               background: C.mustard,
-              boxShadow: `0 4px 20px -4px ${C.mustard}80`,
+              color: "hsl(var(--secondary-foreground))",
+              boxShadow: `0 6px 20px -4px ${C.mustard}60`,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = `0 10px 24px -4px ${C.mustard}80`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = `0 6px 20px -4px ${C.mustard}60`;
             }}
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-4 h-4 stroke-[3px]" />
             Initiate Sync
           </button>
         </div>
@@ -410,29 +420,50 @@ const Chat = () => {
             <input
               type="text"
               placeholder="Search conversations…"
-              className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border outline-none transition-all"
-              style={{
-                background: "hsl(var(--muted) / 0.4)",
-                borderColor: "hsl(var(--border) / 0.5)",
-                color: "hsl(var(--foreground))",
-              }}
+              className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border outline-none transition-all bg-muted/40 border-border/50 text-foreground focus:border-secondary/60 focus:bg-background focus:ring-2 focus:ring-secondary/20"
             />
           </div>
         </div>
 
         {/* ── Quick actions ── */}
-        <div className="px-5 py-2 shrink-0">
-          <div className="grid grid-cols-3 gap-1.5">
-            {[{ e: "⚡", l: "Templates" }, { e: "🧠", l: "Think" }, { e: "📂", l: "Files" }].map((a) => (
-              <button
-                key={a.l}
-                className="flex flex-col items-center gap-1 py-2.5 rounded-xl text-[10px] font-semibold transition-colors hover:bg-muted/40"
-                style={{ color: "hsl(var(--foreground) / 0.8)" }}
-              >
-                <span className="text-base">{a.e}</span>
-                {a.l}
-              </button>
-            ))}
+        <div className="px-5 py-3 shrink-0">
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { icon: Zap, l: "Templates", color: C.mustard, bg: "rgba(232, 197, 71, 0.1)" },
+              { icon: Brain, l: "Think", color: C.olive, bg: "rgba(122, 140, 94, 0.12)" },
+              { icon: FolderOpen, l: "Files", color: C.bronze, bg: "rgba(196, 149, 106, 0.12)" }
+            ].map((a) => {
+              const Icon = a.icon;
+              return (
+                <button
+                  key={a.l}
+                  className="flex flex-col items-center justify-center gap-2 py-3 rounded-2xl border transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] cursor-pointer"
+                  style={{
+                    background: "hsl(var(--card))",
+                    borderColor: "hsl(var(--border) / 0.4)",
+                    boxShadow: "0 2px 8px -2px rgba(0, 0, 0, 0.04)"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = `${a.color}40`;
+                    e.currentTarget.style.boxShadow = `0 4px 16px -4px ${a.color}30`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "hsl(var(--border) / 0.4)";
+                    e.currentTarget.style.boxShadow = "0 2px 8px -2px rgba(0, 0, 0, 0.04)";
+                  }}
+                >
+                  <div
+                    className="p-2 rounded-xl flex items-center justify-center transition-transform duration-300"
+                    style={{ background: a.bg, color: a.color }}
+                  >
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <span className="text-[10px] font-bold tracking-tight" style={{ color: "hsl(var(--foreground) / 0.8)" }}>
+                    {a.l}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -459,79 +490,90 @@ const Chat = () => {
               </p>
             </div>
           ) : (
-            <div className="space-y-0.5">
-              {chatSessions.map((chat) => (
-                <div
-                  key={chat.id}
-                  onClick={() => handleSelectChat(chat.id)}
-                  className="group relative flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer transition-all duration-200"
-                  style={{
-                    background:
-                      activeChatId === chat.id
-                        ? `hsl(var(--muted) / 0.7)`
-                        : "transparent",
-                    borderLeft:
-                      activeChatId === chat.id
-                        ? `3px solid ${C.mustard}`
-                        : "3px solid transparent",
-                  }}
-                >
-                  <MessageSquare
-                    className="w-3.5 h-3.5 shrink-0"
-                    style={{
-                      color: activeChatId === chat.id
-                        ? C.mustard
-                        : "hsl(var(--muted-foreground) / 0.6)",
-                    }}
-                  />
-                  <div className="flex-1 min-w-0">
-                    <p
-                      className="text-xs font-semibold truncate"
-                      style={{ color: "hsl(var(--foreground))" }}
-                    >
-                      {chat.title}
-                    </p>
-                    <p className="text-[10px] mt-0.5" style={{ color: "hsl(var(--muted-foreground))" }}>
-                      {fmtTime(chat.timestamp)}
-                    </p>
-                  </div>
-                  <button
-                    onClick={(e) => handleDeleteChat(chat.id, e)}
-                    className="opacity-0 group-hover:opacity-100 p-1 rounded-md transition-all"
-                    style={{ color: C.bronze }}
+            <div className="space-y-1">
+              {chatSessions.map((chat) => {
+                const isActive = activeChatId === chat.id;
+                return (
+                  <div
+                    key={chat.id}
+                    onClick={() => handleSelectChat(chat.id)}
+                    className={`group relative flex items-center gap-3 px-3.5 py-3 rounded-2xl cursor-pointer transition-all duration-300 hover:translate-x-0.5 border ${
+                      isActive
+                        ? "bg-muted/70 shadow-sm border-border/80"
+                        : "bg-transparent hover:bg-muted/30 border-transparent hover:border-border/30"
+                    }`}
                   >
-                    <Trash2 className="w-3 h-3" />
-                  </button>
-                </div>
-              ))}
+                    {isActive && (
+                      <div
+                        className="absolute left-0 top-3.5 bottom-3.5 w-1 rounded-r-full"
+                        style={{ background: C.mustard }}
+                      />
+                    )}
+                    <MessageSquare
+                      className="w-4 h-4 shrink-0 transition-colors duration-300"
+                      style={{
+                        color: isActive
+                          ? C.mustard
+                          : "hsl(var(--muted-foreground) / 0.6)",
+                      }}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <p
+                        className={`text-xs truncate transition-colors duration-300 ${
+                          isActive ? "font-bold text-foreground" : "font-semibold text-foreground/80 group-hover:text-foreground"
+                        }`}
+                      >
+                        {chat.title}
+                      </p>
+                      <p className="text-[10px] mt-0.5 font-medium opacity-60" style={{ color: "hsl(var(--muted-foreground))" }}>
+                        {fmtTime(chat.timestamp)}
+                      </p>
+                    </div>
+                    <button
+                      onClick={(e) => handleDeleteChat(chat.id, e)}
+                      className="opacity-0 group-hover:opacity-60 hover:opacity-100 p-1.5 rounded-lg transition-all hover:bg-muted duration-200 cursor-pointer"
+                      style={{ color: C.bronze }}
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>
 
         {/* ── Sidebar footer / user card ── */}
-        <div className="p-4 shrink-0 border-t" style={{ borderColor: "hsl(var(--border) / 0.4)" }}>
+        <div className="p-4 shrink-0 border-t" style={{ borderColor: "hsl(var(--border) / 0.3)" }}>
           <div
-            className="flex items-center gap-3 px-3 py-3 rounded-2xl border"
+            className="flex items-center gap-3 px-3.5 py-3 rounded-2xl border transition-all duration-300 hover:shadow-md hover:border-border/80"
             style={{
-              background: "hsl(var(--muted) / 0.3)",
+              background: "hsl(var(--card) / 0.5)",
+              backdropFilter: "blur(12px)",
               borderColor: "hsl(var(--border) / 0.5)",
             }}
           >
             <div
-              className="w-8 h-8 rounded-xl flex items-center justify-center text-white text-xs font-black shrink-0"
-              style={{ background: C.olive }}
+              className="w-9 h-9 rounded-xl flex items-center justify-center text-white text-xs font-black shrink-0 border shadow-inner"
+              style={{
+                background: C.olive,
+                borderColor: "hsl(var(--border) / 0.2)",
+              }}
             >
               {getInitial()}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-bold truncate" style={{ color: "hsl(var(--foreground))" }}>
+              <p className="text-xs font-black truncate" style={{ color: "hsl(var(--foreground))" }}>
                 {user ? `${user.fullName.firstName} ${user.fullName.lastName}` : "Guest User"}
               </p>
-              <div className="flex items-center gap-1.5 mt-0.5">
-                <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: C.mustard }} />
-                <p className="text-[10px]" style={{ color: "hsl(var(--muted-foreground))" }}>
-                  Free Plan · Encrypted
-                </p>
+              <div className="flex items-center gap-2 mt-1">
+                <span className="relative flex h-1.5 w-1.5 shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-secondary"></span>
+                </span>
+                <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-md bg-secondary/10 text-secondary border border-secondary/20">
+                  Free Plan
+                </span>
               </div>
             </div>
           </div>
