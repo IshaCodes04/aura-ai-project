@@ -83,14 +83,14 @@ const Signup = () => {
       subtitle="Create your free account and unlock an AI assistant built for students, developers, writers, and professionals. Get help with code, homework, content, and daily tasks — with responses tailored to how you work."
       supportingText="Free to start · No credit card required"
     >
-      <form onSubmit={handleSubmit} className="space-y-2.5">
-        <h2 className="text-xl font-bold text-center mb-3" style={{ color: 'hsl(var(--navy-blue))' }}>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <h2 className="text-2xl font-bold text-center mb-6" style={{ color: 'hsl(var(--navy-blue))' }}>
           Create Account
         </h2>
 
         {/* First Name */}
         <div>
-          <label className="block text-xs font-semibold text-card-foreground mb-1">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Firstname
           </label>
           <input
@@ -105,7 +105,7 @@ const Signup = () => {
 
         {/* Last Name */}
         <div>
-          <label className="block text-xs font-semibold text-card-foreground mb-1">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Lastname
           </label>
           <input
@@ -120,7 +120,7 @@ const Signup = () => {
 
         {/* Email */}
         <div>
-          <label className="block text-xs font-semibold text-card-foreground mb-1">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Email
           </label>
           <input
@@ -135,7 +135,7 @@ const Signup = () => {
 
         {/* Password */}
         <div>
-          <label className="block text-xs font-semibold text-card-foreground mb-1">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Password
           </label>
           <div className="relative">
@@ -163,7 +163,7 @@ const Signup = () => {
 
         {/* Confirm Password */}
         <div>
-          <label className="block text-xs font-semibold text-card-foreground mb-1">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Confirm Password
           </label>
           <div className="relative">
@@ -194,14 +194,14 @@ const Signup = () => {
         {/* Sign Up Button */}
         <button 
           type="submit" 
-          className="aura-glow-btn w-full mt-2 py-3 text-sm font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1"
+          className="aura-glow-btn w-full mt-4 py-4 text-base font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1"
           style={{ background: 'hsl(var(--secondary))', boxShadow: '0 8px 25px -5px rgba(0,0,0,0.06)' }}
         >
           Create Free Account
         </button>
 
         {/* Divider */}
-        <div className="my-2 flex items-center gap-4">
+        <div className="my-4 flex items-center gap-4">
           <div className="h-px flex-1 bg-border" />
           <span className="text-sm text-muted-foreground">
             or continue with
@@ -239,7 +239,7 @@ const Signup = () => {
         </div>
 
         {/* Login Link */}
-        <p className="text-center text-muted-foreground mt-2 text-sm">
+        <p className="text-center text-muted-foreground mt-4">
           Already have an account?{" "}
           <Link
             to="/login"

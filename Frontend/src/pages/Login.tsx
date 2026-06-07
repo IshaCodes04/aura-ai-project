@@ -71,14 +71,14 @@ const Login = () => {
       subtitle="Aura AI is your personal assistant for coding, research, writing, and planning. Powered by Google Gemini with long-term memory — every session continues from where you left off, not from scratch."
       supportingText="Private · Secure · Context-aware"
     >
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <h2 className="text-xl font-bold text-center mb-4" style={{ color: 'hsl(var(--navy-blue))' }}>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <h2 className="text-2xl font-bold text-center mb-6" style={{ color: 'hsl(var(--navy-blue))' }}>
           Welcome Back
         </h2>
 
         {/* Email */}
         <div>
-          <label className="block text-xs font-semibold text-card-foreground mb-1">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Email
           </label>
           <input
@@ -93,7 +93,7 @@ const Login = () => {
 
         {/* Password */}
         <div>
-          <label className="block text-xs font-semibold text-card-foreground mb-1">
+          <label className="block text-sm font-semibold text-card-foreground mb-2">
             Password
           </label>
           <div className="relative">
@@ -119,7 +119,7 @@ const Login = () => {
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <button 
             type="submit" 
-            className="aura-glow-btn flex-1 w-full py-3 text-sm font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1"
+            className="aura-glow-btn flex-1 w-full py-4 text-base font-bold text-white rounded-2xl transition-all duration-300 hover:-translate-y-1"
             style={{ background: 'hsl(var(--secondary))', boxShadow: '0 8px 25px -5px rgba(0,0,0,0.06)' }}
           >
             Login
@@ -133,7 +133,7 @@ const Login = () => {
         </div>
 
         {/* Divider */}
-        <div className="my-4 flex items-center gap-4">
+        <div className="my-6 flex items-center gap-4">
           <div className="h-px flex-1 bg-border" />
           <span className="text-sm text-muted-foreground">
             or continue with
@@ -170,7 +170,7 @@ const Login = () => {
         </div>
 
         {/* Register Link */}
-        <p className="text-center text-muted-foreground mt-4 text-sm">
+        <p className="text-center text-muted-foreground mt-6">
           Don't have an account?{" "}
           <Link
             to="/signup"
